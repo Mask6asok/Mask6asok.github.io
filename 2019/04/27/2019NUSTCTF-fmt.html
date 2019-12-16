@@ -594,8 +594,8 @@
 <blockquote>
 <p>➜  fmt checksec fmt<br>[*] ‘/home/pwn/Desktop/pwn/NUSTCTF/fmt/fmt’<br>    Arch:     amd64-64-little<br>    RELRO:    Partial RELRO<br>    Stack:    No canary found<br>    NX:       NX disabled<br>    PIE:      No PIE (0x400000)<br>    RWX:      Has RWX segments </p>
 </blockquote>
-</blockquote>
 <p>  没有canary，没有PIE，NX也是关闭的<br>  NX关闭意味着输入shellcode并且控制rip到shellcode地址处<br>可是由于程序是死循环状态，以往的冲刷<code>saved-rip</code>的方法就不能用了也就需要另辟蹊径</p>
+</blockquote>
 <p>在程序代码中，我们可以发现，在执行完<code>printf</code>利用漏洞完后，会执行<code>fflush</code>这个函数</p>
 <p><code>fflush</code>函数也是库函数，也有PLT表GOT表以及在栈中的LIBC偏移地址，所以我们可以利用这个函数来实现控制程序执行流</p>
 <p>本题有两种解法：</p>
@@ -752,10 +752,6 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/30/第一篇博客.html" rel="next" title="第一篇博客">
-                <i class="fa fa-chevron-left"></i> 第一篇博客
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
@@ -788,7 +784,7 @@
 
   
     <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDM5Mi8yMDkyNA=="></div>
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80Nzk0MS8yNDQzOA=="></div>
     </div>
 
   
@@ -861,11 +857,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -900,15 +892,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1051,7 +1035,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Pyker</span>
+  <span class="author" itemprop="copyrightHolder">Mask</span>
 
   
     <span class="post-meta-divider">|</span>
@@ -1059,7 +1043,7 @@
       <i class="fa fa-area-chart"> 站点字数合计:</i>
     </span>
     
-    <span title="站点总字数">74k</span>
+    <span title="站点总字数">75k</span>
   
   
 </div>
@@ -1604,6 +1588,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
 
