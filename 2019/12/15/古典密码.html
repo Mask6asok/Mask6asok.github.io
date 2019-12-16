@@ -146,25 +146,17 @@
 
 
 
-  <script>
-  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
-  daovoice('init', {
-      app_id: "bd399fce"
-    });
-  daovoice('update');
-  </script>
-
-  <meta name="description" content="简单学习一下古典密码体制与对应的密码分析方法 移位密码移位密码算是古典密码学中最为简单的一种密码，其基础是数论中的模运算 密码体制如下，这里假定是还在26位字母以内，只考虑大写或者小写字符  e_K(x)=(x+K)mod26 d_K(y)=(y-K)mod26此处的 $K$ 满足 $0&amp;lt;=K&amp;lt;=25$ ，特殊的当 $K=3$ 时就是凯撒密码(Caesar Cipher) 移位密码的分">
+  <meta name="description" content="简单学习一下古典密码体制与对应的密码分析方法 移位密码Shift Cipher 密码体制移位密码算是古典密码学中最为简单的一种密码，其基础是数论中的模运算 密码体制如下，这里假定是还在26位字母以内，只考虑大写或者小写字符  e_K(x)=(x+K)mod26 d_K(y)=(y-K)mod26此处的 $K$ 满足 $0&amp;lt;=K&amp;lt;=25$ ，特殊的当 $K=3$ 时就是凯撒密码(Caes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="古典密码学">
 <meta property="og:url" content="Mask6asok.github.io/2019/12/15/古典密码.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="简单学习一下古典密码体制与对应的密码分析方法 移位密码移位密码算是古典密码学中最为简单的一种密码，其基础是数论中的模运算 密码体制如下，这里假定是还在26位字母以内，只考虑大写或者小写字符  e_K(x)=(x+K)mod26 d_K(y)=(y-K)mod26此处的 $K$ 满足 $0&amp;lt;=K&amp;lt;=25$ ，特殊的当 $K=3$ 时就是凯撒密码(Caesar Cipher) 移位密码的分">
+<meta property="og:description" content="简单学习一下古典密码体制与对应的密码分析方法 移位密码Shift Cipher 密码体制移位密码算是古典密码学中最为简单的一种密码，其基础是数论中的模运算 密码体制如下，这里假定是还在26位字母以内，只考虑大写或者小写字符  e_K(x)=(x+K)mod26 d_K(y)=(y-K)mod26此处的 $K$ 满足 $0&amp;lt;=K&amp;lt;=25$ ，特殊的当 $K=3$ 时就是凯撒密码(Caes">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-16T04:02:13.247Z">
+<meta property="og:updated_time" content="2019-12-16T04:23:29.786Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="古典密码学">
-<meta name="twitter:description" content="简单学习一下古典密码体制与对应的密码分析方法 移位密码移位密码算是古典密码学中最为简单的一种密码，其基础是数论中的模运算 密码体制如下，这里假定是还在26位字母以内，只考虑大写或者小写字符  e_K(x)=(x+K)mod26 d_K(y)=(y-K)mod26此处的 $K$ 满足 $0&amp;lt;=K&amp;lt;=25$ ，特殊的当 $K=3$ 时就是凯撒密码(Caesar Cipher) 移位密码的分">
+<meta name="twitter:description" content="简单学习一下古典密码体制与对应的密码分析方法 移位密码Shift Cipher 密码体制移位密码算是古典密码学中最为简单的一种密码，其基础是数论中的模运算 密码体制如下，这里假定是还在26位字母以内，只考虑大写或者小写字符  e_K(x)=(x+K)mod26 d_K(y)=(y-K)mod26此处的 $K$ 满足 $0&amp;lt;=K&amp;lt;=25$ ，特殊的当 $K=3$ 时就是凯撒密码(Caes">
 
 
 
@@ -351,23 +343,6 @@
     <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-互动">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/guestbook/" rel="section"><i class="menu-item-icon fa fa-fw fa-comments"></i> <br>互动</a>
-
-  </li>
 
       
       
@@ -506,11 +481,29 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-12-16 12:02:13" itemprop="dateModified" datetime="2019-12-16T12:02:13+08:00">2019-12-16</time>
+                <time title="修改时间：2019-12-16 12:23:29" itemprop="dateModified" datetime="2019-12-16T12:23:29+08:00">2019-12-16</time>
               
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Crypto/" itemprop="url" rel="index"><span itemprop="name">Crypto</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -541,7 +534,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.4k</span>
+                <span title="本文字数">2.4k</span>
               
 
               
@@ -555,7 +548,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -576,24 +569,43 @@
 
       
         <p>简单学习一下古典密码体制与对应的密码分析方法</p>
-<h1 id="移位密码"><a href="#移位密码" class="headerlink" title="移位密码"></a>移位密码</h1><p>移位密码算是古典密码学中最为简单的一种密码，其基础是数论中的模运算</p>
+<h1 id="移位密码"><a href="#移位密码" class="headerlink" title="移位密码"></a>移位密码</h1><p>Shift Cipher</p>
+<h2 id="密码体制"><a href="#密码体制" class="headerlink" title="密码体制"></a>密码体制</h2><p>移位密码算是古典密码学中最为简单的一种密码，其基础是数论中的模运算</p>
 <p>密码体制如下，这里假定是还在26位字母以内，只考虑大写或者小写字符</p>
 <script type="math/tex; mode=display">
 e_K(x)=(x+K)mod26</script><script type="math/tex; mode=display">
 d_K(y)=(y-K)mod26</script><p>此处的 $K$ 满足 $0&lt;=K&lt;=25$ ，特殊的当 $K=3$ 时就是凯撒密码(Caesar Cipher)</p>
-<p>移位密码的分析方法及其简单，因为其密钥空间不是很大，完全可以利用密钥穷尽搜索方法来破译，下面给出一个例子</p>
+<h2 id="分析方法"><a href="#分析方法" class="headerlink" title="分析方法"></a>分析方法</h2><p>移位密码的分析方法及其简单，因为其密钥空间不是很大，完全可以利用密钥穷尽搜索方法来破译，下面给出一个例子</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">xbjhihpnpldgspqdjiutpg</span></span><br></pre></td></tr></table></figure>
 <p>编写爆破 $K=0,1,…,25$ 的脚本 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> ascii_letters</span><br><span class="line">ctoi = <span class="keyword">lambda</span> x: ascii_letters.index(x)</span><br><span class="line">itoc = <span class="keyword">lambda</span> x: ascii_letters[x]</span><br><span class="line"></span><br><span class="line">secret = <span class="string">'xbjhihpnpldgspqdjiutpg'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">26</span>):</span><br><span class="line">    plain = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(secret)):</span><br><span class="line">        y = ctoi(secret[i])</span><br><span class="line">        x = itoc((y - k) % <span class="number">26</span>)</span><br><span class="line">        plain += x</span><br><span class="line">    print(plain)</span><br></pre></td></tr></table></figure>
 <p>在结果中可以看到</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">xbjhihpnpldgspqdjiutpg</span><br><span class="line">waighgomokcfropcihtsof</span><br><span class="line">vzhfgfnlnjbeqnobhgsrne</span><br><span class="line">uygefemkmiadpmnagfrqmd</span><br><span class="line">txfdedljlhzcolmzfeqplc</span><br><span class="line"><span class="keyword">swecdckikgybnklyedpokb</span></span><br><span class="line"><span class="keyword">rvdbcbjhjfxamjkxdconja</span></span><br><span class="line"><span class="keyword">qucabaigiewzlijwcbnmiz</span></span><br><span class="line"><span class="keyword">ptbzazhfhdvykhivbamlhy</span></span><br><span class="line"><span class="keyword">osayzygegcuxjghuazlkgx</span></span><br><span class="line"><span class="keyword">nrzxyxfdfbtwifgtzykjfw</span></span><br><span class="line"><span class="keyword">mqywxweceasvhefsyxjiev</span></span><br><span class="line"><span class="keyword">lpxvwvdbdzrugderxwihdu</span></span><br><span class="line"><span class="keyword">kowuvucacyqtfcdqwvhgct</span></span><br><span class="line"><span class="keyword">jnvtutbzbxpsebcpvugfbs</span></span><br><span class="line"><span class="keyword">imustsayawordaboutfear </span>&lt;--</span><br><span class="line">hltrsrzxzvnqczantsedzq</span><br><span class="line">gksqrqywyumpbyzmsrdcyp</span><br><span class="line">fjrpqpxvxtloaxylrqcbxo</span><br><span class="line"><span class="keyword">eiqopowuwsknzwxkqpbawn</span></span><br><span class="line"><span class="keyword">dhpnonvtvrjmyvwjpoazvm</span></span><br><span class="line"><span class="keyword">cgomnmusuqilxuvionzyul</span></span><br><span class="line"><span class="keyword">bfnlmltrtphkwtuhnmyxtk</span></span><br><span class="line"><span class="keyword">aemklksqsogjvstgmlxwsj</span></span><br><span class="line"><span class="keyword">zdljkjrprnfiursflkwvri</span></span><br><span class="line"><span class="keyword">yckijiqoqmehtqrekjvuqh</span></span><br></pre></td></tr></table></figure>
 <p>第16行出现了明文字符串，对应的$K=15$</p>
-<h1 id="代换密码"><a href="#代换密码" class="headerlink" title="代换密码"></a>代换密码</h1><p>代换密码实际上是一种单表替换密码，根据一个给定的表，使用特定的字符去替换特定的字符，且不一定存在顺序可言，给出密码体制</p>
+<h1 id="仿射密码"><a href="#仿射密码" class="headerlink" title="仿射密码"></a>仿射密码</h1><p>Affine Cipher</p>
+<h2 id="密码体制-1"><a href="#密码体制-1" class="headerlink" title="密码体制"></a>密码体制</h2><p>仿射密码和移位密码很像，放射密码体制如下</p>
+<script type="math/tex; mode=display">
+e_K(x)=(ax+b)mod26</script><script type="math/tex; mode=display">
+d_K(y)=a^{-1}(y-b)mod 26</script><p>这里的 $a$ 是有要求的，$gcd(a,26)=1$，在 $Z_{26}$内有 $a=1,3,5,7,9,11,15,17,19,21,23,25$</p>
+<p>而且必须注意 $a$ 与其乘法逆 $a^{-1}$ 必须存在，其乘法逆定义如下</p>
+<script type="math/tex; mode=display">
+aa^{-1}\equiv a^{-1}a\equiv1(mod\ m)</script><p>只有满足这个条件解才是唯一</p>
+<h2 id="分析方法-1"><a href="#分析方法-1" class="headerlink" title="分析方法"></a>分析方法</h2><p>==todo==</p>
+<h1 id="代换密码"><a href="#代换密码" class="headerlink" title="代换密码"></a>代换密码</h1><p>Substitution Cipher</p>
+<h2 id="密码体制-2"><a href="#密码体制-2" class="headerlink" title="密码体制"></a>密码体制</h2><p>代换密码实际上是一种单表替换密码，根据一个给定的表，使用特定的字符去替换特定的字符，且不一定存在顺序可言，给出密码体制</p>
 <script type="math/tex; mode=display">
 e_\pi(x)=\pi(x)</script><script type="math/tex; mode=display">
 d_\pi(y)=\pi^{-1}(y)</script><p>由于这里替换表 $\pi$ 是未知的，且如果想利用密钥穷尽搜索方法来分析的话，密钥空间为  $26!\approx4.03\times10^{26}$ 是一个十分大的数了，时间上难以接受</p>
 <p>因此针对单表替换的，常使用词频分析的方法</p>
-<h1 id="仿射密码"><a href="#仿射密码" class="headerlink" title="仿射密码"></a>仿射密码</h1><h1 id="维吉尼亚密码"><a href="#维吉尼亚密码" class="headerlink" title="维吉尼亚密码"></a>维吉尼亚密码</h1><h1 id="希尔密码"><a href="#希尔密码" class="headerlink" title="希尔密码"></a>希尔密码</h1><h1 id="置换密码"><a href="#置换密码" class="headerlink" title="置换密码"></a>置换密码</h1>
+<h2 id="分析方法-2"><a href="#分析方法-2" class="headerlink" title="分析方法"></a>分析方法</h2><p>==TODO==</p>
+<h1 id="维吉尼亚密码"><a href="#维吉尼亚密码" class="headerlink" title="维吉尼亚密码"></a>维吉尼亚密码</h1><p>Vigenere Cipher</p>
+<h2 id="密码体制-3"><a href="#密码体制-3" class="headerlink" title="密码体制"></a>密码体制</h2><p>在前面提到的代换密码中，一旦替换表被确定，同样的字符是会被替换成唯一的字符，也就是单表替换。而维吉尼亚密码却可以让相同的字符被替换成不一样的字符，是一种多表替换密码。其密码体制如下</p>
+<script type="math/tex; mode=display">
+e_K(x_1,x_2,···,x_m)=(x_1+k_1,x_2+k_2,···,x_m+k_m)\ mod\ 26</script><script type="math/tex; mode=display">
+d_K(y_1,y_2,···,y_m)=(y_1-k_1,y_2-k_2,···,y_m-k_m)\ mod \ 26</script><p>这里与 $m$ 有关，这里的意义为密钥长度，每次使用相同的移位序列去加密m个字符，重复</p>
+<p>此处给出一个示例脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">tab = <span class="string">'abcdefghijklmnopqrstuvwxyz'</span></span><br><span class="line">ctoi = <span class="keyword">lambda</span> x: tab.index(x)</span><br><span class="line">itoc = <span class="keyword">lambda</span> x: tab[x]</span><br><span class="line">plain = <span class="string">'ilovevigenerecipher'</span></span><br><span class="line">key = <span class="string">'njust'</span></span><br><span class="line">secret = <span class="string">''</span></span><br><span class="line">j = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> plain:</span><br><span class="line">    secret += itoc((ctoi(i) + ctoi(key[j % len(key)])) % <span class="number">26</span>)</span><br><span class="line">    <span class="comment"># print(ctoi(i), ctoi(key[j % len(key)]))</span></span><br><span class="line">    j += <span class="number">1</span></span><br><span class="line">print(secret)</span><br><span class="line"><span class="comment"># secret = vuinxirawgrayubcqyj</span></span><br></pre></td></tr></table></figure>
+<h2 id="分析方法-3"><a href="#分析方法-3" class="headerlink" title="分析方法"></a>分析方法</h2><h1 id="希尔密码"><a href="#希尔密码" class="headerlink" title="希尔密码"></a>希尔密码</h1><h2 id="密码体制-4"><a href="#密码体制-4" class="headerlink" title="密码体制"></a>密码体制</h2><h2 id="分析方法-4"><a href="#分析方法-4" class="headerlink" title="分析方法"></a>分析方法</h2><h1 id="置换密码"><a href="#置换密码" class="headerlink" title="置换密码"></a>置换密码</h1><h2 id="密码体制-5"><a href="#密码体制-5" class="headerlink" title="密码体制"></a>密码体制</h2><h2 id="分析方法-5"><a href="#分析方法-5" class="headerlink" title="分析方法"></a>分析方法</h2><h1 id="流"><a href="#流" class="headerlink" title="流"></a>流</h1><h2 id="密码体制-6"><a href="#密码体制-6" class="headerlink" title="密码体制"></a>密码体制</h2><h2 id="分析方法-6"><a href="#分析方法-6" class="headerlink" title="分析方法"></a>分析方法</h2>
       
     </div>
 
@@ -608,39 +620,6 @@ d_\pi(y)=\pi^{-1}(y)</script><p>由于这里替换表 $\pi$ 是未知的，且�
     
       
     
-    
-      <div>
-        <div id="reward-container">
-  <div>Thank you for your accept. mua！</div>
-  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
-  </button>
-  <div id="qr" style="display: none;">
-
-    
-      
-      
-        
-      
-      <div style="display: inline-block">
-        <img src="/images/reward/wechatpay.png" alt="丨Mask丨 微信支付">
-        <p>微信支付</p>
-      </div>
-    
-      
-      
-        
-      
-      <div style="display: inline-block">
-        <img src="/images/reward/alipay.png" alt="丨Mask丨 支付宝">
-        <p>支付宝</p>
-      </div>
-    
-
-  </div>
-</div>
-
-      </div>
     
 
     
@@ -794,7 +773,9 @@ d_\pi(y)=\pi^{-1}(y)</script><p>由于这里替换表 $\pi$ 是未知的，且�
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -940,7 +921,7 @@ d_\pi(y)=\pi^{-1}(y)</script><p>由于这里替换表 $\pi$ 是未知的，且�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#移位密码"><span class="nav-number">1.</span> <span class="nav-text">移位密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代换密码"><span class="nav-number">2.</span> <span class="nav-text">代换密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#仿射密码"><span class="nav-number">3.</span> <span class="nav-text">仿射密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#维吉尼亚密码"><span class="nav-number">4.</span> <span class="nav-text">维吉尼亚密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#希尔密码"><span class="nav-number">5.</span> <span class="nav-text">希尔密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#置换密码"><span class="nav-number">6.</span> <span class="nav-text">置换密码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#移位密码"><span class="nav-number">1.</span> <span class="nav-text">移位密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制"><span class="nav-number">1.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法"><span class="nav-number">1.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#仿射密码"><span class="nav-number">2.</span> <span class="nav-text">仿射密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-1"><span class="nav-number">2.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-1"><span class="nav-number">2.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代换密码"><span class="nav-number">3.</span> <span class="nav-text">代换密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-2"><span class="nav-number">3.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-2"><span class="nav-number">3.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#维吉尼亚密码"><span class="nav-number">4.</span> <span class="nav-text">维吉尼亚密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-3"><span class="nav-number">4.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-3"><span class="nav-number">4.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#希尔密码"><span class="nav-number">5.</span> <span class="nav-text">希尔密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-4"><span class="nav-number">5.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-4"><span class="nav-number">5.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#置换密码"><span class="nav-number">6.</span> <span class="nav-text">置换密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-5"><span class="nav-number">6.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-5"><span class="nav-number">6.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流"><span class="nav-number">7.</span> <span class="nav-text">流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-6"><span class="nav-number">7.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-6"><span class="nav-number">7.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -980,7 +961,7 @@ d_\pi(y)=\pi^{-1}(y)</script><p>由于这里替换表 $\pi$ 是未知的，且�
       <i class="fa fa-area-chart"> 站点字数合计:</i>
     </span>
     
-    <span title="站点总字数">75k</span>
+    <span title="站点总字数">76k</span>
   
   
 </div>

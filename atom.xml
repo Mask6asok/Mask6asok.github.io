@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="Mask6asok.github.io/"/>
-  <updated>2019-12-16T04:02:13.247Z</updated>
+  <updated>2019-12-16T04:23:29.786Z</updated>
   <id>Mask6asok.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="Mask6asok.github.io/2019/12/15/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81.html"/>
     <id>Mask6asok.github.io/2019/12/15/古典密码.html</id>
     <published>2019-12-15T15:15:13.219Z</published>
-    <updated>2019-12-16T04:02:13.247Z</updated>
+    <updated>2019-12-16T04:23:29.786Z</updated>
     
     <summary type="html">
     
@@ -34,6 +34,8 @@
       
     
     </summary>
+    
+      <category term="Crypto" scheme="Mask6asok.github.io/categories/Crypto/"/>
     
     
   </entry>
@@ -67,7 +69,7 @@
     <link href="Mask6asok.github.io/2019/12/15/ubuntu16%E5%AE%89%E8%A3%85%E5%90%8E%E9%85%8D%E7%BD%AE.html"/>
     <id>Mask6asok.github.io/2019/12/15/ubuntu16安装后配置.html</id>
     <published>2019-12-15T13:55:22.229Z</published>
-    <updated>2019-12-15T03:17:54.694Z</updated>
+    <updated>2019-12-16T04:23:49.717Z</updated>
     
     <summary type="html">
     
@@ -80,6 +82,8 @@
       
     
     </summary>
+    
+      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
     
     
   </entry>
