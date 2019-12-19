@@ -154,7 +154,7 @@
 <meta property="og:description" content="简单学习一下古典密码体制与对应的密码分析方法 移位密码Shift Cipher 移位密码算是古典密码学中最为简单的一种密码，其基础是数论中的模运算 密码体制 移位密码体制：  e_K(x)=(x+K)mod26 d_K(y)=(y-K)mod26 此处的 $K$ 满足 $0&amp;lt;=K&amp;lt;=25$ ，特殊的当 $K=3$ 时就是凯撒密码(Caesar Cipher) 分析方法移位密码的分析方法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/12/16/cktF2C7nquGOj1x.png">
-<meta property="og:updated_time" content="2019-12-19T15:53:35.102Z">
+<meta property="og:updated_time" content="2019-12-19T15:58:47.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="古典密码学">
 <meta name="twitter:description" content="简单学习一下古典密码体制与对应的密码分析方法 移位密码Shift Cipher 移位密码算是古典密码学中最为简单的一种密码，其基础是数论中的模运算 密码体制 移位密码体制：  e_K(x)=(x+K)mod26 d_K(y)=(y-K)mod26 此处的 $K$ 满足 $0&amp;lt;=K&amp;lt;=25$ ，特殊的当 $K=3$ 时就是凯撒密码(Caesar Cipher) 分析方法移位密码的分析方法">
@@ -426,7 +426,7 @@
     <link itemprop="mainEntityOfPage" href="Mask6asok.github.io/2019/12/15/古典密码.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="丨Mask丨">
+      <meta itemprop="name" content="Mask">
       <meta itemprop="description" content="a newbie in CTF">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -483,7 +483,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-12-19 23:53:35" itemprop="dateModified" datetime="2019-12-19T23:53:35+08:00">2019-12-19</time>
+                <time title="修改时间：2019-12-19 23:58:47" itemprop="dateModified" datetime="2019-12-19T23:58:47+08:00">2019-12-19</time>
               
             
           </span>
@@ -780,7 +780,13 @@ z_{i+m}=\sum\limits_{j=0}^{m-1}c_jz_{i+j}mod2</script><p>这里每一个$z_i$都
 <p>自动密钥密码体制:</p>
 <script type="math/tex; mode=display">
 e_z(x)=(x+z)mod26</script><script type="math/tex; mode=display">
-d_k(y)=(y-z)mod26</script>
+d_k(y)=(y-z)mod26</script><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><p>《密码学原理与实践》</p>
+</li>
+<li><p><a href="http://practicalcryptography.com/" target="_blank" rel="noopener">http://practicalcryptography.com/</a></p>
+</li>
+</ol>
+
       
     </div>
 
@@ -810,7 +816,7 @@ d_k(y)=(y-z)mod26</script>
 
 <ul class="post-copyright">
   <li class="post-copyright-author">
-    <strong>本文作者： </strong>丨Mask丨</li>
+    <strong>本文作者： </strong>Mask</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
@@ -914,9 +920,9 @@ d_k(y)=(y-z)mod26</script>
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="丨Mask丨">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Mask">
             
-              <p class="site-author-name" itemprop="name">丨Mask丨</p>
+              <p class="site-author-name" itemprop="name">Mask</p>
               <div class="site-description motion-element" itemprop="description">a newbie in CTF</div>
           </div>
 
@@ -1096,7 +1102,7 @@ d_k(y)=(y-z)mod26</script>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#移位密码"><span class="nav-number">1.</span> <span class="nav-text">移位密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制"><span class="nav-number">1.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法"><span class="nav-number">1.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#仿射密码"><span class="nav-number">2.</span> <span class="nav-text">仿射密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-1"><span class="nav-number">2.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-1"><span class="nav-number">2.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代换密码"><span class="nav-number">3.</span> <span class="nav-text">代换密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-2"><span class="nav-number">3.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-2"><span class="nav-number">3.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#维吉尼亚密码"><span class="nav-number">4.</span> <span class="nav-text">维吉尼亚密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-3"><span class="nav-number">4.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-3"><span class="nav-number">4.2.</span> <span class="nav-text">分析方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确定密钥长度"><span class="nav-number">4.2.1.</span> <span class="nav-text">确定密钥长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定正确密钥"><span class="nav-number">4.2.2.</span> <span class="nav-text">确定正确密钥</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#希尔密码"><span class="nav-number">5.</span> <span class="nav-text">希尔密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-4"><span class="nav-number">5.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-4"><span class="nav-number">5.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#置换密码"><span class="nav-number">6.</span> <span class="nav-text">置换密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-5"><span class="nav-number">6.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-5"><span class="nav-number">6.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流密码"><span class="nav-number">7.</span> <span class="nav-text">流密码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#移位密码"><span class="nav-number">1.</span> <span class="nav-text">移位密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制"><span class="nav-number">1.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法"><span class="nav-number">1.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#仿射密码"><span class="nav-number">2.</span> <span class="nav-text">仿射密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-1"><span class="nav-number">2.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-1"><span class="nav-number">2.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代换密码"><span class="nav-number">3.</span> <span class="nav-text">代换密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-2"><span class="nav-number">3.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-2"><span class="nav-number">3.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#维吉尼亚密码"><span class="nav-number">4.</span> <span class="nav-text">维吉尼亚密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-3"><span class="nav-number">4.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-3"><span class="nav-number">4.2.</span> <span class="nav-text">分析方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确定密钥长度"><span class="nav-number">4.2.1.</span> <span class="nav-text">确定密钥长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定正确密钥"><span class="nav-number">4.2.2.</span> <span class="nav-text">确定正确密钥</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#希尔密码"><span class="nav-number">5.</span> <span class="nav-text">希尔密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-4"><span class="nav-number">5.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-4"><span class="nav-number">5.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#置换密码"><span class="nav-number">6.</span> <span class="nav-text">置换密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制-5"><span class="nav-number">6.1.</span> <span class="nav-text">密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析方法-5"><span class="nav-number">6.2.</span> <span class="nav-text">分析方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流密码"><span class="nav-number">7.</span> <span class="nav-text">流密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
