@@ -19,7 +19,7 @@
 <meta property="og:description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了 baby_arm这是我第一次做arm的题目，这题目也比较友好，不过这是一道堆溢出的题目，没怎么牵扯到栈，所以暂时没去了解arm的汇编层次的结构，比如参数传递之类的，等这个寒假学习一下吧 1234567➜  arm checksec pwn  [*] &apos;/home/mask/Desktop/xman/arm/">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2019-12-22T15:02:54.856Z">
+<meta property="og:updated_time" content="2019-12-22T16:30:41.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xman2020冬令营选拔赛Pwn题解">
 <meta name="twitter:description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了 baby_arm这是我第一次做arm的题目，这题目也比较友好，不过这是一道堆溢出的题目，没怎么牵扯到栈，所以暂时没去了解arm的汇编层次的结构，比如参数传递之类的，等这个寒假学习一下吧 1234567➜  arm checksec pwn  [*] &apos;/home/mask/Desktop/xman/arm/">
@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
 
 
     
@@ -109,6 +109,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -158,7 +162,7 @@
 <p>由于这是一道arm题，所以需要使用qemu来执行</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-arm -g 1234 -L /usr/arm-linux-gnueabihf ./pwn</span><br></pre></td></tr></table></figure>
 <p>调试可以使用gdb附加</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gdb-multiarch ./pwn -q</span><br><span class="line">	......</span><br><span class="line">	......</span><br><span class="line"><span class="meta">pwndbg&gt;</span><span class="bash"> target remote localhost:1234</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gdb-multiarch ./pwn -q</span><br><span class="line">	......</span><br><span class="line">	......</span><br><span class="line"><span class="meta">pwndbg&gt;</span> target remote localhost:1234</span><br></pre></td></tr></table></figure>
 <p>常规菜单题</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  arm <span class="keyword">sh</span> <span class="keyword">run</span>.<span class="keyword">sh</span>              </span><br><span class="line">Tell me your name:</span><br><span class="line">mask</span><br><span class="line">  Welcome to IOT world </span><br><span class="line">  It's a normal <span class="keyword">note</span> boke</span><br><span class="line">  1. add a <span class="keyword">note</span></span><br><span class="line">  2. delete a <span class="keyword">note</span></span><br><span class="line">  3. <span class="keyword">print</span> a <span class="keyword">note</span></span><br><span class="line">  your choice:</span><br></pre></td></tr></table></figure>
 <p>ida打开，很容易就发现了有uaf的漏洞</p>
@@ -201,15 +205,6 @@
 
 
 
-<div class="card">
-    <div class="card-content">
-        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
-        <div class="buttons is-centered">
-            
-        </div>
-    </div>
-</div>
-
 
 
 <div class="card card-transparent">
@@ -236,6 +231,89 @@
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#baby-arm">
+        <span class="has-mr-6">1</span>
+        <span>baby_arm</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#exp">
+        <span class="has-mr-6">1.1</span>
+        <span>exp</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#baby-kernel">
+        <span class="has-mr-6">2</span>
+        <span>baby_kernel</span>
+        </a></li><li>
+        <a class="is-flex" href="#NoooCall">
+        <span class="has-mr-6">3</span>
+        <span>NoooCall</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#exp-1">
+        <span class="has-mr-6">3.1</span>
+        <span>exp</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#format">
+        <span class="has-mr-6">4</span>
+        <span>format</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#exp-2">
+        <span class="has-mr-6">4.1</span>
+        <span>exp</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Crypto/">
+            <span class="level-start">
+                <span class="level-item">Crypto</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Pwn/">
+            <span class="level-start">
+                <span class="level-item">Pwn</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
 <div class="card widget">
     <div class="card-content">
         <nav class="level">
@@ -327,10 +405,8 @@
         
     </div>
 </div>
-    
         
-    
-        <div class="card widget">
+            <div class="card widget">
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
@@ -354,217 +430,6 @@
     </div>
 </div>
 
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Crypto/">
-            <span class="level-start">
-                <span class="level-item">Crypto</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Others/">
-            <span class="level-start">
-                <span class="level-item">Others</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Pwn/">
-            <span class="level-start">
-                <span class="level-item">Pwn</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">9</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            标签云
-        </h3>
-        <a href="/tags/Conditional-competition/" style="font-size: 10px;">Conditional competition</a> <a href="/tags/IOFILE/" style="font-size: 10px;">IOFILE</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/fmt/" style="font-size: 13.33px;">fmt</a> <a href="/tags/format/" style="font-size: 10px;">format</a> <a href="/tags/heap/" style="font-size: 16.67px;">heap</a> <a href="/tags/integer-overflow/" style="font-size: 10px;">integer overflow</a> <a href="/tags/kernel/" style="font-size: 10px;">kernel</a> <a href="/tags/libc/" style="font-size: 13.33px;">libc</a> <a href="/tags/pwn/" style="font-size: 20px;">pwn</a> <a href="/tags/shellcode/" style="font-size: 10px;">shellcode</a> <a href="/tags/stack/" style="font-size: 13.33px;">stack</a> <a href="/tags/tcache/" style="font-size: 13.33px;">tcache</a>
-    </div>
-</div>
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen is-sticky">
-        
-            <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Xman2020冬令营选拔赛Pwn题解">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-22T11:57:22.029Z">2019-12-22</time></div>
-                    <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Xman2020冬令营选拔赛Pwn题解</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/古典密码.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="古典密码学">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T15:15:13.219Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/古典密码.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">古典密码学</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Crypto/">Crypto</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/永恒之蓝测试.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="永恒之蓝测试">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.254Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/永恒之蓝测试.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">永恒之蓝测试</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/ubuntu16安装后配置.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pwn-Ubuntu配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.229Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/ubuntu16安装后配置.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Pwn-Ubuntu配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/2019护网杯-mergeheap.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 护网杯 mergeheap">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.218Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/2019护网杯-mergeheap.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2019 护网杯 mergeheap</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">四月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
         
             <div class="card widget">
     <div class="card-content">
@@ -681,106 +546,95 @@
 
 <div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
     
-        <div class="card widget">
+        
+<div class="card widget">
     <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Xman2020冬令营选拔赛Pwn题解">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-22T11:57:22.029Z">2019-12-22</time></div>
-                    <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Xman2020冬令营选拔赛Pwn题解</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Mask">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Mask
                     </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        A newbie in CTF
+                    </p>
+                    
+                    
                 </div>
             </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/古典密码.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="古典密码学">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T15:15:13.219Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/古典密码.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">古典密码学</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Crypto/">Crypto</a>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
                     </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            12
+                        </p>
+                    </a>
                 </div>
             </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/永恒之蓝测试.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="永恒之蓝测试">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.254Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/永恒之蓝测试.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">永恒之蓝测试</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
                     </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
                 </div>
             </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/ubuntu16安装后配置.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pwn-Ubuntu配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.229Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/ubuntu16安装后配置.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Pwn-Ubuntu配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
                     </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            13
+                        </p>
+                    </a>
                 </div>
             </div>
-        </article>
+        </nav>
         
-        <article class="media">
+        
+        
+        <div class="level is-mobile">
             
-            <a href="/2019/12/15/2019护网杯-mergeheap.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 护网杯 mergeheap">
-                </p>
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/mask6asok">
+                
+                <i class="fab fa-github"></i>
+                
             </a>
             
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.218Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/2019护网杯-mergeheap.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2019 护网杯 mergeheap</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
-                    </p>
-                </div>
-            </div>
-        </article>
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="QQ" href="tencent://message/?uin=1924594189&amp;Site=&amp;menu=yes">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Email" href="mailto:1924594189@qq.com">
+                
+                <i class="fa fa-envelope"></i>
+                
+            </a>
+            
+        </div>
         
     </div>
 </div>
@@ -789,58 +643,26 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            归档
+            链接
         </h3>
         <ul class="menu-list">
         
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">四月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
+            <li>
+                <a class="level is-mobile" href="https://binlep.github.io/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">binLep&#39;s blog</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">binlep.github.io</span>
+                    </span>
+                </a>
+            </li>
         
         </ul>
         </div>
     </div>
 </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -987,15 +809,13 @@ var IcarusThemeSettings = {
     },
     article: {
         highlight: {
-            clipboard: true,
-            fold: 'unfolded'
+            clipboard: false,
+            fold: ''
         }
     }
 };
 </script>
 
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
 

@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
 
 
     
@@ -149,7 +149,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    33 分钟 读完 (大约 4958 个字)
+                    33 分钟 读完 (大约 4963 个字)
                 </span>
                 
                 
@@ -172,11 +172,11 @@ e_K(x)=(x+K)mod26</script><script type="math/tex; mode=display">
 d_K(y)=(y-K)mod26</script><hr>
 <p>此处的 $K$ 满足 $0&lt;=K&lt;=25$ ，特殊的当 $K=3$ 时就是凯撒密码(Caesar Cipher)</p>
 <h2 id="分析方法"><a href="#分析方法" class="headerlink" title="分析方法"></a>分析方法</h2><p>移位密码的分析方法及其简单，因为其密钥空间不是很大，完全可以利用密钥穷尽搜索方法来破译，下面给出一个例子</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">xbjhihpnpldgspqdjiutpg</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xbjhihpnpldgspqdjiutpg</span><br></pre></td></tr></table></figure>
 <p>编写爆破 $K=0,1,…,25$ 的脚本 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> ascii_letters</span><br><span class="line">ctoi = <span class="keyword">lambda</span> x: ascii_letters.index(x)</span><br><span class="line">itoc = <span class="keyword">lambda</span> x: ascii_letters[x]</span><br><span class="line"></span><br><span class="line">secret = <span class="string">'xbjhihpnpldgspqdjiutpg'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">26</span>):</span><br><span class="line">    plain = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(secret)):</span><br><span class="line">        y = ctoi(secret[i])</span><br><span class="line">        x = itoc((y - k) % <span class="number">26</span>)</span><br><span class="line">        plain += x</span><br><span class="line">    print(plain)</span><br></pre></td></tr></table></figure>
 <p>在结果中可以看到</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">xbjhihpnpldgspqdjiutpg</span><br><span class="line">waighgomokcfropcihtsof</span><br><span class="line">vzhfgfnlnjbeqnobhgsrne</span><br><span class="line">uygefemkmiadpmnagfrqmd</span><br><span class="line">txfdedljlhzcolmzfeqplc</span><br><span class="line"><span class="keyword">swecdckikgybnklyedpokb</span></span><br><span class="line"><span class="keyword">rvdbcbjhjfxamjkxdconja</span></span><br><span class="line"><span class="keyword">qucabaigiewzlijwcbnmiz</span></span><br><span class="line"><span class="keyword">ptbzazhfhdvykhivbamlhy</span></span><br><span class="line"><span class="keyword">osayzygegcuxjghuazlkgx</span></span><br><span class="line"><span class="keyword">nrzxyxfdfbtwifgtzykjfw</span></span><br><span class="line"><span class="keyword">mqywxweceasvhefsyxjiev</span></span><br><span class="line"><span class="keyword">lpxvwvdbdzrugderxwihdu</span></span><br><span class="line"><span class="keyword">kowuvucacyqtfcdqwvhgct</span></span><br><span class="line"><span class="keyword">jnvtutbzbxpsebcpvugfbs</span></span><br><span class="line"><span class="keyword">imustsayawordaboutfear </span>&lt;--</span><br><span class="line">hltrsrzxzvnqczantsedzq</span><br><span class="line">gksqrqywyumpbyzmsrdcyp</span><br><span class="line">fjrpqpxvxtloaxylrqcbxo</span><br><span class="line"><span class="keyword">eiqopowuwsknzwxkqpbawn</span></span><br><span class="line"><span class="keyword">dhpnonvtvrjmyvwjpoazvm</span></span><br><span class="line"><span class="keyword">cgomnmusuqilxuvionzyul</span></span><br><span class="line"><span class="keyword">bfnlmltrtphkwtuhnmyxtk</span></span><br><span class="line"><span class="keyword">aemklksqsogjvstgmlxwsj</span></span><br><span class="line"><span class="keyword">zdljkjrprnfiursflkwvri</span></span><br><span class="line"><span class="keyword">yckijiqoqmehtqrekjvuqh</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">xbjhihpnpldgspqdjiutpg</span><br><span class="line">waighgomokcfropcihtsof</span><br><span class="line">vzhfgfnlnjbeqnobhgsrne</span><br><span class="line">uygefemkmiadpmnagfrqmd</span><br><span class="line">txfdedljlhzcolmzfeqplc</span><br><span class="line">swecdckikgybnklyedpokb</span><br><span class="line">rvdbcbjhjfxamjkxdconja</span><br><span class="line">qucabaigiewzlijwcbnmiz</span><br><span class="line">ptbzazhfhdvykhivbamlhy</span><br><span class="line">osayzygegcuxjghuazlkgx</span><br><span class="line">nrzxyxfdfbtwifgtzykjfw</span><br><span class="line">mqywxweceasvhefsyxjiev</span><br><span class="line">lpxvwvdbdzrugderxwihdu</span><br><span class="line">kowuvucacyqtfcdqwvhgct</span><br><span class="line">jnvtutbzbxpsebcpvugfbs</span><br><span class="line">imustsayawordaboutfear &lt;--</span><br><span class="line">hltrsrzxzvnqczantsedzq</span><br><span class="line">gksqrqywyumpbyzmsrdcyp</span><br><span class="line">fjrpqpxvxtloaxylrqcbxo</span><br><span class="line">eiqopowuwsknzwxkqpbawn</span><br><span class="line">dhpnonvtvrjmyvwjpoazvm</span><br><span class="line">cgomnmusuqilxuvionzyul</span><br><span class="line">bfnlmltrtphkwtuhnmyxtk</span><br><span class="line">aemklksqsogjvstgmlxwsj</span><br><span class="line">zdljkjrprnfiursflkwvri</span><br><span class="line">yckijiqoqmehtqrekjvuqh</span><br></pre></td></tr></table></figure>
 <p>第16行出现了明文字符串，对应的$K=15$</p>
 <p>当然这是针对有意义的文本，可以观察出符合英文文本的特征，在下文维吉尼亚密码中将介绍卡方统计来找出密钥$K$的方法</p>
 <h1 id="仿射密码"><a href="#仿射密码" class="headerlink" title="仿射密码"></a>仿射密码</h1><p>Affine Cipher</p>
@@ -216,7 +216,7 @@ aa^{-1}\equiv a^{-1}a\equiv1(mod\ m)</script><p>只有满足这个条件解才�
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">''</span></span><br><span class="line">result = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> str:</span><br><span class="line">    result[i] = str.count(i)</span><br><span class="line">result = sorted(result.items(), key=<span class="keyword">lambda</span> d: d[<span class="number">1</span>], reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> result:</span><br><span class="line">    fmt = <span class="string">'&#123;&#125; &#123;:0&gt;2d&#125; &#123;:.3f&#125;'</span></span><br><span class="line">    print(fmt.format(i[<span class="number">0</span>], i[<span class="number">1</span>], i[<span class="number">1</span>] / len(str)))</span><br></pre></td></tr></table></figure>
 <p>可以给出str字符串中每个字符出现的频率</p>
 <p>假如我们分析此仿射密码</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">FMXVEDKAPHFERBNDKRXRSREEMORUDSDKDVSHVUFEDKAPRKDLYEVLRHHRH</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FMXVEDKAPHFERBNDKRXRSREEMORUDSDKDVSHVUFEDKAPRKDLYEVLRHHRH</span><br></pre></td></tr></table></figure>
 <p>首先分析其词频</p>
 <blockquote>
 <p>R 08 0.140<br>D 07 0.123<br>E 06 0.105<br>K 05 0.088<br>H 05 0.088<br>V 04 0.070<br>F 03 0.053<br>S 03 0.053<br>M 02 0.035<br>X 02 0.035<br>A 02 0.035<br>P 02 0.035<br>U 02 0.035<br>L 02 0.035<br>B 01 0.018<br>N 01 0.018<br>O 01 0.018<br>Y 01 0.018</p>
@@ -237,7 +237,7 @@ aa^{-1}\equiv a^{-1}a\equiv1(mod\ m)</script><p>只有满足这个条件解才�
 <p>相应的攻击脚本</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this code cracks the affine cipher</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> ngram_score <span class="keyword">import</span> ngram_score</span><br><span class="line">fitness = ngram_score(<span class="string">'quadgrams.txt'</span>) <span class="comment"># load our quadgram statistics</span></span><br><span class="line"><span class="keyword">from</span> pycipher <span class="keyword">import</span> Affine</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">break_affine</span><span class="params">(ctext)</span>:</span></span><br><span class="line">    <span class="comment"># make sure ciphertext has all spacing/punc removed and is uppercase</span></span><br><span class="line">    ctext = re.sub(<span class="string">'[^A-Z]'</span>,<span class="string">''</span>,ctext.upper())</span><br><span class="line">    <span class="comment"># try all posiible keys, return the one with the highest fitness</span></span><br><span class="line">    scores = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">11</span>,<span class="number">15</span>,<span class="number">17</span>,<span class="number">19</span>,<span class="number">21</span>,<span class="number">23</span>,<span class="number">25</span>]:</span><br><span class="line">        scores.extend([(fitness.score(Affine(i,j).decipher(ctext)),(i,j)) <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">25</span>)])</span><br><span class="line">    <span class="keyword">return</span> max(scores)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># example ciphertext</span></span><br><span class="line">ctext = <span class="string">'FMXVEDKAPHFERBNDKRXRSREEMORUDSDKDVSHVUFEDKAPRKDLYEVLRHHRH'</span></span><br><span class="line">max_key = break_affine(ctext)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">'best candidate with key (a,b) = '</span>+str(max_key[<span class="number">1</span>])+<span class="string">':'</span></span><br><span class="line"><span class="keyword">print</span> Affine(max_key[<span class="number">1</span>][<span class="number">0</span>],max_key[<span class="number">1</span>][<span class="number">1</span>]).decipher(ctext)</span><br></pre></td></tr></table></figure>
 <p>可以看到结果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  Crypto python break_affine.py</span><br><span class="line">best candidate with key (a,b) = (3, 5):</span><br><span class="line">ALGORITHMSAREQUITEGENERRLDEFINITIONSOFARITHMETICPROCESSES</span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  Crypto python break_affine.py</span><br><span class="line">best candidate with key (a,b) = (3, 5):</span><br><span class="line">ALGORITHMSAREQUITEGENERRLDEFINITIONSOFARITHMETICPROCESSES</span><br></pre></td></tr></table></figure>
 <h1 id="代换密码"><a href="#代换密码" class="headerlink" title="代换密码"></a>代换密码</h1><p>Substitution Cipher</p>
 <p>代换密码实际上是一种单表替换密码，根据一个给定的表，使用特定的字符去替换特定的字符，且不一定存在顺序可言</p>
 <h2 id="密码体制-2"><a href="#密码体制-2" class="headerlink" title="密码体制"></a>密码体制</h2><hr>
@@ -259,7 +259,7 @@ d_\pi(y)=\pi^{-1}(y)</script><hr>
 <p>不过需要注意到是，文本适应度是利用文本中的四字组来和参考英文文本来比较的，如果明文构造的比较特殊，那么分析结果可能不是很好，并且当密文长度不足时，分析结果也是大打折扣</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pycipher <span class="keyword">import</span> SimpleSubstitution <span class="keyword">as</span> SimpleSub</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> ngram_score <span class="keyword">import</span> ngram_score</span><br><span class="line">fitness = ngram_score(<span class="string">'quadgrams.txt'</span>)  <span class="comment"># load our quadgram statistics</span></span><br><span class="line"></span><br><span class="line">ctext = <span class="string">'YIFOFMZRWOFYVECFMDZPCVMRZWNMDZVEJBTXCDDUMJNDIFEFMDZCDMQZKCEYFCJMYRNCWJCSZREXCHZUNMXZNZUCDRJXYYSMRTMEYIFZWDYVZVYFZUMRZCRWNZDZJJXZWGCHSMRNMDHNCMFQCHZJMXJZWIEJYUCFWDJNZDIR'</span></span><br><span class="line">ctext = re.sub(<span class="string">'[^A-Z]'</span>, <span class="string">''</span>, ctext.upper())</span><br><span class="line"></span><br><span class="line">maxkey = list(<span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span>)</span><br><span class="line">maxscore = <span class="number">-99e9</span></span><br><span class="line">parentscore, parentkey = maxscore, maxkey[:]</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Substitution Cipher solver, you may have to wait several iterations"</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"for the correct result. Press ctrl+c to exit program."</span></span><br><span class="line"><span class="comment"># keep going until we are killed by the user</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    i = i+<span class="number">1</span></span><br><span class="line">    random.shuffle(parentkey)</span><br><span class="line">    deciphered = SimpleSub(parentkey).decipher(ctext)</span><br><span class="line">    parentscore = fitness.score(deciphered)</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> count &lt; <span class="number">1000</span>:</span><br><span class="line">        a = random.randint(<span class="number">0</span>, <span class="number">25</span>)</span><br><span class="line">        b = random.randint(<span class="number">0</span>, <span class="number">25</span>)</span><br><span class="line">        child = parentkey[:]</span><br><span class="line">        <span class="comment"># swap two characters in the child</span></span><br><span class="line">        child[a], child[b] = child[b], child[a]</span><br><span class="line">        deciphered = SimpleSub(child).decipher(ctext)</span><br><span class="line">        score = fitness.score(deciphered)</span><br><span class="line">        <span class="comment"># if the child was better, replace the parent with it</span></span><br><span class="line">        <span class="keyword">if</span> score &gt; parentscore:</span><br><span class="line">            parentscore = score</span><br><span class="line">            parentkey = child[:]</span><br><span class="line">            count = <span class="number">0</span></span><br><span class="line">        count = count+<span class="number">1</span></span><br><span class="line">    <span class="comment"># keep track of best score seen so far</span></span><br><span class="line">    <span class="keyword">if</span> parentscore &gt; maxscore:</span><br><span class="line">        maxscore, maxkey = parentscore, parentkey[:]</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'\nbest score so far:'</span>, maxscore, <span class="string">'on iteration'</span>, i</span><br><span class="line">        ss = SimpleSub(maxkey)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'    best key: '</span>+<span class="string">''</span>.join(maxkey)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'    plaintext: '</span>+ss.decipher(ctext)</span><br></pre></td></tr></table></figure>
 <p>有些挺快就能分析出来了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Substitution Cipher solver, you may have to wait several iterations</span><br><span class="line">for the correct result. Press ctrl+c to exit program.</span><br><span class="line"></span><br><span class="line">best score so far: -900.382755643 on iteration 1</span><br><span class="line">    best key: MVNHCIYUJKTFSXWQARDZEGPLOB</span><br><span class="line">    plaintext: GFLYLATROYLGBUELASTWEBARTOCASTBUIZKNESSHAICSFLULASTESAPTJEUGLEIAGRCEOIEMTRUNEDTHCANTCTHESRINGGMARKAUGFLTOSGBTBGLTHARTEROCTSTIINTOVEDMARCASDCEALPEDTIANITOFUIGHELOSICTSFR</span><br><span class="line"></span><br><span class="line">best score so far: -714.033088457 on iteration 2</span><br><span class="line">    best key: CGHWZOTNMKSXVRYELFDJIQUPBA</span><br><span class="line">    plaintext: OURFRIENDFROMPARISEXAMINEDHISEMPTYGLASSWITHSURPRISEASIVEJAPORATIONHADTAKENPLACEWHILEHEWASNTLOOKINGIPOUREDSOMEMOREWINEANDHESETTLEDBACKINHISCHAIRVACETILTEDUPTOWARDSTHESUN</span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Substitution Cipher solver, you may have to wait several iterations</span><br><span class="line">for the correct result. Press ctrl+c to exit program.</span><br><span class="line"></span><br><span class="line">best score so far: -900.382755643 on iteration 1</span><br><span class="line">    best key: MVNHCIYUJKTFSXWQARDZEGPLOB</span><br><span class="line">    plaintext: GFLYLATROYLGBUELASTWEBARTOCASTBUIZKNESSHAICSFLULASTESAPTJEUGLEIAGRCEOIEMTRUNEDTHCANTCTHESRINGGMARKAUGFLTOSGBTBGLTHARTEROCTSTIINTOVEDMARCASDCEALPEDTIANITOFUIGHELOSICTSFR</span><br><span class="line"></span><br><span class="line">best score so far: -714.033088457 on iteration 2</span><br><span class="line">    best key: CGHWZOTNMKSXVRYELFDJIQUPBA</span><br><span class="line">    plaintext: OURFRIENDFROMPARISEXAMINEDHISEMPTYGLASSWITHSURPRISEASIVEJAPORATIONHADTAKENPLACEWHILEHEWASNTLOOKINGIPOUREDSOMEMOREWINEANDHESETTLEDBACKINHISCHAIRVACETILTEDUPTOWARDSTHESUN</span><br></pre></td></tr></table></figure>
 <h1 id="维吉尼亚密码"><a href="#维吉尼亚密码" class="headerlink" title="维吉尼亚密码"></a>维吉尼亚密码</h1><p>Vigenere Cipher</p>
 <p>在前面提到的代换密码中，一旦替换表被确定，同样的字符是会被替换成唯一的字符，也就是单表替换。而维吉尼亚密码却可以让相同的字符被替换成不一样的字符，是一种多表替换密码。</p>
 <h2 id="密码体制-3"><a href="#密码体制-3" class="headerlink" title="密码体制"></a>密码体制</h2><hr>
@@ -280,7 +280,7 @@ I.C.=\frac{\sum\limits_{i=A}^{i=Z}f_i(f_i-1)}{N(N-1)}</script><p>该指数不会
 <p>简单写了一个脚本分析</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding:utf-8</span></span><br><span class="line">code = <span class="string">'CHREEVOAHMAERATBIAXXWTNXBEEOPHBSBOMQEQERBWRVXUOAKXAOSXXWEAHBWGUMMOMNKGRFVGXWTRZXWIAKLXFPSKAUTEMNDCMGTSXMXBTULADNGMGPSRELXNJELXVRVPRTULHDNOWTWDTYGBPHXTFALJHASVBFXNGLLCHRZBWELEKMSUIKNBHWRJGNMGJSGLXFEYPHAGNRBIEQJTAMRVLCRREMNDGLXRRIMGNSNRWCHROHAEYEVTAOEBBIPEEWEVKAKOEWADREMXMTBHHCHRTKDNVRZCHRCLQOHPWQAIIWXNRMGWOIIFKEE'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calFrequency</span><span class="params">(code)</span>:</span></span><br><span class="line">    result = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> code:</span><br><span class="line">        result[i] = code.count(i)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_IC</span><span class="params">(text)</span>:</span></span><br><span class="line">    tab = calFrequency(text)</span><br><span class="line">    char_sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tab.keys():</span><br><span class="line">        char_sum += tab[i] * (tab[i] - <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> char_sum / (len(text) * (len(text) - <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_IC_Avg</span><span class="params">(str_list)</span>:</span></span><br><span class="line">    IC_sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> str_list:</span><br><span class="line">        IC_sum += cal_IC(i)</span><br><span class="line">    <span class="keyword">return</span> IC_sum / len(str_list)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ans = dict()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 密钥最大长度这里设为26，实际分析可以大到长度的一半，不过会有倍数问题</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, <span class="number">26</span>):</span><br><span class="line">    str_list = list()</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</span><br><span class="line">        temp = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(int(len(code) / i)):</span><br><span class="line">            temp += code[i * k + j]</span><br><span class="line">        str_list.append(temp)</span><br><span class="line">    ans[i] = cal_IC_Avg(str_list)</span><br><span class="line"></span><br><span class="line">ans = sorted(ans.items(), key=<span class="keyword">lambda</span> d: d[<span class="number">1</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">print(ans)</span><br></pre></td></tr></table></figure>
 <p>在结果中可以发现一些比较接近0.06的$I.C.$值对应的长度</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(25, 0.06666666666666664), (5, 0.06641988365943945), (15, 0.06596491228070175), (10, 0.06516129032258064), (20, 0.05714285714285714), (23, 0.04682274247491638), (3, 0.04636544685088375), (9, 0.04634581105169341), (11, 0.04449254449254449), (6, 0.04399195575666164), (21, 0.043432757718472007), (18, 0.043300653594771234), (2, 0.04317617866004963), (17, 0.04306036139946174), (19, 0.04298245614035088), (13, 0.042363433667781496), (12, 0.0423076923076923), (7, 0.042283298097251586), (8, 0.04183535762483131), (4, 0.041625041625041624), (24, 0.04059829059829059), (22, 0.040459540459540456), (16, 0.03983918128654971), (14, 0.03896103896103897)]</span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(25, 0.06666666666666664), (5, 0.06641988365943945), (15, 0.06596491228070175), (10, 0.06516129032258064), (20, 0.05714285714285714), (23, 0.04682274247491638), (3, 0.04636544685088375), (9, 0.04634581105169341), (11, 0.04449254449254449), (6, 0.04399195575666164), (21, 0.043432757718472007), (18, 0.043300653594771234), (2, 0.04317617866004963), (17, 0.04306036139946174), (19, 0.04298245614035088), (13, 0.042363433667781496), (12, 0.0423076923076923), (7, 0.042283298097251586), (8, 0.04183535762483131), (4, 0.041625041625041624), (24, 0.04059829059829059), (22, 0.040459540459540456), (16, 0.03983918128654971), (14, 0.03896103896103897)]</span><br></pre></td></tr></table></figure>
 <p>可以发现5的倍数的对应$I.C.$值都很接近0.06，可以考虑密钥为5的倍数</p>
 <h3 id="确定正确密钥"><a href="#确定正确密钥" class="headerlink" title="确定正确密钥"></a>确定正确密钥</h3><p>假设密钥是5，那么这个密文文本就可以分为五个序列，每一个序列都是一个移位密码，我们只需分别求出对应序列的移位密钥$K_i$，由于这是从文本中抽出的字符序列，没有英文逻辑，直接采用移位密码分析的爆破算法无法直接观察出密钥的正确性，还需要加入卡方统计来判断</p>
 <script type="math/tex; mode=display">
@@ -288,18 +288,15 @@ I.C.=\frac{\sum\limits_{i=A}^{i=Z}f_i(f_i-1)}{N(N-1)}</script><p>该指数不会
 <p>简单实现了一下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> ascii_letters</span><br><span class="line">ctoi = <span class="keyword">lambda</span> x: ascii_letters.index(x)</span><br><span class="line">itoc = <span class="keyword">lambda</span> x: ascii_letters[x]</span><br><span class="line">stand = &#123;<span class="string">'e'</span>: <span class="number">0.1311</span>, <span class="string">'t'</span>: <span class="number">0.1047</span>, <span class="string">'a'</span>: <span class="number">0.0815</span>, <span class="string">'o'</span>: <span class="number">0.08</span>, <span class="string">'n'</span>: <span class="number">0.0710</span>, <span class="string">'r'</span>: <span class="number">0.0683</span>, <span class="string">'i'</span>: <span class="number">0.0635</span>, <span class="string">'s'</span>: <span class="number">0.0610</span>, <span class="string">'h'</span>: <span class="number">0.0526</span>, <span class="string">'d'</span>: <span class="number">0.0379</span>, <span class="string">'l'</span>: <span class="number">0.0339</span>, <span class="string">'f'</span>: <span class="number">0.0292</span>, <span class="string">'c'</span>: <span class="number">0.0276</span>,</span><br><span class="line">         <span class="string">'m'</span>: <span class="number">0.0254</span>, <span class="string">'u'</span>: <span class="number">0.0246</span>, <span class="string">'g'</span>: <span class="number">0.0199</span>, <span class="string">'y'</span>: <span class="number">0.0198</span>, <span class="string">'p'</span>: <span class="number">0.0198</span>, <span class="string">'w'</span>: <span class="number">0.0154</span>, <span class="string">'b'</span>: <span class="number">0.0144</span>, <span class="string">'v'</span>: <span class="number">0.0092</span>, <span class="string">'k'</span>: <span class="number">0.0042</span>, <span class="string">'x'</span>: <span class="number">0.0017</span>, <span class="string">'j'</span>: <span class="number">0.0013</span>, <span class="string">'q'</span>: <span class="number">0.0012</span>, <span class="string">'z'</span>: <span class="number">0.008</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shift</span><span class="params">(text, n)</span>:</span></span><br><span class="line">    plain = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(text)):</span><br><span class="line">        y = ctoi(text[i])</span><br><span class="line">        x = itoc((y - n) % <span class="number">26</span>)</span><br><span class="line">        plain += x</span><br><span class="line">    <span class="keyword">return</span> plain</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_kri_squa</span><span class="params">(text)</span>:</span></span><br><span class="line">    text = text.lower()</span><br><span class="line">    result = &#123;&#125;</span><br><span class="line">    kri_squa = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> text:</span><br><span class="line">        result[i] = text.count(i)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> result.keys():</span><br><span class="line">        E=stand[i]*len(text)</span><br><span class="line">        kri_squa += (result[i] - E) ** <span class="number">2</span> / E</span><br><span class="line">    <span class="keyword">return</span> kri_squa</span><br><span class="line"></span><br><span class="line">code=<span class="string">'EMTXBHMRXXXBMGXXLKMGXAGLLPHTGTHFLBKKRGXHBTLMXGWHVBEAAXHKZLWWGF'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">26</span>):</span><br><span class="line">    plain = shift(code, i)</span><br><span class="line">    <span class="keyword">print</span> (i, plain[<span class="number">0</span>:<span class="number">20</span>], int(cal_kri_squa(plain)))</span><br></pre></td></tr></table></figure>
 <p>可以发现当前密钥是19</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">(0, 'emtxbhmrxxxbmgxxlkmg', 1058)</span><br><span class="line">(1, 'dlswaglqwwwalfwwkjlf', 520)</span><br><span class="line">(2, 'ckrvzfkpvvvzkevvjike', 747)</span><br><span class="line">(3, 'bjquyejouuuyjduuihjd', 663)</span><br><span class="line">(4, 'aiptxdintttxictthgic', 278)</span><br><span class="line">(5, 'zhoswchmssswhbssgfhb', 133)</span><br><span class="line">(6, 'ygnrvbglrrrvgarrfega', 232)</span><br><span class="line">(7, 'xfmquafkqqqufzqqedfz', 1486)</span><br><span class="line">(8, 'welptzejpppteyppdcey', 251)</span><br><span class="line">(9, 'vdkosydiooosdxoocbdx', 571)</span><br><span class="line">(10, 'ucjnrxchnnnrcwnnbacw', 723)</span><br><span class="line">(11, 'tbimqwbgmmmqbvmmazbv', 532)</span><br><span class="line">(12, 'sahlpvaflllpaullzyau', 227)</span><br><span class="line">(13, 'rzgkouzekkkoztkkyxzt', 702)</span><br><span class="line">(14, 'qyfjntydjjjnysjjxwys', 1631)</span><br><span class="line">(15, 'pxeimsxciiimxriiwvxr', 352)</span><br><span class="line">(16, 'owdhlrwbhhhlwqhhvuwq', 783)</span><br><span class="line">(17, 'nvcgkqvagggkvpggutvp', 819)</span><br><span class="line">(18, 'mubfjpuzfffjuofftsuo', 394)</span><br><span class="line">(19, 'ltaeiotyeeeitneesrtn', 5) 	&lt;----</span><br><span class="line">(20, 'kszdhnsxdddhsmddrqsm', 327)</span><br><span class="line">(21, 'jrycgmrwcccgrlccqprl', 634)</span><br><span class="line">(22, 'iqxbflqvbbbfqkbbpoqk', 829)</span><br><span class="line">(23, 'hpwaekpuaaaepjaaonpj', 764)</span><br><span class="line">(24, 'govzdjotzzzdoizznmoi', 664)</span><br><span class="line">(25, 'fnuycinsyyycnhyymlnh', 193)</span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">(0, 'emtxbhmrxxxbmgxxlkmg', 1058)</span><br><span class="line">(1, 'dlswaglqwwwalfwwkjlf', 520)</span><br><span class="line">(2, 'ckrvzfkpvvvzkevvjike', 747)</span><br><span class="line">(3, 'bjquyejouuuyjduuihjd', 663)</span><br><span class="line">(4, 'aiptxdintttxictthgic', 278)</span><br><span class="line">(5, 'zhoswchmssswhbssgfhb', 133)</span><br><span class="line">(6, 'ygnrvbglrrrvgarrfega', 232)</span><br><span class="line">(7, 'xfmquafkqqqufzqqedfz', 1486)</span><br><span class="line">(8, 'welptzejpppteyppdcey', 251)</span><br><span class="line">(9, 'vdkosydiooosdxoocbdx', 571)</span><br><span class="line">(10, 'ucjnrxchnnnrcwnnbacw', 723)</span><br><span class="line">(11, 'tbimqwbgmmmqbvmmazbv', 532)</span><br><span class="line">(12, 'sahlpvaflllpaullzyau', 227)</span><br><span class="line">(13, 'rzgkouzekkkoztkkyxzt', 702)</span><br><span class="line">(14, 'qyfjntydjjjnysjjxwys', 1631)</span><br><span class="line">(15, 'pxeimsxciiimxriiwvxr', 352)</span><br><span class="line">(16, 'owdhlrwbhhhlwqhhvuwq', 783)</span><br><span class="line">(17, 'nvcgkqvagggkvpggutvp', 819)</span><br><span class="line">(18, 'mubfjpuzfffjuofftsuo', 394)</span><br><span class="line">(19, 'ltaeiotyeeeitneesrtn', 5) 	&lt;----</span><br><span class="line">(20, 'kszdhnsxdddhsmddrqsm', 327)</span><br><span class="line">(21, 'jrycgmrwcccgrlccqprl', 634)</span><br><span class="line">(22, 'iqxbflqvbbbfqkbbpoqk', 829)</span><br><span class="line">(23, 'hpwaekpuaaaepjaaonpj', 764)</span><br><span class="line">(24, 'govzdjotzzzdoizznmoi', 664)</span><br><span class="line">(25, 'fnuycinsyyycnhyymlnh', 193)</span><br></pre></td></tr></table></figure>
 <p>那么针对维吉尼亚密码解密，密钥长度确定了，就把密文分割成几个序列，再对每个序列进行密钥分析，得到每个序列对应的密钥，即可得到完整密钥，继而恢复明文</p>
-<p>比如上面我们分析得到密钥长度大概是5的倍数，从5开始，分割密文得到</p>
-<blockquote>
-<p>CVABWEBQBUAWWORWWXANTBDPXXRDWBFAXCWMNJJFAIACNRNCATBWKDMCDCQQXW<br>HOEITESEWOOEGMFTIFUDSTNSNVTNDPASNHESBGSEGEMRDRSHEAIEORTHNHOANO<br>RARANOBQRASAUNVRAPTCXUGRJRUOTHLVGRLUHNGYNQRRGINRYOPVEEBRVRHIRI<br>EHAXXPOEVKXHMKGZKSEMMLMEEVLWYXJBLZEIWMLPRJVELMROEEEKWMHTRCPIMI<br>EMTXBHMRXXXBMGXXLKMGXAGLLPHTGTHFLBKKRGXHBTLMXGWHVBEAAXHKZLWWGF</p>
-</blockquote>
+<p>比如上面我们分析得到密钥长度大概是5的倍数，从5开始，分割密文得到<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CVABWEBQBUAWWORWWXANTBDPXXRDWBFAXCWMNJJFAIACNRNCATBWKDMCDCQQXW</span><br><span class="line">HOEITESEWOOEGMFTIFUDSTNSNVTNDPASNHESBGSEGEMRDRSHEAIEORTHNHOANO</span><br><span class="line">RARANOBQRASAUNVRAPTCXUGRJRUOTHLVGRLUHNGYNQRRGINRYOPVEEBRVRHIRI</span><br><span class="line">EHAXXPOEVKXHMKGZKSEMMLMEEVLWYXJBLZEIWMLPRJVELMROEEEKWMHTRCPIMI</span><br><span class="line">EMTXBHMRXXXBMGXXLKMGXAGLLPHTGTHFLBKKRGXHBTLMXGWHVBEAAXHKZLWWGF</span><br></pre></td></tr></table></figure></p>
 <p>对每一个序列进行密钥分析得到密钥</p>
 <blockquote>
 <p>9,0,13,4,19 （janet）</p>
 </blockquote>
 <p>使用此密钥对密文解码得到明文</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">thealmondtreewasintentativeblossokthedayswerelongeroftenendinghitfmagnificenteveningsofcorrugatedpinkskiesthhhuntingseasonwasoverwithhounbsandgunsputawayforsixmonthsthevineyardsherebusyagainasthewellorganizedfarmerstreatedtheirvinesandthekorelackabaisicalneighborshurriedtodothepruningtheyshouldhavedoneinnovember</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">thealmondtreewasintentativeblossokthedayswerelongeroftenendinghitfmagnificenteveningsofcorrugatedpinkskiesthhhuntingseasonwasoverwithhounbsandgunsputawayforsixmonthsthevineyardsherebusyagainasthewellorganizedfarmerstreatedtheirvinesandthekorelackabaisicalneighborshurriedtodothepruningtheyshouldhavedoneinnovember</span><br></pre></td></tr></table></figure>
 <p>在《密码学原理与实践》一书中确定密钥的方法是用到类似重合指数的方法，对于每个可能的密钥$K_i$，利用如下指标进行判断</p>
 <script type="math/tex; mode=display">
 M_g=\sum\limits_{i=A}^{i=Z}\frac{p_if_{i+g}}{n'}</script><p>期望值是$M_g\approx0.065$，这里就不写脚本分析了</p>
@@ -402,6 +399,49 @@ d_k(y)=(y-z)mod26</script><h1 id="参考"><a href="#参考" class="headerlink" t
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Crypto/">
+            <span class="level-start">
+                <span class="level-item">Crypto</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Pwn/">
+            <span class="level-start">
+                <span class="level-item">Pwn</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
 <div class="card widget">
     <div class="card-content">
         <nav class="level">
@@ -493,10 +533,8 @@ d_k(y)=(y-z)mod26</script><h1 id="参考"><a href="#参考" class="headerlink" t
         
     </div>
 </div>
-    
         
-    
-        <div class="card widget">
+            <div class="card widget">
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
@@ -520,217 +558,6 @@ d_k(y)=(y-z)mod26</script><h1 id="参考"><a href="#参考" class="headerlink" t
     </div>
 </div>
 
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Crypto/">
-            <span class="level-start">
-                <span class="level-item">Crypto</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Others/">
-            <span class="level-start">
-                <span class="level-item">Others</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Pwn/">
-            <span class="level-start">
-                <span class="level-item">Pwn</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">9</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            标签云
-        </h3>
-        <a href="/tags/Conditional-competition/" style="font-size: 10px;">Conditional competition</a> <a href="/tags/IOFILE/" style="font-size: 10px;">IOFILE</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/fmt/" style="font-size: 13.33px;">fmt</a> <a href="/tags/format/" style="font-size: 10px;">format</a> <a href="/tags/heap/" style="font-size: 16.67px;">heap</a> <a href="/tags/integer-overflow/" style="font-size: 10px;">integer overflow</a> <a href="/tags/kernel/" style="font-size: 10px;">kernel</a> <a href="/tags/libc/" style="font-size: 13.33px;">libc</a> <a href="/tags/pwn/" style="font-size: 20px;">pwn</a> <a href="/tags/shellcode/" style="font-size: 10px;">shellcode</a> <a href="/tags/stack/" style="font-size: 13.33px;">stack</a> <a href="/tags/tcache/" style="font-size: 13.33px;">tcache</a>
-    </div>
-</div>
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen is-sticky">
-        
-            <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Xman2020冬令营选拔赛Pwn题解">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-22T11:57:22.029Z">2019-12-22</time></div>
-                    <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Xman2020冬令营选拔赛Pwn题解</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/古典密码.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="古典密码学">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T15:15:13.219Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/古典密码.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">古典密码学</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Crypto/">Crypto</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/永恒之蓝测试.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="永恒之蓝测试">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.254Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/永恒之蓝测试.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">永恒之蓝测试</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/ubuntu16安装后配置.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pwn-Ubuntu配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.229Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/ubuntu16安装后配置.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Pwn-Ubuntu配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/2019护网杯-mergeheap.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 护网杯 mergeheap">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.218Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/2019护网杯-mergeheap.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2019 护网杯 mergeheap</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">四月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
         
             <div class="card widget">
     <div class="card-content">
@@ -847,106 +674,95 @@ d_k(y)=(y-z)mod26</script><h1 id="参考"><a href="#参考" class="headerlink" t
 
 <div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
     
-        <div class="card widget">
+        
+<div class="card widget">
     <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Xman2020冬令营选拔赛Pwn题解">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-22T11:57:22.029Z">2019-12-22</time></div>
-                    <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Xman2020冬令营选拔赛Pwn题解</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Mask">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Mask
                     </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        A newbie in CTF
+                    </p>
+                    
+                    
                 </div>
             </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/古典密码.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="古典密码学">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T15:15:13.219Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/古典密码.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">古典密码学</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Crypto/">Crypto</a>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
                     </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            12
+                        </p>
+                    </a>
                 </div>
             </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/永恒之蓝测试.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="永恒之蓝测试">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.254Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/永恒之蓝测试.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">永恒之蓝测试</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
                     </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
                 </div>
             </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/12/15/ubuntu16安装后配置.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pwn-Ubuntu配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.229Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/ubuntu16安装后配置.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Pwn-Ubuntu配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
                     </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            13
+                        </p>
+                    </a>
                 </div>
             </div>
-        </article>
+        </nav>
         
-        <article class="media">
+        
+        
+        <div class="level is-mobile">
             
-            <a href="/2019/12/15/2019护网杯-mergeheap.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 护网杯 mergeheap">
-                </p>
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/mask6asok">
+                
+                <i class="fab fa-github"></i>
+                
             </a>
             
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.218Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/2019护网杯-mergeheap.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2019 护网杯 mergeheap</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
-                    </p>
-                </div>
-            </div>
-        </article>
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="QQ" href="tencent://message/?uin=1924594189&amp;Site=&amp;menu=yes">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Email" href="mailto:1924594189@qq.com">
+                
+                <i class="fa fa-envelope"></i>
+                
+            </a>
+            
+        </div>
         
     </div>
 </div>
@@ -955,58 +771,26 @@ d_k(y)=(y-z)mod26</script><h1 id="参考"><a href="#参考" class="headerlink" t
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            归档
+            链接
         </h3>
         <ul class="menu-list">
         
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">四月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
+            <li>
+                <a class="level is-mobile" href="https://binlep.github.io/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">binLep&#39;s blog</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">binlep.github.io</span>
+                    </span>
+                </a>
+            </li>
         
         </ul>
         </div>
     </div>
 </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -1153,15 +937,13 @@ var IcarusThemeSettings = {
     },
     article: {
         highlight: {
-            clipboard: true,
-            fold: 'unfolded'
+            clipboard: false,
+            fold: ''
         }
     }
 };
 </script>
 
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
 
