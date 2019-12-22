@@ -65,8 +65,8 @@
       <tags>
         <tag>pwn</tag>
         <tag>heap</tag>
-        <tag>tcache</tag>
         <tag>IOFILE</tag>
+        <tag>tcache</tag>
       </tags>
   </entry>
   <entry>
@@ -77,8 +77,8 @@
         <category>Pwn</category>
       </categories>
       <tags>
-        <tag>fmt</tag>
         <tag>integer overflow</tag>
+        <tag>fmt</tag>
       </tags>
   </entry>
   <entry>
