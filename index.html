@@ -157,7 +157,7 @@
 <p>由于这是一道arm题，所以需要使用qemu来执行</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-arm -g 1234 -L /usr/arm-linux-gnueabihf ./pwn</span><br></pre></td></tr></table></figure>
 <p>调试可以使用gdb附加</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gdb-multiarch ./pwn -q</span><br><span class="line">	......</span><br><span class="line">	......</span><br><span class="line"><span class="meta">pwndbg&gt;</span> target remote localhost:1234</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gdb-multiarch ./pwn -q</span><br><span class="line">	......</span><br><span class="line">	......</span><br><span class="line"><span class="meta">pwndbg&gt;</span><span class="bash"> target remote localhost:1234</span></span><br></pre></td></tr></table></figure>
 <p>常规菜单题</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  arm <span class="keyword">sh</span> <span class="keyword">run</span>.<span class="keyword">sh</span>              </span><br><span class="line">Tell me your name:</span><br><span class="line">mask</span><br><span class="line">  Welcome to IOT world </span><br><span class="line">  It's a normal <span class="keyword">note</span> boke</span><br><span class="line">  1. add a <span class="keyword">note</span></span><br><span class="line">  2. delete a <span class="keyword">note</span></span><br><span class="line">  3. <span class="keyword">print</span> a <span class="keyword">note</span></span><br><span class="line">  your choice:</span><br></pre></td></tr></table></figure>
 <p>ida打开，很容易就发现了有uaf的漏洞</p>
@@ -1308,47 +1308,6 @@ d_k(y)=(y-z)mod26</script><h1 id="参考"><a href="#参考" class="headerlink" t
         
 <div class="card widget">
     <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Crypto/">
-            <span class="level-start">
-                <span class="level-item">Crypto</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Others/">
-            <span class="level-start">
-                <span class="level-item">Others</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Pwn/">
-            <span class="level-start">
-                <span class="level-item">Pwn</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">9</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen is-sticky">
-        
-            
-<div class="card widget">
-    <div class="card-content">
         <nav class="level">
             <div class="level-item has-text-centered" style="flex-shrink: 1">
                 <div>
@@ -1438,6 +1397,47 @@ d_k(y)=(y-z)mod26</script><h1 id="参考"><a href="#参考" class="headerlink" t
         
     </div>
 </div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Crypto/">
+            <span class="level-start">
+                <span class="level-item">Crypto</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Pwn/">
+            <span class="level-start">
+                <span class="level-item">Pwn</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
         
             <div class="card widget">
     <div class="card-content">
@@ -1578,99 +1578,6 @@ d_k(y)=(y-z)mod26</script><h1 id="参考"><a href="#参考" class="headerlink" t
 
 
 <div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                    <figure class="image is-128x128 has-mb-6">
-                        <img class="" src="/images/avatar.png" alt="Mask">
-                    </figure>
-                    
-                    <p class="is-size-4 is-block">
-                        Mask
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        A newbie in CTF
-                    </p>
-                    
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <a href="/archives">
-                        <p class="title has-text-weight-normal">
-                            12
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分类
-                    </p>
-                    <a href="/categories">
-                        <p class="title has-text-weight-normal">
-                            3
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        标签
-                    </p>
-                    <a href="/tags">
-                        <p class="title has-text-weight-normal">
-                            13
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </nav>
-        
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
-                title="Github" href="https://github.com/mask6asok">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
-                title="QQ" href="tencent://message/?uin=1924594189&amp;Site=&amp;menu=yes">
-                
-                <i class="fab fa-qq"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
-                title="Email" href="mailto:1924594189@qq.com">
-                
-                <i class="fa fa-envelope"></i>
-                
-            </a>
-            
-        </div>
-        
-    </div>
-</div>
     
         <div class="card widget">
     <div class="card-content">
