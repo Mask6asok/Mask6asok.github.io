@@ -7,20 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: format - Mask&#39;s blogs</title>
+<title>Xman2020冬令营选拔赛Pwn题解 - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="a newbie in CTF">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mask&#39;s blogs">
-<meta property="og:url" content="Mask6asok.github.io/tags/format/index.html">
+    <meta name="description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了 baby_arm这是我第一次做arm的题目，这题目也比较友好，不过这是一道堆溢出的题目，没怎么牵扯到栈，所以暂时没去了解arm的汇编层次的结构，比如参数传递之类的，等这个寒假学习一下吧 1234567➜  arm checksec pwn  [*] &apos;/home/mask/Desktop/xman/arm/">
+<meta name="keywords" content="heap,arm,kernel,shellcode,format">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xman2020冬令营选拔赛Pwn题解">
+<meta property="og:url" content="Mask6asok.github.io/2019/12/22/XMan2019_WinterCamp_Qualify_Pwn.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="a newbie in CTF">
+<meta property="og:description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了 baby_arm这是我第一次做arm的题目，这题目也比较友好，不过这是一道堆溢出的题目，没怎么牵扯到栈，所以暂时没去了解arm的汇编层次的结构，比如参数传递之类的，等这个寒假学习一下吧 1234567➜  arm checksec pwn  [*] &apos;/home/mask/Desktop/xman/arm/">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
+<meta property="og:updated_time" content="2019-12-28T09:08:14.355Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mask&#39;s blogs">
-<meta name="twitter:description" content="a newbie in CTF">
+<meta name="twitter:title" content="Xman2020冬令营选拔赛Pwn题解">
+<meta name="twitter:description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了 baby_arm这是我第一次做arm的题目，这题目也比较友好，不过这是一道堆溢出的题目，没怎么牵扯到栈，所以暂时没去了解arm的汇编层次的结构，比如参数传递之类的，等这个寒假学习一下吧 1234567➜  arm checksec pwn  [*] &apos;/home/mask/Desktop/xman/arm/">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -79,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.ico" alt="Mask&#39;s blogs" height="28">
+                <img src="/images/logo.ico" alt="Xman2020冬令营选拔赛Pwn题解" height="28">
             
             </a>
         </div>
@@ -107,6 +109,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -120,18 +126,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">format</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
@@ -157,7 +152,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/12/22/XMan2019_WinterCamp_Qualify_Pwn.html">Xman2020冬令营选拔赛Pwn题解</a>
+                Xman2020冬令营选拔赛Pwn题解
             
         </h1>
         <div class="content">
@@ -194,6 +189,15 @@
 
         </div>
         
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/arm/">arm</a>, <a class="has-link-grey -link" href="/tags/format/">format</a>, <a class="has-link-grey -link" href="/tags/heap/">heap</a>, <a class="has-link-grey -link" href="/tags/kernel/">kernel</a>, <a class="has-link-grey -link" href="/tags/shellcode/">shellcode</a>
+                </div>
+            </div>
+        </div>
+        
         
         
     </div>
@@ -203,7 +207,26 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/28/brief_sql.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">SQL初步学习</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/15/Classical_Crypto.html">
+                <span class="level-item">古典密码学</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -215,6 +238,46 @@
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#baby-arm">
+        <span class="has-mr-6">1</span>
+        <span>baby_arm</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#exp">
+        <span class="has-mr-6">1.1</span>
+        <span>exp</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#baby-kernel">
+        <span class="has-mr-6">2</span>
+        <span>baby_kernel</span>
+        </a></li><li>
+        <a class="is-flex" href="#NoooCall">
+        <span class="has-mr-6">3</span>
+        <span>NoooCall</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#exp-1">
+        <span class="has-mr-6">3.1</span>
+        <span>exp</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#format">
+        <span class="has-mr-6">4</span>
+        <span>format</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#exp-2">
+        <span class="has-mr-6">4.1</span>
+        <span>exp</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         
 <div class="card widget">
@@ -660,7 +723,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.ico" alt="Mask&#39;s blogs" height="28">
+                    <img src="/images/logo.ico" alt="Xman2020冬令营选拔赛Pwn题解" height="28">
                 
                 </a>
                 <p class="is-size-7">
