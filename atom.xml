@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="Mask6asok.github.io/"/>
-  <updated>2019-12-22T16:30:41.147Z</updated>
+  <updated>2019-12-28T04:01:17.704Z</updated>
   <id>Mask6asok.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL初步学习</title>
+    <link href="Mask6asok.github.io/2019/12/28/brief_sql.html"/>
+    <id>Mask6asok.github.io/2019/12/28/brief_sql.html</id>
+    <published>2019-12-28T04:01:31.292Z</published>
+    <updated>2019-12-28T04:01:17.704Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="DBMS" scheme="Mask6asok.github.io/categories/DBMS/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Xman2020冬令营选拔赛Pwn题解</title>
@@ -260,9 +284,9 @@
       <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
     
     
-      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
-    
       <category term="integer overflow" scheme="Mask6asok.github.io/tags/integer-overflow/"/>
+    
+      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
     
   </entry>
   
@@ -342,11 +366,11 @@
     
       <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
     
+      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
+    
       <category term="stack" scheme="Mask6asok.github.io/tags/stack/"/>
     
       <category term="libc" scheme="Mask6asok.github.io/tags/libc/"/>
-    
-      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
     
   </entry>
   

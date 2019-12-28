@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>SQL初步学习 - Mask&#39;s blogs</title>
+
+
+    <meta name="description" content="这学期学习了《数据库系统基础教程》，简单学习了SQL的增删查改功能，知识点繁多，简单记录一下 表的定义简单表定义12345CREAT TABLE_NAME(	attr1_name type,    attr2_name type,    ......); 其中type类型有如下几种 123456789CHAR(n)——填充字符串，长为nVARCHAR(n)——终止符字符串，最长为nBIT(n)——">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL初步学习">
+<meta property="og:url" content="Mask6asok.github.io/2019/12/28/brief_sql.html">
+<meta property="og:site_name" content="Mask&#39;s blogs">
+<meta property="og:description" content="这学期学习了《数据库系统基础教程》，简单学习了SQL的增删查改功能，知识点繁多，简单记录一下 表的定义简单表定义12345CREAT TABLE_NAME(	attr1_name type,    attr2_name type,    ......); 其中type类型有如下几种 123456789CHAR(n)——填充字符串，长为nVARCHAR(n)——终止符字符串，最长为nBIT(n)——">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="/images/og_image.png">
+<meta property="og:updated_time" content="2019-12-28T04:01:17.704Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL初步学习">
+<meta name="twitter:description" content="这学期学习了《数据库系统基础教程》，简单学习了SQL的增删查改功能，知识点繁多，简单记录一下 表的定义简单表定义12345CREAT TABLE_NAME(	attr1_name type,    attr2_name type,    ......); 其中type类型有如下几种 123456789CHAR(n)——填充字符串，长为nVARCHAR(n)——终止符字符串，最长为nBIT(n)——">
+<meta name="twitter:image" content="/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.ico" alt="SQL初步学习" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-28T04:01:31.292Z">2019-12-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/DBMS/">DBMS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    23 分钟 读完 (大约 3412 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                SQL初步学习
+            
+        </h1>
+        <div class="content">
+            <p>这学期学习了《数据库系统基础教程》，简单学习了SQL的增删查改功能，知识点繁多，简单记录一下</p>
+<h2 id="表的定义"><a href="#表的定义" class="headerlink" title="表的定义"></a>表的定义</h2><h3 id="简单表定义"><a href="#简单表定义" class="headerlink" title="简单表定义"></a>简单表定义</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREAT TABLE_NAME(</span><br><span class="line">	attr1_name type,</span><br><span class="line">    attr2_name type,</span><br><span class="line">    ......</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>其中<code>type</code>类型有如下几种</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CHAR(n)——填充字符串，长为n</span><br><span class="line">VARCHAR(n)——终止符字符串，最长为n</span><br><span class="line">BIT(n)——比特位串，长为n</span><br><span class="line">INT——整形</span><br><span class="line">SHORTINT——比INT小的整形</span><br><span class="line">FLOAT——浮点型</span><br><span class="line">DECIMAL(n,d)/NUMERIC(n,d)——长为n的十进制数字串，小数点是右数第d位</span><br><span class="line">DATE——日期类型字符串</span><br><span class="line">TIME——时间类型字符串</span><br></pre></td></tr></table></figure>
+<p>当在R中增加/修改元组时，并非一定会为所有属性赋值，当某个属性不存在赋值时，建议用<code>NULL</code>来填充，但是也可以用<code>DEFAULT VALUE</code>默认值来填充</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">	attr_name type DEFAULT xxx, <span class="comment"># xxx需与type类型一致</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="针对表结构的操作"><a href="#针对表结构的操作" class="headerlink" title="针对表结构的操作"></a>针对表结构的操作</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> R <span class="comment"># 删除R表</span></span><br><span class="line"><span class="keyword">ALTER</span> R <span class="keyword">ADD</span> attr_name <span class="keyword">type</span> <span class="comment"># 在R关系表中增加一个类型为type，名字为attr_name的属性</span></span><br><span class="line"><span class="keyword">ALTER</span> R <span class="keyword">DELETE</span> attr_name <span class="comment"># 在R关系表中删除一个名为arrt_name的属性</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性键"><a href="#属性键" class="headerlink" title="属性键"></a>属性键</h3><p>指明键有两个关键字，<code>PRIMARY KEY</code>和<code>UNIQUE</code>，两者区别在于<code>PRIMARY KEY</code>声明的键属性不能为<code>NULL</code>而<code>UNIQUE</code>声明的键属性可以，而且一个表中只能有一个<code>PRIMARY KEY</code>而可以有多个<code>UNIQUE</code>，简单来说就是<code>PRIMARY KEY = UNIQUE + NOT NULL</code></p>
+<p>在关系表中建表时定义键的方式有两种</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">	attr1_name type PRIMARY KEY,</span><br><span class="line">...</span><br><span class="line"> <span class="comment"># or</span></span><br><span class="line">...</span><br><span class="line">	attr1_name type,</span><br><span class="line">	attr2_name type,</span><br><span class="line">	...</span><br><span class="line">	PRIMARY KEY(attr1) <span class="comment"># KEY(attr1,attr2) 可定义多重键</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>数据库中要求一个表中所有元组在键属性上不能一致，否则无法通过键去索引唯一元组，此时DBMS就会拒绝这类违反规则的插入或者更新操作</p>
+<h3 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h3><p>外键<code>FOREIGN KEY</code>，一个属性/属性组定义为外键，则它会引用其他关系（也可为自身）的属性/属性组，其中被引用的属性若在自身关系中，则此属性必须为<code>UNIQUE</code>或者<code>PRIMARY kEY</code>；外键属性的值，必须在被引用关系中存在，否则违反参照完整性</p>
+<p>声明外键的方法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">	R1_attr1_name type REFERENCES R2(R2_attr_name),</span><br><span class="line">...</span><br><span class="line"> <span class="comment"># or</span></span><br><span class="line">...</span><br><span class="line">	...</span><br><span class="line">	FOREIGN KEY (R1_attr1_name) REFERENCES R2(R2_attr_name)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>这两种方法都是等价的，其意义都是无论何时<code>R2_attr_name</code>必须为<code>R2</code>的键，<code>R1</code>表中的<code>R1_attr1_name</code>属性的值，必须为<code>R2</code>表中某个元组在<code>R2_attr_name</code>属性上的值，除非<code>R1_attr1_name</code>值为<code>NULL</code>（键不能为<code>NULL</code>)</p>
+<h3 id="维护参照完整性"><a href="#维护参照完整性" class="headerlink" title="维护参照完整性"></a>维护参照完整性</h3><p>上文提到了键属性之间的参照完整性，其意义是在某些操作会引起不满足键的参照完整性要求时（如两个元组键相同，某个关系中某个元组的外键的值在被参照关系中不存在等），DBMS会为了维护整体结构的参照完整性，对这类操作做出反应</p>
+<p>DBMS对这些操作有以下几种反应可选</p>
+<ol>
+<li>缺省原则，拒绝违法更新（RESTRICT），拒绝这类操作</li>
+<li>级联原则（CASCADE），保持一致性，若修改则全修改，若删除则全删除</li>
+<li>置空原则（SET NULL），影响外键时，若外键不符合要求，则把外键置空</li>
+</ol>
+<p>为外键选择原则的方式为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">	R1_attr_name type REFERENCEs R2(R2_attr_name) ON <span class="keyword">DELETE</span>/<span class="keyword">UPDATE</span> <span class="keyword">SET</span> <span class="literal">NULL</span>/<span class="keyword">CASCADE</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><code>RESTRICT</code>是默认的原则</p>
+<h3 id="属性-元组约束"><a href="#属性-元组约束" class="headerlink" title="属性/元组约束"></a>属性/元组约束</h3><p>可以对关系表中具体属性或者元组进行约束</p>
+<p><code>NOT NULL</code>约束要求某个属性不能为<code>NULL</code>值，例如主键要求<code>NOT NULL</code></p>
+<p><code>CHECK (condition)</code>可以进一步约束属性值，满足<code>condition</code>的属性值的元组才能放入，一般会在<code>UPDATE</code>、<code>INSERT</code>操作时进行check，其中<code>condition</code>还支持通过查表来进行动态check</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">	R1_attr_name type <span class="keyword">CHECK</span>(R1_attr_name <span class="keyword">in</span> <span class="keyword">SELECT</span> R2_attr_name <span class="keyword">from</span> R2)</span><br><span class="line">	<span class="comment"># 约束 R1中的R1_attr_name属性必须在R2的R2_attr_name中出现</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>当约束条件同时针对关系中两个属性时，则必须使用基于元组的check</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">	attr1_name type,</span><br><span class="line">	attr2_name type,</span><br><span class="line">	<span class="keyword">CHECK</span>( attr1_name &gt; attr2_name)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>基于元组的check比基于属性的check检验更频繁，一个是元组任何属性改变都会check，另一个是只有声明check的属性改变 时才会check</p>
+<p>当存在属性check与元组check时，基于属性的check先检验</p>
+<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><p>表的查询是最重要的部分</p>
+<p>SQL的查询基本框架为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">ALL</span>|<span class="keyword">DISTINCT</span>] <span class="keyword">attr</span>-<span class="keyword">list</span></span><br><span class="line">	<span class="comment"># *|&#123;column-name|expression&#125; [AS alias-name]</span></span><br><span class="line"><span class="keyword">FROM</span> R</span><br><span class="line">[<span class="keyword">WHERE</span> condition]</span><br><span class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> &#123;expression|interger&#125; [<span class="keyword">ASC</span>|<span class="keyword">DESC</span>]]</span><br></pre></td></tr></table></figure>
+<h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h3><p><code>SELECT</code>语句相当于一个投影，将需要的属性投影出来</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="comment"># 全投影</span></span><br><span class="line"><span class="keyword">SELECT</span> attr1 [<span class="keyword">AS</span> name1],... <span class="comment"># 将某个属性/某组属性投影出来，AS可以起别名</span></span><br><span class="line"><span class="keyword">SELECT</span> expression(e.g. a*b <span class="keyword">as</span> c) <span class="comment"># 将某些属性进行运算</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">'A'</span> <span class="keyword">as</span> c <span class="comment"># 加入常量</span></span><br></pre></td></tr></table></figure>
+<h3 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h3><p><code>FROM</code>语句说明了表的查询范围，<code>FROM R</code>即在<code>R</code>中进行筛选查询</p>
+<p>同时SQL也支持多关系查询（多表联合查询），<code>FROM R1, R2</code>是将<code>R1</code>与<code>R2</code>进行了笛卡尔积得到的新关系再进行筛选查询，针对重复属性，可以利用<code>R1.name</code>与<code>R2.name</code>进行区分</p>
+<p><code>FROM</code>语句还可以对关系进行改名，<code>FROM R AS S</code>，则在<code>WHERE</code>和<code>SELECT</code>中可以直接利用<code>S.name</code>来操作</p>
+<h3 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h3><p><code>WHERE</code>语句相当于一个选择语句，从关系中筛选符合<code>condition</code>的元组</p>
+<p>选择对象可以是关系中的属性<code>attr</code>，常量值<code>const</code></p>
+<p>运算符有+，-，*，/，=，&lt;&gt;（不等），&gt;，&lt;，&lt;=，&gt;=，IS [NOT] NULL，NOT，AND，OR</p>
+<p>基于字符串的比较是比较字典序，还支持模式匹配（低级正则） </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str [NOT] LIKE pattern</span><br></pre></td></tr></table></figure>
+<p><code>pattern</code>中用 <code>&amp;</code>代表零个到多个字符，用<code>_</code>代表一个字符</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name LIKE 'Mask _%'</span><br><span class="line"><span class="comment"># 匹配name是 Mask x... 的元组</span></span><br></pre></td></tr></table></figure>
+<p>特别注意在进行运算时，如果某个属性值为<code>NULL</code>，则比较运算的结果是<code>NULL</code>，算数运算的结果是<code>UNKNOWN</code>，而且<code>NULL</code>不能用作常量字面值出现在表达式中，常用 <code>IS [NOT] NULL</code>判是否为空</p>
+<h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><p><code>ORDER BY</code>语句可以对结果元组序列进行排序，<code>ASC</code>是默认方向，升序，<code>DESC</code>是降序，而且可以进行多属性排序</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> a1 <span class="keyword">DESC</span>, a2;</span><br><span class="line"><span class="comment"># 将R表中先按a1属性降序排序，针对相同的a1属性元组，按a2属性升序排序</span></span><br></pre></td></tr></table></figure>
+<h3 id="查询结果运算"><a href="#查询结果运算" class="headerlink" title="查询结果运算"></a>查询结果运算</h3><p>SQL支持将多个查询的结果进行类似集合的交并差运算</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UNION <span class="comment"># 并，大多数DBMS支持</span></span><br><span class="line">	... UNION [ALL] ... <span class="comment"># ALL保留重复</span></span><br><span class="line">INTERSECT <span class="comment"># 交，大多数DBMS不支持</span></span><br><span class="line">EXCEPT/MINUS <span class="comment"># 差，大多数DBMS不支持</span></span><br></pre></td></tr></table></figure>
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><p>一个查询语句作为另一个查询语句的一部分</p>
+<p>子查询常出现在<code>WHERE</code>语句中充当单值常量（标量）或者作为关系存在</p>
+<p>子查询也可以出现在<code>FROM</code>语句中，不过此时应当给予一个别名，以便在<code>SELECT</code>和<code>WHERE</code>中引用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R1</span><br><span class="line"><span class="keyword">WHERE</span> R1.a1 <span class="keyword">IN</span> (<span class="keyword">SELECT</span> a1 <span class="keyword">IN</span> R2);</span><br><span class="line"><span class="comment"># 将R1中a1属性在R2中a1属性出现过的元组投影出来</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R1, (<span class="keyword">SELECT</span> a1 <span class="keyword">FROM</span> R2) <span class="keyword">AS</span> R3;</span><br><span class="line"><span class="comment"># 将R2中的a1属性列表投影出来作为R3关系</span></span><br></pre></td></tr></table></figure>
+<p>产生标量的子查询，即在子查询中<code>SELECT</code>了单个属性出来，如上面的<code>(SELECT a1 IN R2)</code></p>
+<h3 id="关系条件表达式"><a href="#关系条件表达式" class="headerlink" title="关系条件表达式"></a>关系条件表达式</h3><p>在<code>WHERE</code>语句中可以使用关系条件表达式进行筛选</p>
+<p><code>ANY</code>：存在某个元组满足即为真 <code>s &gt; ANY R</code></p>
+<p><code>ALL</code>：所有元组满足即为真<code>s &gt; ALL R</code></p>
+<p><code>IN</code>：关系中存在这个元组即为真<code>s IN R</code></p>
+<p><code>EXISTS</code>：关系中存在元组（非空）即为真<code>EXISTS R</code></p>
+<p>（这里的<code>R</code>也可用子查询）</p>
+<p>可以利用<code>()</code>括起来的标量值列表来表示一个元组，这里的标量值可以是常量字面值<code>(&#39;Mask&#39;, 20)</code>也可以是属性<code>(name, age)</code></p>
+<p>如果使用元组来进行关系条件运算，则必须要求元组和关系的元组有相同的分量个数</p>
+<h3 id="关联子查询"><a href="#关联子查询" class="headerlink" title="关联子查询"></a>关联子查询</h3><p>关联子查询出现在嵌套结构中，常常会进行多次查询，主要在于外部的每一次查询，内部都要进行一次子查询</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># R1(a,b,c) R2(a,b,c)</span></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R1</span><br><span class="line"><span class="keyword">WHERE</span> R1.a &lt; <span class="keyword">ALL</span> (<span class="keyword">SELECT</span> b <span class="keyword">FROM</span> R2 <span class="keyword">wHERE</span> c = R1.c)</span><br><span class="line"><span class="comment"># 针对R1中每个元组，都要查询一次R2获得所有的c值相同的b,再判断a是否小于所有的b</span></span><br></pre></td></tr></table></figure>
+<p>在关联子查询中需要注意属性变量的范围，在子查询中的某个属性<code>aa</code>，若在子查询的<code>FROM</code>关系中不存在<code>aa</code>，则会引用外部查询，简单来说子查询可以使用父查询中的属性</p>
+<h3 id="连接表达式"><a href="#连接表达式" class="headerlink" title="连接表达式"></a>连接表达式</h3><p>在上文提到的<code>FROM</code>中可以使用<code>FROM R1, R2</code>来进行多关系查询，也可以使用连接运算符来创造新的关系</p>
+<p><code>CROSS JOIN</code>：交叉连接，就是笛卡尔积</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R1 <span class="keyword">CROSS</span> <span class="keyword">JOIN</span> R2;</span><br></pre></td></tr></table></figure>
+<p><code>JOIN ON</code>：$\theta$连接，笛卡尔积后进行选择</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R1 <span class="keyword">JOIN</span> R2 <span class="keyword">ON</span> condition;</span><br></pre></td></tr></table></figure>
+<p><code>NATURAL JOIN</code>：自然连接，同名属性且同值的拼接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R1 <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> R2 [<span class="keyword">ON</span> condition]</span><br></pre></td></tr></table></figure>
+<p>上面的<code>NATURAL JOIN</code>是默认的内连接，实际上一个是<code>NATURAL INNER JOIN</code>，内连接对于不匹配的悬浮元组，是不会加入结果表的</p>
+<p>而外连接<code>OUTER JOIN</code>则会把悬浮元组中的未匹配值填充空值使之称为查询结果</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R1 <span class="keyword">FULL</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> R2 [<span class="keyword">ON</span> condition];</span><br><span class="line"><span class="comment"># R1与R2的悬浮元组都保留</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R1 <span class="keyword">RIGHT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> [<span class="keyword">ON</span> condition];</span><br><span class="line"><span class="comment"># R2的悬浮元组都保留</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R1 <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> [<span class="keyword">ON</span> condition];</span><br><span class="line"><span class="comment"># R1的悬浮元组都保留</span></span><br></pre></td></tr></table></figure>
+<h2 id="针对关系的运算"><a href="#针对关系的运算" class="headerlink" title="针对关系的运算"></a>针对关系的运算</h2><h3 id="消除重复"><a href="#消除重复" class="headerlink" title="消除重复"></a>消除重复</h3><p>SQL是基于包运算的，意思是结果可能有重复，在<code>SELECT</code>时可以消除重复的元组</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R</span><br><span class="line"><span class="comment"># 将R中重复元组去除</span></span><br></pre></td></tr></table></figure>
+<p>SQL中的消除重复是基于排序的，因此频繁的消除重复可能会造成额外的时间复杂度</p>
+<h2 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h2><p>首先介绍一下聚合运算符<code>SUM</code>，<code>AVG</code>，<code>MIN</code>，<code>MAX</code>，<code>COUNT</code></p>
+<p>前四个都是求关系表中某一列，即某一个属性的统计值，第五个是求列值个数，也可以用来求元组的数目（<code>COUNT(*)</code>，去重计数：<code>COUNT(DISTINCT *)</code>)</p>
+<p>上述的运算都是忽略<code>NULL</code>运算的，因为<code>NULL</code>的算数运算都是<code>KNOWN</code>，空包的<code>COUNT</code>是<code>0</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> R</span><br><span class="line"><span class="keyword">WHERE</span> a = (<span class="keyword">SELECT</span> <span class="keyword">MAX</span>(a) <span class="keyword">FROM</span> R);</span><br><span class="line"><span class="comment"># R中a值最大的元组</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>接着继续来讲<code>GROUP BY</code>，它一般与聚合运算一起用</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GROUP BY &#123;name|expression&#125;,...</span><br></pre></td></tr></table></figure>
+<p>可以多属性分组<code>GROUP BY a1, a2</code>，先按<code>a1</code>分组，相同的<code>a1</code>里按<code>a2</code>分组</p>
+<p>分组后，相应的<code>SELECT</code>中只能出现<code>GROUP BY</code>语句中出现的属性（分组依据）以及聚合运算符，因为未出现的属性被分组了，单独打印是没有意义的，但是可以通过聚合运算使得这些未出现的属性相对于分组的统计量存进表里，这是有意义的</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># R(a,b,c)</span></span><br><span class="line"><span class="keyword">SELECT</span> a,<span class="keyword">MAX</span>(b),<span class="keyword">MIN</span>(c)</span><br><span class="line"><span class="keyword">FROM</span> R</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> a</span><br><span class="line"><span class="comment"># 统计相同a的最大b与最小c</span></span><br></pre></td></tr></table></figure>
+<h2 id="HAVING"><a href="#HAVING" class="headerlink" title="HAVING"></a>HAVING</h2><p><code>HAVING</code>子句常用来根据聚合运算的结果对分组进行选择</p>
+<p><code>HAVING</code>不能使用<code>SELECT</code>中的别名，只能使用聚合运算符和<code>ORDER BY</code>中出现的属性</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># R(a,b,c)</span></span><br><span class="line"><span class="keyword">SELECT</span> a,<span class="keyword">MAX</span>(b) <span class="keyword">AS</span> MAXB,<span class="keyword">MIN</span>(c)</span><br><span class="line"><span class="keyword">FROM</span> R</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> a</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">MAX</span>(b) &gt; a <span class="comment"># HAVING MAXB &gt; a 错误</span></span><br><span class="line"><span class="comment"># 统计相同a的最大b，且b大于a,与最小c</span></span><br></pre></td></tr></table></figure>
+<h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><p>增加表的元组</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> R(...) <span class="keyword">VALUES</span> (...)</span><br></pre></td></tr></table></figure>
+<p>插入元组时注意键值唯一性，属性列表和值表的对应数量类型一致，如果属性列表没有罗列全部属性<code>R(a1,a2)</code>，则其余的值用缺省值填充，如果省略了属性列表，则值表应与<code>R</code>属性顺序一致</p>
+<p>可以利用子查询向关系中插入多个元组，此时利用子查询替换<code>VALUES (...)</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> R(a1,a2) <span class="keyword">SELECT</span> b1,b2 <span class="keyword">FROM</span> S <span class="keyword">WHERE</span> ...;</span><br></pre></td></tr></table></figure>
+<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><p>删除表中的元组</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELECT FROM R [WHERE condition]</span><br></pre></td></tr></table></figure>
+<p>删除满足<code>condition</code>的元组，这里的<code>condition</code>也可使用子查询，若没有<code>WHERE</code>语句，则把整个<code>R</code>表清空</p>
+<p>在删除具有参照完整性约束的关系时，应当先把参照关系（子关系）先删除，再删除被参照关系（父关系），否则会因为违反参照完整性约束而操作失败</p>
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><p>修改元组的特定分量，可以使用<code>WHERE</code>来增加修改条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> R</span><br><span class="line"><span class="keyword">SET</span> A1 = V1, A2 = V2</span><br><span class="line">[<span class="keyword">WHERE</span> condition]</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/22/Xman2020冬令营选拔赛Pwn题解.html">
+                <span class="level-item">Xman2020冬令营选拔赛Pwn题解</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#表的定义">
+        <span class="has-mr-6">1</span>
+        <span>表的定义</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#简单表定义">
+        <span class="has-mr-6">1.1</span>
+        <span>简单表定义</span>
+        </a></li><li>
+        <a class="is-flex" href="#针对表结构的操作">
+        <span class="has-mr-6">1.2</span>
+        <span>针对表结构的操作</span>
+        </a></li><li>
+        <a class="is-flex" href="#属性键">
+        <span class="has-mr-6">1.3</span>
+        <span>属性键</span>
+        </a></li><li>
+        <a class="is-flex" href="#外键">
+        <span class="has-mr-6">1.4</span>
+        <span>外键</span>
+        </a></li><li>
+        <a class="is-flex" href="#维护参照完整性">
+        <span class="has-mr-6">1.5</span>
+        <span>维护参照完整性</span>
+        </a></li><li>
+        <a class="is-flex" href="#属性-元组约束">
+        <span class="has-mr-6">1.6</span>
+        <span>属性/元组约束</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#查">
+        <span class="has-mr-6">2</span>
+        <span>查</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#SELECT">
+        <span class="has-mr-6">2.1</span>
+        <span>SELECT</span>
+        </a></li><li>
+        <a class="is-flex" href="#FROM">
+        <span class="has-mr-6">2.2</span>
+        <span>FROM</span>
+        </a></li><li>
+        <a class="is-flex" href="#WHERE">
+        <span class="has-mr-6">2.3</span>
+        <span>WHERE</span>
+        </a></li><li>
+        <a class="is-flex" href="#ORDER-BY">
+        <span class="has-mr-6">2.4</span>
+        <span>ORDER BY</span>
+        </a></li><li>
+        <a class="is-flex" href="#查询结果运算">
+        <span class="has-mr-6">2.5</span>
+        <span>查询结果运算</span>
+        </a></li><li>
+        <a class="is-flex" href="#子查询">
+        <span class="has-mr-6">2.6</span>
+        <span>子查询</span>
+        </a></li><li>
+        <a class="is-flex" href="#关系条件表达式">
+        <span class="has-mr-6">2.7</span>
+        <span>关系条件表达式</span>
+        </a></li><li>
+        <a class="is-flex" href="#关联子查询">
+        <span class="has-mr-6">2.8</span>
+        <span>关联子查询</span>
+        </a></li><li>
+        <a class="is-flex" href="#连接表达式">
+        <span class="has-mr-6">2.9</span>
+        <span>连接表达式</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#针对关系的运算">
+        <span class="has-mr-6">3</span>
+        <span>针对关系的运算</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#消除重复">
+        <span class="has-mr-6">3.1</span>
+        <span>消除重复</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#GROUP-BY">
+        <span class="has-mr-6">4</span>
+        <span>GROUP BY</span>
+        </a></li><li>
+        <a class="is-flex" href="#HAVING">
+        <span class="has-mr-6">5</span>
+        <span>HAVING</span>
+        </a></li><li>
+        <a class="is-flex" href="#增">
+        <span class="has-mr-6">6</span>
+        <span>增</span>
+        </a></li><li>
+        <a class="is-flex" href="#删">
+        <span class="has-mr-6">7</span>
+        <span>删</span>
+        </a></li><li>
+        <a class="is-flex" href="#改">
+        <span class="has-mr-6">8</span>
+        <span>改</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Mask">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Mask
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        A newbie in CTF
+                    </p>
+                    
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            13
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            4
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            13
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/mask6asok">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="QQ" href="tencent://message/?uin=1924594189&amp;Site=&amp;menu=yes">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Email" href="mailto:1924594189@qq.com">
+                
+                <i class="fa fa-envelope"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://binlep.github.io/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">binLep&#39;s blog</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">binlep.github.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Crypto/">
+            <span class="level-start">
+                <span class="level-item">Crypto</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/DBMS/">
+            <span class="level-start">
+                <span class="level-item">DBMS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Pwn/">
+            <span class="level-start">
+                <span class="level-item">Pwn</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conditional-competition/">
+                        <span class="tag">Conditional competition</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IOFILE/">
+                        <span class="tag">IOFILE</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/arm/">
+                        <span class="tag">arm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fmt/">
+                        <span class="tag">fmt</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/format/">
+                        <span class="tag">format</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/heap/">
+                        <span class="tag">heap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/integer-overflow/">
+                        <span class="tag">integer overflow</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kernel/">
+                        <span class="tag">kernel</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/libc/">
+                        <span class="tag">libc</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pwn/">
+                        <span class="tag">pwn</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shellcode/">
+                        <span class="tag">shellcode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stack/">
+                        <span class="tag">stack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcache/">
+                        <span class="tag">tcache</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Crypto/">
+            <span class="level-start">
+                <span class="level-item">Crypto</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/DBMS/">
+            <span class="level-start">
+                <span class="level-item">DBMS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Pwn/">
+            <span class="level-start">
+                <span class="level-item">Pwn</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conditional-competition/">
+                        <span class="tag">Conditional competition</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IOFILE/">
+                        <span class="tag">IOFILE</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/arm/">
+                        <span class="tag">arm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fmt/">
+                        <span class="tag">fmt</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/format/">
+                        <span class="tag">format</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/heap/">
+                        <span class="tag">heap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/integer-overflow/">
+                        <span class="tag">integer overflow</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kernel/">
+                        <span class="tag">kernel</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/libc/">
+                        <span class="tag">libc</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pwn/">
+                        <span class="tag">pwn</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shellcode/">
+                        <span class="tag">shellcode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stack/">
+                        <span class="tag">stack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcache/">
+                        <span class="tag">tcache</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.ico" alt="SQL初步学习" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Mask&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'Mask6asok.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: false,
+            fold: ''
+        }
+    }
+};
+</script>
+
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
