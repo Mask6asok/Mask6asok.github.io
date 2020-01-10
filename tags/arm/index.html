@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    29 分钟 读完 (大约 4310 个字)
+                    28 分钟 读完 (大约 4269 个字)
                 </span>
                 
                 
@@ -167,7 +167,7 @@
 <p>题目本身很简单，只是一个free后未置0的UAF</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">del_note</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// r0</span></span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [sp+8h] [bp+8h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Index :"</span>);</span><br><span class="line">  read(<span class="number">0</span>, &amp;v1, <span class="number">4u</span>);</span><br><span class="line">  result = atoi((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;v1);</span><br><span class="line">  <span class="keyword">if</span> ( result &lt; <span class="number">0</span> || result &gt;= count )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Out of bound!"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( notelist[result] )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">free</span>(notelist[result]);    <span class="comment">// uaf</span></span><br><span class="line">    result = <span class="built_in">puts</span>(<span class="string">"Done it"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>fastbin attack</code>去劫持<code>notelist</code>便可以任意地址读写了</p>
-<p>因为这是一道arm架构的题目，其libc也是arm的libc，当时无法找到远程libc的版本，所以没有拿到flag，后来有另外一位师傅给了一个多平台libc search的网站<a href="https://libc.nullbyte.cat/，以后遇到相应题目也能继续做下去了">https://libc.nullbyte.cat/，以后遇到相应题目也能继续做下去了</a></p>
+<p>因为这是一道arm架构的题目，其libc也是arm的libc，当时无法找到远程libc的版本，所以没有拿到flag，后来有另外一位师傅给了一个多平台libc search的网站<a href="https://libc.nullbyte.cat，以后遇到相应题目也能继续做下去了">https://libc.nullbyte.cat，以后遇到相应题目也能继续做下去了</a></p>
 <p>赛时有考虑过<code>ret to dl_resolve</code>的做法，在网上查了下也没发现有相关的文章，当时也没有详细研究，这次趁着期末考前有空，仔细琢磨了一下</p>
 <h2 id="加载函数"><a href="#加载函数" class="headerlink" title="加载函数"></a>加载函数</h2><p>先来看一下arm的程序是如何加载libc中的函数的</p>
 <h3 id="plt-got"><a href="#plt-got" class="headerlink" title="plt/got"></a>plt/got</h3><p>就以<code>main</code>函数中的一个<code>puts</code>调用为例来分析</p>
@@ -280,11 +280,6 @@
 <p>写的不好，希望各位大佬多多谅解~</p>
 <p>pwn文件与脚本下载地址</p>
 <p>链接: <a href="https://pan.baidu.com/s/1BDiDMV5nc7J4BU-R4S4wLw">https://pan.baidu.com/s/1BDiDMV5nc7J4BU-R4S4wLw</a> 提取码: tbci</p>
-<blockquote>
-<p>我看奖励计划投稿要求是要留下联系方式哦，就写在这里吧，发布时记得删除哦</p>
-<p>QQ：1924594189</p>
-<p>Mail：1924594189@qq.com</p>
-</blockquote>
 
         </div>
         
