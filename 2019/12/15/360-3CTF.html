@@ -10,19 +10,19 @@
 <title>360 3CTF 初赛 Pwn - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="360-3CTF 初赛 Pwn1.Pwn01从main函数可以看到，逻辑很简单，两个bypass之后就直接拿flag 123456789int __cdecl main(int argc, const char **argv, const char **envp)&amp;#123;  init(*(_QWORD *)&amp;amp;argc, argv, envp);  if ( (unsigned int)">
-<meta name="keywords" content="integer overflow,fmt">
+    <meta name="description" content="360 3CTF 初赛 Pwn wp">
+<meta name="keywords" content="fmt,integer overflow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="360 3CTF 初赛 Pwn">
 <meta property="og:url" content="Mask6asok.github.io/2019/12/15/360-3CTF.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="360-3CTF 初赛 Pwn1.Pwn01从main函数可以看到，逻辑很简单，两个bypass之后就直接拿flag 123456789int __cdecl main(int argc, const char **argv, const char **envp)&amp;#123;  init(*(_QWORD *)&amp;amp;argc, argv, envp);  if ( (unsigned int)">
+<meta property="og:description" content="360 3CTF 初赛 Pwn wp">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-19T16:12:49.195Z">
+<meta property="og:updated_time" content="2020-01-20T06:55:00.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="360 3CTF 初赛 Pwn">
-<meta name="twitter:description" content="360-3CTF 初赛 Pwn1.Pwn01从main函数可以看到，逻辑很简单，两个bypass之后就直接拿flag 123456789int __cdecl main(int argc, const char **argv, const char **envp)&amp;#123;  init(*(_QWORD *)&amp;amp;argc, argv, envp);  if ( (unsigned int)">
+<meta name="twitter:description" content="360 3CTF 初赛 Pwn wp">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -139,7 +139,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1060 个字)
+                    7 分钟 读完 (大约 1062 个字)
                 </span>
                 
                 
@@ -152,7 +152,9 @@
             
         </h1>
         <div class="content">
-            <h1 id="360-3CTF-初赛-Pwn"><a href="#360-3CTF-初赛-Pwn" class="headerlink" title="360-3CTF 初赛 Pwn"></a>360-3CTF 初赛 Pwn</h1><h2 id="1-Pwn01"><a href="#1-Pwn01" class="headerlink" title="1.Pwn01"></a>1.Pwn01</h2><p>从main函数可以看到，逻辑很简单，两个bypass之后就直接拿flag</p>
+            <p>360 3CTF 初赛 Pwn wp</p>
+<a id="more"></a>
+<h2 id="1-Pwn01"><a href="#1-Pwn01" class="headerlink" title="1.Pwn01"></a>1.Pwn01</h2><p>从main函数可以看到，逻辑很简单，两个bypass之后就直接拿flag</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  init(*(_QWORD *)&amp;argc, argv, envp);</span><br><span class="line">  <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)bypass1() &amp;&amp; (<span class="keyword">unsigned</span> <span class="keyword">int</span>)bypass2() )</span><br><span class="line">    system(<span class="string">"cat ./flag"</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"failed!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>接着看两个bypass的check</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">signed</span> __<span class="function">int64 <span class="title">bypass1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [rsp+8h] [rbp-38h]</span></span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [rsp+Ch] [rbp-34h]</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [rsp+10h] [rbp-30h]</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+20h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v6; <span class="comment">// [rsp+38h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v6 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;s, <span class="number">0</span>, <span class="number">0x10</span>uLL);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"x: "</span>);</span><br><span class="line">  read(<span class="number">0</span>, &amp;s, <span class="number">0x10</span>uLL);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"y: "</span>);</span><br><span class="line">  read(<span class="number">0</span>, &amp;buf, <span class="number">0x10</span>uLL);</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strchr</span>(&amp;s, <span class="number">45</span>) || <span class="built_in">strchr</span>(&amp;buf, <span class="number">45</span>) )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">  v1 = atoi(&amp;s);</span><br><span class="line">  v2 = atoi(&amp;buf);</span><br><span class="line">  <span class="keyword">if</span> ( v1 &gt; <span class="number">359</span> || v2 &gt; <span class="number">359</span> || v1 - v2 != <span class="number">360</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"level1 success!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

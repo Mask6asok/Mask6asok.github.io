@@ -10,18 +10,18 @@
 <title>永恒之蓝测试 - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="内网渗透——利用永恒之蓝攻击windows71.获取本机ip地址12345678910root@Kali:~# ifconfigeth0: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt;  mtu 1500        inet 192.168.230.133  netmask 255.255.255.0  broadcast 192.168.2">
+    <meta name="description" content="永恒之蓝漏洞利用测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="永恒之蓝测试">
 <meta property="og:url" content="Mask6asok.github.io/2019/12/15/Eternal_Blue.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="内网渗透——利用永恒之蓝攻击windows71.获取本机ip地址12345678910root@Kali:~# ifconfigeth0: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt;  mtu 1500        inet 192.168.230.133  netmask 255.255.255.0  broadcast 192.168.2">
+<meta property="og:description" content="永恒之蓝漏洞利用测试">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-22T16:01:11.547Z">
+<meta property="og:updated_time" content="2020-01-20T06:52:54.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="永恒之蓝测试">
-<meta name="twitter:description" content="内网渗透——利用永恒之蓝攻击windows71.获取本机ip地址12345678910root@Kali:~# ifconfigeth0: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt;  mtu 1500        inet 192.168.230.133  netmask 255.255.255.0  broadcast 192.168.2">
+<meta name="twitter:description" content="永恒之蓝漏洞利用测试">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -138,7 +138,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 459 个字)
+                    3 分钟 读完 (大约 455 个字)
                 </span>
                 
                 
@@ -151,7 +151,8 @@
             
         </h1>
         <div class="content">
-            <h1 id="内网渗透——利用永恒之蓝攻击windows7"><a href="#内网渗透——利用永恒之蓝攻击windows7" class="headerlink" title="内网渗透——利用永恒之蓝攻击windows7"></a>内网渗透——利用永恒之蓝攻击windows7</h1><h2 id="1-获取本机ip地址"><a href="#1-获取本机ip地址" class="headerlink" title="1.获取本机ip地址"></a>1.获取本机ip地址</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@Kali:~# ifconfig</span><br><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.230.133  netmask 255.255.255.0  broadcast 192.168.230.255</span><br><span class="line">        inet6 fe80::20c:29ff:fefb:93e6  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:0c:29:fb:93:e6  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 3097  bytes 219626 (214.4 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 11461  bytes 1123362 (1.0 MiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line">        device interrupt 19  base 0x2000</span><br></pre></td></tr></table></figure>
+            <p>永恒之蓝漏洞利用测试<br><a id="more"></a></p>
+<h2 id="1-获取本机ip地址"><a href="#1-获取本机ip地址" class="headerlink" title="1.获取本机ip地址"></a>1.获取本机ip地址</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@Kali:~# ifconfig</span><br><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.230.133  netmask 255.255.255.0  broadcast 192.168.230.255</span><br><span class="line">        inet6 fe80::20c:29ff:fefb:93e6  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:0c:29:fb:93:e6  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 3097  bytes 219626 (214.4 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 11461  bytes 1123362 (1.0 MiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line">        device interrupt 19  base 0x2000</span><br></pre></td></tr></table></figure>
 <p>得到本机ip为<code>192.168.230.133</code></p>
 <h2 id="2-扫描局域网内其余主机"><a href="#2-扫描局域网内其余主机" class="headerlink" title="2.扫描局域网内其余主机"></a>2.扫描局域网内其余主机</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@Kali:~# nmap 192.168.230.133/24</span><br><span class="line">Starting Nmap 7.80 ( https://nmap.org ) at 2019-09-22 11:44 EDT</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">Nmap scan report for promote.cache-dns.local (192.168.230.134)</span><br><span class="line">Host is up (0.00027s latency).</span><br><span class="line">Not shown: 993 filtered ports</span><br><span class="line">PORT      STATE SERVICE</span><br><span class="line">135/tcp   open  msrpc</span><br><span class="line">139/tcp   open  netbios-ssn</span><br><span class="line">445/tcp   open  microsoft-ds</span><br><span class="line">554/tcp   open  rtsp</span><br><span class="line">2869/tcp  open  icslap</span><br><span class="line">5357/tcp  open  wsdapi</span><br><span class="line">10243/tcp open  unknown</span><br><span class="line">MAC Address: 00:0C:29:68:FF:4F (VMware)</span><br><span class="line"></span><br><span class="line">......</span><br></pre></td></tr></table></figure>
 <p>可以看到有一台<code>192.168.230.134</code>主机开放了<code>445</code>端口，可以考虑利用永恒之蓝漏洞打一波</p>

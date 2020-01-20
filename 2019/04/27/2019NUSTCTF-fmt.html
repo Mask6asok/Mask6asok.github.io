@@ -10,19 +10,19 @@
 <title>2019 NUSTCTF fmt - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="Write-Up本次校赛的题目，作为一个PWN手居然没有做出来 而且一直纠结于这个题目，导致错过了求解其他题目的机会，有点小后悔 关键还是在于对这个漏洞利用的不熟练，导致很多时间用来学习和踩坑了，事实证明，我还是太菜啦 好了，先查看一下程序的基本思路 123456789101112int __cdecl __noreturn main(int argc, const char **argv, co">
-<meta name="keywords" content="pwn,fmt,stack,libc">
+    <meta name="description" content="本次校赛的题目，作为一个PWN手居然没有做出来 而且一直纠结于这个题目，导致错过了求解其他题目的机会，有点小后悔 关键还是在于对这个漏洞利用的不熟练，导致很多时间用来学习和踩坑了，事实证明，我还是太菜啦">
+<meta name="keywords" content="pwn,stack,libc,fmt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 NUSTCTF fmt">
 <meta property="og:url" content="Mask6asok.github.io/2019/04/27/2019NUSTCTF-fmt.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="Write-Up本次校赛的题目，作为一个PWN手居然没有做出来 而且一直纠结于这个题目，导致错过了求解其他题目的机会，有点小后悔 关键还是在于对这个漏洞利用的不熟练，导致很多时间用来学习和踩坑了，事实证明，我还是太菜啦 好了，先查看一下程序的基本思路 123456789101112int __cdecl __noreturn main(int argc, const char **argv, co">
+<meta property="og:description" content="本次校赛的题目，作为一个PWN手居然没有做出来 而且一直纠结于这个题目，导致错过了求解其他题目的机会，有点小后悔 关键还是在于对这个漏洞利用的不熟练，导致很多时间用来学习和踩坑了，事实证明，我还是太菜啦">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2019-04-27T12:48:43.224Z">
+<meta property="og:updated_time" content="2020-01-20T06:49:18.016Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 NUSTCTF fmt">
-<meta name="twitter:description" content="Write-Up本次校赛的题目，作为一个PWN手居然没有做出来 而且一直纠结于这个题目，导致错过了求解其他题目的机会，有点小后悔 关键还是在于对这个漏洞利用的不熟练，导致很多时间用来学习和踩坑了，事实证明，我还是太菜啦 好了，先查看一下程序的基本思路 123456789101112int __cdecl __noreturn main(int argc, const char **argv, co">
+<meta name="twitter:description" content="本次校赛的题目，作为一个PWN手居然没有做出来 而且一直纠结于这个题目，导致错过了求解其他题目的机会，有点小后悔 关键还是在于对这个漏洞利用的不熟练，导致很多时间用来学习和踩坑了，事实证明，我还是太菜啦">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -139,7 +139,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1669 个字)
+                    11 分钟 读完 (大约 1668 个字)
                 </span>
                 
                 
@@ -152,9 +152,10 @@
             
         </h1>
         <div class="content">
-            <h1 id="Write-Up"><a href="#Write-Up" class="headerlink" title="Write-Up"></a>Write-Up</h1><p>本次校赛的题目，作为一个PWN手居然没有做出来</p>
+            <p>本次校赛的题目，作为一个PWN手居然没有做出来</p>
 <p>而且一直纠结于这个题目，导致错过了求解其他题目的机会，有点小后悔</p>
 <p>关键还是在于对这个漏洞利用的不熟练，导致很多时间用来学习和踩坑了，事实证明，<strong>我还是太菜啦</strong></p>
+<a id="more"></a>
 <p>好了，先查看一下程序的基本思路</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __cdecl __<span class="function">noreturn <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+0h] [rbp-400h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;s, <span class="number">0</span>, <span class="number">0x400</span>uLL);</span><br><span class="line">    read(<span class="number">0</span>, &amp;s, <span class="number">0x400</span>uLL);</span><br><span class="line">    <span class="built_in">printf</span>(&amp;s, &amp;s);</span><br><span class="line">    fflush(_bss_start);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以发现，就是一个<code>格式化字符串</code>漏洞，当时我就很高兴啊，这么简单的题目。可是等我开始利用的时候，才发现是多么难利用！</p>

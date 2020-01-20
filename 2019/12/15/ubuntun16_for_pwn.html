@@ -10,18 +10,18 @@
 <title>Pwn-Ubuntu配置 - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="ubuntu安装后配置每次炸了后都得重配，记录一下需要的东西 换源使用清华源 打开/etc/apt/sources.list文件，改为下面的内容 12345678910deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse# deb-src https://mirrors">
+    <meta name="description" content="每次炸了后都得重配，记录一下需要的东西">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pwn-Ubuntu配置">
 <meta property="og:url" content="Mask6asok.github.io/2019/12/15/ubuntun16_for_pwn.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="ubuntu安装后配置每次炸了后都得重配，记录一下需要的东西 换源使用清华源 打开/etc/apt/sources.list文件，改为下面的内容 12345678910deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse# deb-src https://mirrors">
+<meta property="og:description" content="每次炸了后都得重配，记录一下需要的东西">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2020-01-05T14:44:31.150Z">
+<meta property="og:updated_time" content="2020-01-20T06:50:03.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pwn-Ubuntu配置">
-<meta name="twitter:description" content="ubuntu安装后配置每次炸了后都得重配，记录一下需要的东西 换源使用清华源 打开/etc/apt/sources.list文件，改为下面的内容 12345678910deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse# deb-src https://mirrors">
+<meta name="twitter:description" content="每次炸了后都得重配，记录一下需要的东西">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -138,7 +138,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1086 个字)
+                    7 分钟 读完 (大约 1081 个字)
                 </span>
                 
                 
@@ -151,7 +151,8 @@
             
         </h1>
         <div class="content">
-            <h1 id="ubuntu安装后配置"><a href="#ubuntu安装后配置" class="headerlink" title="ubuntu安装后配置"></a>ubuntu安装后配置</h1><p>每次炸了后都得重配，记录一下需要的东西</p>
+            <p>每次炸了后都得重配，记录一下需要的东西</p>
+<a id="more"></a>
 <h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><p>使用清华源</p>
 <p>打开<code>/etc/apt/sources.list</code>文件，改为下面的内容</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">deb</span> http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line"># <span class="keyword">deb</span>-src http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line"><span class="keyword">deb</span> http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line"># <span class="keyword">deb</span>-src http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line"><span class="keyword">deb</span> http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line"># <span class="keyword">deb</span>-src http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line"><span class="keyword">deb</span> http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line"># <span class="keyword">deb</span>-src http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line"># <span class="keyword">deb</span> http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/ubuntu/ xenial-proposed main restricted universe multiverse</span><br><span class="line"># <span class="keyword">deb</span>-src http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/ubuntu/ xenial-proposed main restricted universe multiverse</span><br></pre></td></tr></table></figure>

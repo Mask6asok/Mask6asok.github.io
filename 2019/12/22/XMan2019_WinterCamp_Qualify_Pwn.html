@@ -10,19 +10,19 @@
 <title>Xman2020冬令营选拔赛Pwn题解 - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了 baby_arm这是我第一次做arm的题目，这题目也比较友好，不过这是一道堆溢出的题目，没怎么牵扯到栈，所以暂时没去了解arm的汇编层次的结构，比如参数传递之类的，等这个寒假学习一下吧 1234567➜  arm checksec pwn  [*] &apos;/home/mask/Desktop/xman/arm/">
+    <meta name="description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了">
 <meta name="keywords" content="heap,arm,kernel,shellcode,format">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Xman2020冬令营选拔赛Pwn题解">
 <meta property="og:url" content="Mask6asok.github.io/2019/12/22/XMan2019_WinterCamp_Qualify_Pwn.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了 baby_arm这是我第一次做arm的题目，这题目也比较友好，不过这是一道堆溢出的题目，没怎么牵扯到栈，所以暂时没去了解arm的汇编层次的结构，比如参数传递之类的，等这个寒假学习一下吧 1234567➜  arm checksec pwn  [*] &apos;/home/mask/Desktop/xman/arm/">
+<meta property="og:description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2019-12-28T09:08:14.355Z">
+<meta property="og:updated_time" content="2020-01-20T06:56:47.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xman2020冬令营选拔赛Pwn题解">
-<meta name="twitter:description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了 baby_arm这是我第一次做arm的题目，这题目也比较友好，不过这是一道堆溢出的题目，没怎么牵扯到栈，所以暂时没去了解arm的汇编层次的结构，比如参数传递之类的，等这个寒假学习一下吧 1234567➜  arm checksec pwn  [*] &apos;/home/mask/Desktop/xman/arm/">
+<meta name="twitter:description" content="这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -143,7 +143,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1393 个字)
+                    9 分钟 读完 (大约 1394 个字)
                 </span>
                 
                 
@@ -157,6 +157,7 @@
         </h1>
         <div class="content">
             <p>这次选拔赛pwn题都还行，除了kernel没做，其他都做了，可惜考试多多，没时间去冬令营了</p>
+<a id="more"></a>
 <h2 id="baby-arm"><a href="#baby-arm" class="headerlink" title="baby_arm"></a>baby_arm</h2><p>这是我第一次做arm的题目，这题目也比较友好，不过这是一道堆溢出的题目，没怎么牵扯到栈，所以暂时没去了解arm的汇编层次的结构，比如参数传递之类的，等这个寒假学习一下吧</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  arm checksec pwn  </span><br><span class="line">[*] '/home/mask/Desktop/xman/arm/pwn'</span><br><span class="line">    Arch:     arm-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x10000)</span><br></pre></td></tr></table></figure>
 <p>由于这是一道arm题，所以需要使用qemu来执行</p>

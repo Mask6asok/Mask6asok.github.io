@@ -10,19 +10,19 @@
 <title>记一次arm架构的ret to dl_resolve - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="首发于安全客 https://www.anquanke.com/post/id/196442 前记想试试这个利用方式是因为今年Xman冬令营选拔赛上的一道题目baby_arm 1234567➜  arm checksec pwn       [*] &apos;/home/mask/Desktop/xman/arm/pwn&apos;    Arch:     arm-32-little    RELRO:    P">
+    <meta name="description" content="首发于安全客 https://www.anquanke.com/post/id/196442">
 <meta name="keywords" content="pwn,arm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次arm架构的ret to dl_resolve">
 <meta property="og:url" content="Mask6asok.github.io/2020/01/10/arm_ret2dlresolve.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="首发于安全客 https://www.anquanke.com/post/id/196442 前记想试试这个利用方式是因为今年Xman冬令营选拔赛上的一道题目baby_arm 1234567➜  arm checksec pwn       [*] &apos;/home/mask/Desktop/xman/arm/pwn&apos;    Arch:     arm-32-little    RELRO:    P">
+<meta property="og:description" content="首发于安全客 https://www.anquanke.com/post/id/196442">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2020-01-10T15:37:51.014Z">
+<meta property="og:updated_time" content="2020-01-20T06:49:38.768Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次arm架构的ret to dl_resolve">
-<meta name="twitter:description" content="首发于安全客 https://www.anquanke.com/post/id/196442 前记想试试这个利用方式是因为今年Xman冬令营选拔赛上的一道题目baby_arm 1234567➜  arm checksec pwn       [*] &apos;/home/mask/Desktop/xman/arm/pwn&apos;    Arch:     arm-32-little    RELRO:    P">
+<meta name="twitter:description" content="首发于安全客 https://www.anquanke.com/post/id/196442">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -139,7 +139,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    28 分钟 读完 (大约 4269 个字)
+                    28 分钟 读完 (大约 4270 个字)
                 </span>
                 
                 
@@ -153,6 +153,7 @@
         </h1>
         <div class="content">
             <p>首发于安全客 <a href="https://www.anquanke.com/post/id/196442">https://www.anquanke.com/post/id/196442</a></p>
+<a id="more"></a>
 <h2 id="前记"><a href="#前记" class="headerlink" title="前记"></a>前记</h2><p>想试试这个利用方式是因为今年Xman冬令营选拔赛上的一道题目<code>baby_arm</code></p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  arm checksec pwn       </span><br><span class="line">[*] '/home/mask/Desktop/xman/arm/pwn'</span><br><span class="line">    Arch:     arm-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x10000)</span><br></pre></td></tr></table></figure>
 <p>题目本身很简单，只是一个free后未置0的UAF</p>

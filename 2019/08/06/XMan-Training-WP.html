@@ -10,18 +10,18 @@
 <title>XMan-Training-WP - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="Pwnforgot分析保护机制  没有canary，没有PIE，但是栈不可执行，再看看程序  存在栈溢出情况，发现下面有一长串的操作，不管他，直接上字符串看看哪里是溢出点  存在后门函数 123456int sub_80486CC()&amp;#123;  char s; // [esp+1Eh] [ebp-3Ah]  snprintf(&amp;amp;s, 0x32u, &quot;cat %s&quot;, &quot;./flag&quot;)">
+    <meta name="description" content="2019 Xman 夏令营 Pwn &amp;amp; Re wp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XMan-Training-WP">
 <meta property="og:url" content="Mask6asok.github.io/2019/08/06/XMan-Training-WP.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="Pwnforgot分析保护机制  没有canary，没有PIE，但是栈不可执行，再看看程序  存在栈溢出情况，发现下面有一长串的操作，不管他，直接上字符串看看哪里是溢出点  存在后门函数 123456int sub_80486CC()&amp;#123;  char s; // [esp+1Eh] [ebp-3Ah]  snprintf(&amp;amp;s, 0x32u, &quot;cat %s&quot;, &quot;./flag&quot;)">
+<meta property="og:description" content="2019 Xman 夏令营 Pwn &amp;amp; Re wp">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-09T05:44:23.401Z">
+<meta property="og:updated_time" content="2020-01-20T06:56:41.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XMan-Training-WP">
-<meta name="twitter:description" content="Pwnforgot分析保护机制  没有canary，没有PIE，但是栈不可执行，再看看程序  存在栈溢出情况，发现下面有一长串的操作，不管他，直接上字符串看看哪里是溢出点  存在后门函数 123456int sub_80486CC()&amp;#123;  char s; // [esp+1Eh] [ebp-3Ah]  snprintf(&amp;amp;s, 0x32u, &quot;cat %s&quot;, &quot;./flag&quot;)">
+<meta name="twitter:description" content="2019 Xman 夏令营 Pwn &amp;amp; Re wp">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -134,7 +134,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 6998 个字)
+                    1 小时 读完 (大约 7006 个字)
                 </span>
                 
                 
@@ -147,7 +147,9 @@
             
         </h1>
         <div class="content">
-            <h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><h2 id="forgot"><a href="#forgot" class="headerlink" title="forgot"></a>forgot</h2><p>分析保护机制</p>
+            <p>2019 Xman 夏令营 Pwn &amp; Re wp</p>
+<a id="more"></a>
+<h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><h2 id="forgot"><a href="#forgot" class="headerlink" title="forgot"></a>forgot</h2><p>分析保护机制</p>
 <p><img src="https://i.loli.net/2019/08/06/1cVOkaCiJ9ZPouW.png" alt="forgor1.png"></p>
 <p>没有canary，没有PIE，但是栈不可执行，再看看程序</p>
 <p><img src="https://i.loli.net/2019/08/06/QONYRiqgrmvTSeB.png" alt="2.png"></p>

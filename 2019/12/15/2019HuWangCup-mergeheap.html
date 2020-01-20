@@ -10,19 +10,19 @@
 <title>2019 护网杯 mergeheap - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="Write-Up题目审计就如题目所言，漏洞出在merge函数中 12345678910111213141516171819202122232425int merge()&amp;#123;  int MERGE_LEN; // ST1C_4  signed int idx; // [rsp+8h] [rbp-18h]  int IDX_1; // [rsp+Ch] [rbp-14h]  int IDX_2">
+    <meta name="description" content="2019护网杯mergeheap wp">
 <meta name="keywords" content="pwn,heap,tcache">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 护网杯 mergeheap">
 <meta property="og:url" content="Mask6asok.github.io/2019/12/15/2019HuWangCup-mergeheap.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="Write-Up题目审计就如题目所言，漏洞出在merge函数中 12345678910111213141516171819202122232425int merge()&amp;#123;  int MERGE_LEN; // ST1C_4  signed int idx; // [rsp+8h] [rbp-18h]  int IDX_1; // [rsp+Ch] [rbp-14h]  int IDX_2">
+<meta property="og:description" content="2019护网杯mergeheap wp">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-09T01:08:14.449Z">
+<meta property="og:updated_time" content="2020-01-20T06:54:42.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 护网杯 mergeheap">
-<meta name="twitter:description" content="Write-Up题目审计就如题目所言，漏洞出在merge函数中 12345678910111213141516171819202122232425int merge()&amp;#123;  int MERGE_LEN; // ST1C_4  signed int idx; // [rsp+8h] [rbp-18h]  int IDX_1; // [rsp+Ch] [rbp-14h]  int IDX_2">
+<meta name="twitter:description" content="2019护网杯mergeheap wp">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -139,7 +139,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 619 个字)
+                    4 分钟 读完 (大约 623 个字)
                 </span>
                 
                 
@@ -152,7 +152,8 @@
             
         </h1>
         <div class="content">
-            <h1 id="Write-Up"><a href="#Write-Up" class="headerlink" title="Write-Up"></a>Write-Up</h1><h2 id="题目审计"><a href="#题目审计" class="headerlink" title="题目审计"></a>题目审计</h2><p>就如题目所言，漏洞出在merge函数中</p>
+            <p>2019护网杯mergeheap wp<br><a id="more"></a></p>
+<h2 id="题目审计"><a href="#题目审计" class="headerlink" title="题目审计"></a>题目审计</h2><p>就如题目所言，漏洞出在merge函数中</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> MERGE_LEN; <span class="comment">// ST1C_4</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> idx; <span class="comment">// [rsp+8h] [rbp-18h]</span></span><br><span class="line">  <span class="keyword">int</span> IDX_1; <span class="comment">// [rsp+Ch] [rbp-14h]</span></span><br><span class="line">  <span class="keyword">int</span> IDX_2; <span class="comment">// [rsp+10h] [rbp-10h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> ( idx = <span class="number">0</span>; idx &lt;= <span class="number">14</span> &amp;&amp; CHUNK_LIST[idx]; ++idx )</span><br><span class="line">    ;</span><br><span class="line">  <span class="keyword">if</span> ( idx &gt; <span class="number">14</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">"full"</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"idx1:"</span>);</span><br><span class="line">  IDX_1 = read_num();</span><br><span class="line">  <span class="keyword">if</span> ( IDX_1 &lt; <span class="number">0</span> || IDX_1 &gt; <span class="number">14</span> || !CHUNK_LIST[IDX_1] )</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">"invalid"</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"idx2:"</span>);</span><br><span class="line">  IDX_2 = read_num();</span><br><span class="line">  <span class="keyword">if</span> ( IDX_2 &lt; <span class="number">0</span> || IDX_2 &gt; <span class="number">14</span> || !CHUNK_LIST[IDX_2] )</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">"invalid"</span>);</span><br><span class="line">  MERGE_LEN = LEN_LIST[IDX_1] + LEN_LIST[IDX_2];</span><br><span class="line">  CHUNK_LIST[idx] = <span class="built_in">malloc</span>(MERGE_LEN);</span><br><span class="line">  <span class="built_in">strcpy</span>((<span class="keyword">char</span> *)CHUNK_LIST[idx], (<span class="keyword">const</span> <span class="keyword">char</span> *)CHUNK_LIST[IDX_1]);</span><br><span class="line">  <span class="built_in">strcat</span>((<span class="keyword">char</span> *)CHUNK_LIST[idx], (<span class="keyword">const</span> <span class="keyword">char</span> *)CHUNK_LIST[IDX_2]);<span class="comment">// 可以移除到下一个chunk的size位，可以unlink</span></span><br><span class="line">  LEN_LIST[idx] = MERGE_LEN;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">"Done"</span>);</span><br></pre></td></tr></table></figure>
 <p>在合并的时候，利用str类的函数，是读到0字节才会停止，在chunk使用了next chunk的prev size区域的时候，就可以一直读到下一个chunk的size位，形成了溢出</p>
 <p>这里用来修改next chunk的prev_inuse为false，可以unlink</p>

@@ -10,19 +10,19 @@
 <title>2019 SUSCTF PWN - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="有幸去到东南大学参加这个比赛，这算是我参加的第一个比较正式的比赛，这是四月份的比赛了，当时实力不够，pwn只做出了两道题，还是比较简单的，另外两道有关堆的题目不会做，后来学习了一下堆的管理机制，现在终于这两道题做完了 checkin题目分析123456789101112131415161718int __cdecl main(int argc, const char **argv, const c">
+    <meta name="description" content="有幸去到东南大学参加这个比赛，这算是我参加的第一个比较正式的比赛，这是四月份的比赛了，当时实力不够，pwn只做出了两道题，还是比较简单的，另外两道有关堆的题目不会做，后来学习了一下堆的管理机制，现在终于这两道题做完了">
 <meta name="keywords" content="pwn,stack,libc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 SUSCTF PWN">
 <meta property="og:url" content="Mask6asok.github.io/2019/07/20/2019 SUSCTF PWN.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="有幸去到东南大学参加这个比赛，这算是我参加的第一个比较正式的比赛，这是四月份的比赛了，当时实力不够，pwn只做出了两道题，还是比较简单的，另外两道有关堆的题目不会做，后来学习了一下堆的管理机制，现在终于这两道题做完了 checkin题目分析123456789101112131415161718int __cdecl main(int argc, const char **argv, const c">
+<meta property="og:description" content="有幸去到东南大学参加这个比赛，这算是我参加的第一个比较正式的比赛，这是四月份的比赛了，当时实力不够，pwn只做出了两道题，还是比较简单的，另外两道有关堆的题目不会做，后来学习了一下堆的管理机制，现在终于这两道题做完了">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-20T16:06:15.811Z">
+<meta property="og:updated_time" content="2020-01-20T06:45:55.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 SUSCTF PWN">
-<meta name="twitter:description" content="有幸去到东南大学参加这个比赛，这算是我参加的第一个比较正式的比赛，这是四月份的比赛了，当时实力不够，pwn只做出了两道题，还是比较简单的，另外两道有关堆的题目不会做，后来学习了一下堆的管理机制，现在终于这两道题做完了 checkin题目分析123456789101112131415161718int __cdecl main(int argc, const char **argv, const c">
+<meta name="twitter:description" content="有幸去到东南大学参加这个比赛，这算是我参加的第一个比较正式的比赛，这是四月份的比赛了，当时实力不够，pwn只做出了两道题，还是比较简单的，另外两道有关堆的题目不会做，后来学习了一下堆的管理机制，现在终于这两道题做完了">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -139,7 +139,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    17 分钟 读完 (大约 2606 个字)
+                    17 分钟 读完 (大约 2607 个字)
                 </span>
                 
                 
@@ -153,6 +153,7 @@
         </h1>
         <div class="content">
             <p>有幸去到东南大学参加这个比赛，这算是我参加的第一个比较正式的比赛，这是四月份的比赛了，当时实力不够，pwn只做出了两道题，还是比较简单的，另外两道有关堆的题目不会做，后来学习了一下堆的管理机制，现在终于这两道题做完了</p>
+<a id="more"></a>
 <h2 id="checkin"><a href="#checkin" class="headerlink" title="checkin"></a>checkin</h2><h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [rsp+10h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v5; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v5 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  init(*(_QWORD *)&amp;argc, argv, envp);</span><br><span class="line">  banner();</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"input your cmd to check in QAQ\n&gt;"</span>);</span><br><span class="line">  read(<span class="number">0</span>, &amp;buf, <span class="number">0x10</span>uLL);</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strstr</span>(&amp;buf, <span class="string">"sh"</span>) )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"you can't input sh"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  system(&amp;buf);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>题目很简单，就是一个签到题，利用system函数调用你输入的指令，这里把sh屏蔽了，直接在sh之间插入一些其他东西即可跳过</p>
 <h3 id="EXP"><a href="#EXP" class="headerlink" title="EXP"></a>EXP</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/s``h</span><br></pre></td></tr></table></figure>

@@ -10,19 +10,19 @@
 <title>2019 ByteCTF Pwn - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="Write-Up1.mulnote题目审计这道题一打开发现控制流程有点复杂，当时想逆的。。因为发现有一处realloc，想着放0形成double free的效果，不过后来也没整出来 赛后在某位师傅的提示下发现有条件竞争的漏洞，在Remove功能中，起了一个线程 1234567void *__fastcall start_routine(void *idx)&amp;#123;  free((void *)">
+    <meta name="description" content="2019 ByteCTF Pwn wp">
 <meta name="keywords" content="pwn,heap,Conditional competition">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 ByteCTF Pwn">
 <meta property="og:url" content="Mask6asok.github.io/2019/12/15/2019ByteCTF-mulnote.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="Write-Up1.mulnote题目审计这道题一打开发现控制流程有点复杂，当时想逆的。。因为发现有一处realloc，想着放0形成double free的效果，不过后来也没整出来 赛后在某位师傅的提示下发现有条件竞争的漏洞，在Remove功能中，起了一个线程 1234567void *__fastcall start_routine(void *idx)&amp;#123;  free((void *)">
+<meta property="og:description" content="2019 ByteCTF Pwn wp">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-11T04:02:21.387Z">
+<meta property="og:updated_time" content="2020-01-20T06:55:55.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 ByteCTF Pwn">
-<meta name="twitter:description" content="Write-Up1.mulnote题目审计这道题一打开发现控制流程有点复杂，当时想逆的。。因为发现有一处realloc，想着放0形成double free的效果，不过后来也没整出来 赛后在某位师傅的提示下发现有条件竞争的漏洞，在Remove功能中，起了一个线程 1234567void *__fastcall start_routine(void *idx)&amp;#123;  free((void *)">
+<meta name="twitter:description" content="2019 ByteCTF Pwn wp">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -139,7 +139,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 767 个字)
+                    5 分钟 读完 (大约 769 个字)
                 </span>
                 
                 
@@ -152,7 +152,9 @@
             
         </h1>
         <div class="content">
-            <h1 id="Write-Up"><a href="#Write-Up" class="headerlink" title="Write-Up"></a>Write-Up</h1><h2 id="1-mulnote"><a href="#1-mulnote" class="headerlink" title="1.mulnote"></a>1.mulnote</h2><h3 id="题目审计"><a href="#题目审计" class="headerlink" title="题目审计"></a>题目审计</h3><p>这道题一打开发现控制流程有点复杂，当时想逆的。。因为发现有一处realloc，想着放0形成double free的效果，不过后来也没整出来</p>
+            <p>2019 ByteCTF Pwn wp</p>
+<a id="more"></a>
+<h2 id="1-mulnote"><a href="#1-mulnote" class="headerlink" title="1.mulnote"></a>1.mulnote</h2><h3 id="题目审计"><a href="#题目审计" class="headerlink" title="题目审计"></a>题目审计</h3><p>这道题一打开发现控制流程有点复杂，当时想逆的。。因为发现有一处realloc，想着放0形成double free的效果，不过后来也没整出来</p>
 <p>赛后在某位师傅的提示下发现有条件竞争的漏洞，在Remove功能中，起了一个线程</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> *__<span class="function">fastcall <span class="title">start_routine</span><span class="params">(<span class="keyword">void</span> *idx)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">free</span>((<span class="keyword">void</span> *)chunk_list[(_QWORD)idx]);</span><br><span class="line">  sleep(<span class="number">0xA</span>u);</span><br><span class="line">  chunk_list[(_QWORD)idx] = <span class="number">0L</span>L;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里在sleep未结束时再次调用就有double free的效果</p>
