@@ -109,7 +109,7 @@
     <link href="Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_5.html"/>
     <id>Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_5.html</id>
     <published>2020-02-06T14:50:43.346Z</published>
-    <updated>2020-02-06T14:54:45.932Z</updated>
+    <updated>2020-02-06T14:56:25.318Z</updated>
     
     <summary type="html">
     
@@ -356,9 +356,9 @@
       <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
     
     
-      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
-    
       <category term="integer overflow" scheme="Mask6asok.github.io/tags/integer-overflow/"/>
+    
+      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
     
   </entry>
   
@@ -422,11 +422,11 @@
     
       <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
     
+      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
+    
       <category term="stack" scheme="Mask6asok.github.io/tags/stack/"/>
     
       <category term="libc" scheme="Mask6asok.github.io/tags/libc/"/>
-    
-      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
     
   </entry>
   
