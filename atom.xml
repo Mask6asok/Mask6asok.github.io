@@ -105,6 +105,29 @@
   </entry>
   
   <entry>
+    <title>Linux Kernel Pwn Ⅳ：1343485</title>
+    <link href="Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_5.html"/>
+    <id>Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_5.html</id>
+    <published>2020-02-06T14:50:43.346Z</published>
+    <updated>2020-02-06T14:53:10.406Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;简单介绍内核中堆管理的利用（待更新）&lt;/p&gt;
+&lt;p&gt;Linux Kernel Pwn Ⅴ：Brief Heap Exploit&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
+    
+    
+      <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
+    
+      <category term="kernel" scheme="Mask6asok.github.io/tags/kernel/"/>
+    
+  </entry>
+  
+  <entry>
     <title>记一次arm架构的ret to dl_resolve</title>
     <link href="Mask6asok.github.io/2020/01/10/arm_ret2dlresolve.html"/>
     <id>Mask6asok.github.io/2020/01/10/arm_ret2dlresolve.html</id>
