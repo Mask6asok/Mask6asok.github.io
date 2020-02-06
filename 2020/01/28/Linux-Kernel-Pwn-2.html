@@ -10,19 +10,19 @@
 <title>Linux Kernel Pwn Ⅱ：Null Pointer Dereference - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="简单Null Pointer Dereference这个古老的漏洞">
+    <meta name="description" content="简单介绍Null Pointer Dereference这个古老的漏洞">
 <meta name="keywords" content="pwn,kernel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux Kernel Pwn Ⅱ：Null Pointer Dereference">
 <meta property="og:url" content="Mask6asok.github.io/2020/01/28/Linux-Kernel-Pwn-2.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="简单Null Pointer Dereference这个古老的漏洞">
+<meta property="og:description" content="简单介绍Null Pointer Dereference这个古老的漏洞">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2020-02-06T14:35:14.728Z">
+<meta property="og:updated_time" content="2020-02-06T14:39:02.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux Kernel Pwn Ⅱ：Null Pointer Dereference">
-<meta name="twitter:description" content="简单Null Pointer Dereference这个古老的漏洞">
+<meta name="twitter:description" content="简单介绍Null Pointer Dereference这个古老的漏洞">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -143,7 +143,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 619 个字)
+                    4 分钟 读完 (大约 621 个字)
                 </span>
                 
                 
@@ -156,7 +156,7 @@
             
         </h1>
         <div class="content">
-            <p>简单Null Pointer Dereference这个古老的漏洞</p>
+            <p>简单介绍Null Pointer Dereference这个古老的漏洞</p>
 <a id="more"></a>
 <p>空指针解引用类漏洞是比较早的一类漏洞，问题在于某些指针未经初始化验证直接使用，导致执行0地址处指令</p>
 <p>若是在用户程序中申请0地址处执行，赋予可执行权限，并写入shellcode，则劫持执行流</p>
