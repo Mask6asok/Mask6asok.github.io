@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="Mask6asok.github.io/"/>
-  <updated>2020-02-07T07:49:53.512Z</updated>
+  <updated>2020-02-08T02:53:22.552Z</updated>
   <id>Mask6asok.github.io/</id>
   
   <author>
@@ -17,11 +17,31 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>HGAME 2020 Pwn WriteUp</title>
+    <link href="Mask6asok.github.io/2020/02/08/hgame_pwn.html"/>
+    <id>Mask6asok.github.io/2020/02/08/hgame_pwn.html</id>
+    <published>2020-02-08T01:31:34.220Z</published>
+    <updated>2020-02-08T02:53:22.552Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记录一下 HGAME 2020 的 Pwn 题&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
+    
+    
+      <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Kernel Pwn题目的实战</title>
     <link href="Mask6asok.github.io/2020/02/06/kernel_challenge.html"/>
     <id>Mask6asok.github.io/2020/02/06/kernel_challenge.html</id>
     <published>2020-02-06T15:10:19.658Z</published>
-    <updated>2020-02-07T07:49:53.512Z</updated>
+    <updated>2020-02-08T02:46:12.814Z</updated>
     
     <summary type="html">
     
@@ -421,34 +441,6 @@
       <category term="stack" scheme="Mask6asok.github.io/tags/stack/"/>
     
       <category term="libc" scheme="Mask6asok.github.io/tags/libc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2019 NUSTCTF fmt</title>
-    <link href="Mask6asok.github.io/2019/04/27/2019NUSTCTF-fmt.html"/>
-    <id>Mask6asok.github.io/2019/04/27/2019NUSTCTF-fmt.html</id>
-    <published>2019-04-26T16:05:38.000Z</published>
-    <updated>2020-01-20T06:49:18.016Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本次校赛的题目，作为一个PWN手居然没有做出来&lt;/p&gt;
-&lt;p&gt;而且一直纠结于这个题目，导致错过了求解其他题目的机会，有点小后悔&lt;/p&gt;
-&lt;p&gt;关键还是在于对这个漏洞利用的不熟练，导致很多时间用来学习和踩坑了，事实证明，&lt;strong&gt;我还是太菜啦&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
-    
-    
-      <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
-    
-      <category term="stack" scheme="Mask6asok.github.io/tags/stack/"/>
-    
-      <category term="libc" scheme="Mask6asok.github.io/tags/libc/"/>
-    
-      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
     
   </entry>
   
