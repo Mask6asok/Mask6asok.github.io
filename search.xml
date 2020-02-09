@@ -198,8 +198,8 @@
         <category>Pwn</category>
       </categories>
       <tags>
-        <tag>integer overflow</tag>
         <tag>fmt</tag>
+        <tag>integer overflow</tag>
       </tags>
   </entry>
   <entry>
@@ -229,9 +229,9 @@
       </categories>
       <tags>
         <tag>pwn</tag>
-        <tag>fmt</tag>
         <tag>stack</tag>
         <tag>libc</tag>
+        <tag>fmt</tag>
       </tags>
   </entry>
 </search>
