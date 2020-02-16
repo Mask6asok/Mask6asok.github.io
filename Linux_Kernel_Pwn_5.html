@@ -178,7 +178,7 @@
 <li>slabs_empty：空slab，未分配</li>
 </ul>
 <p>slabs列表中的每个slab中的内存空间会被划分为多个chunk使用</p>
-<p><img src="https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/figure1.gif" alt></p>
+<p><img src="https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/figure1.gif" alt=""></p>
 <h2 id="SLAB"><a href="#SLAB" class="headerlink" title="SLAB"></a>SLAB</h2><p>SLAB是由一页或者多页连续内存中的slab分配出的cache组成的，每个cache对应了Kernel中的一个内存分配结构，也可以说SLAB是一组相同类型的内存结构</p>
 <p>SLAB结构如下</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">slab</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">union</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">        &#123;</span></span><br><span class="line">            <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">list</span>;</span></span><br><span class="line">            <span class="keyword">unsigned</span> <span class="keyword">long</span> colouroff;</span><br><span class="line">            <span class="keyword">void</span> *s_mem;            <span class="comment">/* including colour offset */</span></span><br><span class="line">            <span class="keyword">unsigned</span> <span class="keyword">int</span> inuse;     <span class="comment">/* num of objs active in slab */</span></span><br><span class="line">            <span class="keyword">kmem_bufctl_t</span> <span class="built_in">free</span>;</span><br><span class="line">            <span class="keyword">unsigned</span> <span class="keyword">short</span> nodeid;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">slab_rcu</span> __<span class="title">slab_cover_slab_rcu</span>;</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -189,7 +189,7 @@
 <li>slab对象</li>
 </ol>
 <p>如下图是6个同类型的结构放在相邻的两页中</p>
-<p><img src="https://mk0resourcesinfm536w.kinstacdn.com/wp-content/uploads/111913_1518_ExploitingL1.png" alt></p>
+<p><img src="https://mk0resourcesinfm536w.kinstacdn.com/wp-content/uploads/111913_1518_ExploitingL1.png" alt=""></p>
 <p>因此针对SLAB的溢出攻击，也就是针对slab对象的溢出攻击</p>
 <p>在一个slab溢出通常发生在向kmalloc出来的chunk写数据时越界，溢出的结果可能是</p>
 <ul>
@@ -201,7 +201,7 @@
 <p>结构如下</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">page</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">        <span class="keyword">union</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">pgoff_t</span> index; <span class="comment">/* Our offset within mapping. */</span></span><br><span class="line">            <span class="keyword">void</span> *freelist; <span class="comment">/* slub first free object */</span></span><br><span class="line">        &#125;;</span><br><span class="line">        ...</span><br><span class="line">        <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">        &#123;</span></span><br><span class="line">            <span class="keyword">unsigned</span> inuse:<span class="number">16</span>;</span><br><span class="line">            <span class="keyword">unsigned</span> objects:<span class="number">15</span>;</span><br><span class="line">            <span class="keyword">unsigned</span> frozen:<span class="number">1</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">        ...</span><br><span class="line">    &#125;;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">union</span></span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">kmem_cache</span> *<span class="title">slab</span>;</span> <span class="comment">/* SLUB: Pointer to slab */</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>一个page中的freelist指向第一个自由slab对象，这个自由slab对象又有另外一个freelist指向下一个自由slab对象，有点类似于fastbin的结构</p>
-<p><img src="https://i.loli.net/2020/01/31/IVEpZ1S28fqFzKv.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/31/IVEpZ1S28fqFzKv.png" alt=""></p>
 <p>SLUB分配器管理着内存中许多动态分配的chunk，他们之间的区别也是由size区分，与GLIBC中的fastbin一样，这些大小也有一个定数，假如<code>kmalloc(50)</code>，则会返回<code>kmalloc-64</code>的chunk</p>
 <p>使用，下面命令可以查看更详细的数据</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sudo cat /proc/slabinfo </span><br><span class="line">...</span><br><span class="line">kmalloc-8192    </span><br><span class="line">kmalloc-4096    </span><br><span class="line">kmalloc-2048    </span><br><span class="line">kmalloc-1024    </span><br><span class="line">kmalloc-512     </span><br><span class="line">kmalloc-256     </span><br><span class="line">kmalloc-192     </span><br><span class="line">kmalloc-128     </span><br><span class="line">kmalloc-96      </span><br><span class="line">kmalloc-64      </span><br><span class="line">kmalloc-32      </span><br><span class="line">kmalloc-16      </span><br><span class="line">kmalloc-8</span><br></pre></td></tr></table></figure>
@@ -218,27 +218,27 @@
 </ol>
 <p>由于我对内核的堆管理机制还不是很熟练，所以这里就简单的利用UAF来提权，等以后熟悉了管理机制再写更全面的利用方法</p>
 <h1 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h1><p>先尝试申请两个chunk，看看地址</p>
-<p><img src="https://i.loli.net/2020/01/31/Lj4UnWZ5rho7t1H.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/31/Lj4UnWZ5rho7t1H.png" alt=""></p>
 <p>可以发现，第二次得到的chunk地址与第一次的chunk地址是反过来的，我们看看这地址里面是什么东西</p>
-<p><img src="https://i.loli.net/2020/01/31/z2ajBxVmP58fwuk.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/31/z2ajBxVmP58fwuk.png" alt=""></p>
 <p>可以发现它是类似fastbin的结构，LIFO原则，单链表，那我们尝试一下double free</p>
-<p><img src="https://i.loli.net/2020/01/31/wlDMx5NsFUrjVfi.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/31/wlDMx5NsFUrjVfi.png" alt=""></p>
 <p>可以发现，double free是可以的，申请到一样的chunk，接着尝试一下fastbin attack来修改next指针，也即是在2这个chunk修改了值</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">_add(<span class="number">0x10</span>, <span class="string">"0"</span>);</span><br><span class="line">_add(<span class="number">0x10</span>, <span class="string">"1"</span>);</span><br><span class="line">_del(<span class="number">0</span>);</span><br><span class="line">_del(<span class="number">0</span>);</span><br><span class="line">join_data(<span class="number">0xdeadbeef</span>);</span><br><span class="line">_add(<span class="number">0x10</span>, payload);</span><br><span class="line">_add(<span class="number">0x10</span>, <span class="string">"3"</span>);</span><br><span class="line">_add(<span class="number">0x10</span>, <span class="string">"4"</span>);</span><br></pre></td></tr></table></figure>
 <p>在4这个chunk申请时gdb跟进，可以发现0xdeadbeef确实进入了kernel heap管理系统，不过报错了</p>
-<p><img src="https://i.loli.net/2020/01/31/32bYNDVACQO1fg5.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/31/32bYNDVACQO1fg5.png" alt=""></p>
 <p>我们换一个可访问地址，比如LKM的数据段，劫持到list变量，可以发现成功劫持</p>
-<p><img src="https://i.loli.net/2020/01/31/3K7jAtlgxIiQYGL.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/31/3K7jAtlgxIiQYGL.png" alt=""></p>
 <p>则配合see和fix功能可以实现内核任意地址读写，这里我们直接劫持内核中的file_operations结构体，修改realese函数指针（原本指向heap_vul_release，在关闭LKM时释放所有chunk），指向用户程序，则在关闭LKM时劫持执行流到用户程序，进而提权</p>
-<p><img src="https://i.loli.net/2020/01/31/7poJBGH4SrCf5QZ.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/31/7poJBGH4SrCf5QZ.png" alt=""></p>
 <p>get_root程序和ret2usr一样，提权并且返回到起shell函数</p>
-<p><img src="https://i.loli.net/2020/01/31/z6E7DjTHmIZu3xP.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/31/z6E7DjTHmIZu3xP.png" alt=""></p>
 <p>当然我们也可以使用溢出来修改相邻chunk的next指针</p>
-<h1 id="Attachment"><a href="#Attachment" class="headerlink" title="Attachment"></a>Attachment</h1><p>Heap_Vul：链接: <a href="https://pan.baidu.com/s/1AqGEuJPjvpPNu7WqjcDtCg" target="_blank" rel="noopener">https://pan.baidu.com/s/1AqGEuJPjvpPNu7WqjcDtCg</a> 提取码: aac8</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://resources.infosecinstitute.com/exploiting-linux-kernel-heap-corruptions-slub-allocator/" target="_blank" rel="noopener">SLUB Allocator</a></p>
-<p><a href="https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/index.html" target="_blank" rel="noopener">Linux slab 分配器剖析</a></p>
-<p><a href="https://blog.lexfo.fr/cve-2017-11176-linux-kernel-exploitation-part3.html" target="_blank" rel="noopener">A step-by-step Linux Kernel exploitation</a></p>
-<p><a href="https://argp.github.io/2012/01/03/linux-kernel-heap-exploitation/" target="_blank" rel="noopener">The Linux kernel memory allocators from an exploitation perspective</a></p>
+<h1 id="Attachment"><a href="#Attachment" class="headerlink" title="Attachment"></a>Attachment</h1><p>Heap_Vul：链接: <a href="https://pan.baidu.com/s/1AqGEuJPjvpPNu7WqjcDtCg">https://pan.baidu.com/s/1AqGEuJPjvpPNu7WqjcDtCg</a> 提取码: aac8</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://resources.infosecinstitute.com/exploiting-linux-kernel-heap-corruptions-slub-allocator/">SLUB Allocator</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/index.html">Linux slab 分配器剖析</a></p>
+<p><a href="https://blog.lexfo.fr/cve-2017-11176-linux-kernel-exploitation-part3.html">A step-by-step Linux Kernel exploitation</a></p>
+<p><a href="https://argp.github.io/2012/01/03/linux-kernel-heap-exploitation/">The Linux kernel memory allocators from an exploitation perspective</a></p>
 
         </div>
         

@@ -176,8 +176,8 @@
 <p>也就是执行<code>commit_creds(prepare_kernel_cred(0))</code>后返回，然后在<code>pwn.c</code>中执行了<code>system(&quot;/bin/sh&quot;)</code>，就相当于以root权限起了一个shell</p>
 <p>用一个普通用户尝试，在rootfs中的init文件加入<code>setsid cttyhack setuidgid 1000 sh</code>即可以非roo启动</p>
 <p><img src="https://i.loli.net/2020/01/28/3rSgMmZKEDx6XJH.png" alt="1580038752682.png"></p>
-<h1 id="Attachment"><a href="#Attachment" class="headerlink" title="Attachment"></a>Attachment</h1><p>NULL_Pointer_Dereference：链接: <a href="https://pan.baidu.com/s/1nH3CCL9oSIHg3PnF8h_6oA" target="_blank" rel="noopener">https://pan.baidu.com/s/1nH3CCL9oSIHg3PnF8h_6oA</a> 提取码: dztb</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://pwn4.fun/2017/04/19/Linux%E5%86%85%E6%A0%B8%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89NULL-Pointer-Dereference/" target="_blank" rel="noopener">BruceFan ‘s Blog</a></p>
+<h1 id="Attachment"><a href="#Attachment" class="headerlink" title="Attachment"></a>Attachment</h1><p>NULL_Pointer_Dereference：链接: <a href="https://pan.baidu.com/s/1nH3CCL9oSIHg3PnF8h_6oA">https://pan.baidu.com/s/1nH3CCL9oSIHg3PnF8h_6oA</a> 提取码: dztb</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://pwn4.fun/2017/04/19/Linux%E5%86%85%E6%A0%B8%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89NULL-Pointer-Dereference/">BruceFan ‘s Blog</a></p>
 
         </div>
         
