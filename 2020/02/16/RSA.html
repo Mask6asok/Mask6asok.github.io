@@ -19,7 +19,7 @@
 <meta property="og:description" content="简单学习RSA加密算法以及攻击方法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2020-02-16T02:09:18.992Z">
+<meta property="og:updated_time" content="2020-02-16T02:10:27.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RSA简单学习">
 <meta name="twitter:description" content="简单学习RSA加密算法以及攻击方法">
@@ -143,7 +143,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    24 分钟 读完 (大约 3534 个字)
+                    24 分钟 读完 (大约 3533 个字)
                 </span>
                 
                 
@@ -423,7 +423,7 @@ c_1=m^{e_1}(\mathrm{mod}N)，c_2=m^{e_2}(\mathrm{mod}N)</script><p>由于$e_1，
 s\cdot e_1+t\cdot e_2=1</script><p>得到$s，t$，由此可得</p>
 <script type="math/tex; mode=display">
 c_1^s\cdot c_2^t\equiv m^{s\cdot e_1}\cdot m^{t\cdot e_2}(\mathrm{mod}N)=m(\mathrm{mod}N)</script><p>解出明文m</p>
-<h2 id="计算-phi-N"><a href="#计算-phi-N" class="headerlink" title="计算$\phi(N)$"></a>计算$\phi(N)$</h2><p>在已知$N$和$\phi(N)$的情况下，是可以求解出$p，q$的，因为</p>
+<h2 id="计算N"><a href="#计算N" class="headerlink" title="计算N"></a>计算N</h2><p>在已知$N$和$\phi(N)$的情况下，是可以求解出$p，q$的，因为</p>
 <script type="math/tex; mode=display">
 N=p\cdot q</script><script type="math/tex; mode=display">
 \phi(N)=(p-1)\cdot (q-1)=p\cdot q-(p+q)+1</script><p>使用$q=N/p$代入，求解方程</p>
@@ -431,11 +431,11 @@ N=p\cdot q</script><script type="math/tex; mode=display">
 p^2-(N-\phi(N)+1)\cdot p+N=0</script><p>方程的两个根即为$p，q$</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_from_phi</span><span class="params">(N, phi)</span>:</span></span><br><span class="line">    a = <span class="number">1</span></span><br><span class="line">    b = -(N - phi + <span class="number">1</span>)</span><br><span class="line">    c = N</span><br><span class="line">    p = int((-b + pow(b * b - <span class="number">4</span> * a * c, <span class="number">0.5</span>)) / (<span class="number">2</span> * a))</span><br><span class="line">    q = int((-b - pow(b * b - <span class="number">4</span> * a * c, <span class="number">0.5</span>)) / (<span class="number">2</span> * a))</span><br><span class="line">    <span class="keyword">return</span> p, q</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> cal_from_phi(<span class="number">84773093</span>, <span class="number">84754668</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(9539, 8887)</span><br></pre></td></tr></table></figure>
-<h2 id="解密指数"><a href="#解密指数" class="headerlink" title="解密指数"></a>解密指数</h2><h3 id="已知-d"><a href="#已知-d" class="headerlink" title="已知$d$"></a>已知$d$</h3><p>如果解密指数$e$和解密指数$d$已知，那么$N$是可以被分解的，为了保证安全性，此时重新选择一个加密指数$e$是不行的，必须重新选择模数$N$</p>
+<h2 id="解密指数"><a href="#解密指数" class="headerlink" title="解密指数"></a>解密指数</h2><h3 id="已知d"><a href="#已知d" class="headerlink" title="已知d"></a>已知d</h3><p>如果解密指数$e$和解密指数$d$已知，那么$N$是可以被分解的，为了保证安全性，此时重新选择一个加密指数$e$是不行的，必须重新选择模数$N$</p>
 <p>该算法是一个Las Vegas型的随机算法，具有一定的几率计算成功，原理还不是很懂，先贴上一个简单实现，等日后在补上原理</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_from_d</span><span class="params">(N, e, d)</span>:</span></span><br><span class="line">    r = e * d - <span class="number">1</span></span><br><span class="line">    s = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> r % s == <span class="number">0</span>:</span><br><span class="line">        s *= <span class="number">2</span></span><br><span class="line">    r = r / (s / <span class="number">2</span>)</span><br><span class="line">    w = getRandomRange(<span class="number">1</span>, N)</span><br><span class="line">    x = GCD(w, N)</span><br><span class="line">    <span class="keyword">if</span> <span class="number">1</span> &lt; x <span class="keyword">and</span> x &lt; N:</span><br><span class="line">        <span class="keyword">return</span> x, N / x</span><br><span class="line">    v = pow(w, r, N)</span><br><span class="line">    <span class="keyword">if</span> v % N == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>, <span class="number">-1</span></span><br><span class="line">    v_ = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> v % N != <span class="number">1</span>:</span><br><span class="line">        v_ = v</span><br><span class="line">        v = pow(v, <span class="number">2</span>, N)</span><br><span class="line">    <span class="keyword">if</span> v_ % N == N - <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>, <span class="number">-1</span></span><br><span class="line">    p = GCD(v_ + <span class="number">1</span>, N)</span><br><span class="line">    <span class="keyword">return</span> p, N / p</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">N = <span class="number">89855713</span></span><br><span class="line">e = <span class="number">34986517</span></span><br><span class="line">d = <span class="number">82330933</span></span><br><span class="line"><span class="keyword">print</span> cal_from_d(N, e, d)</span><br></pre></td></tr></table></figure>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  RSA /usr/bin/python /mnt/d/Crypto/RSA/test.py</span><br><span class="line">(-1, -1)</span><br><span class="line">➜  RSA /usr/bin/python /mnt/d/Crypto/RSA/test.py</span><br><span class="line">(9871, 9103)</span><br></pre></td></tr></table></figure>
-<h3 id="求解-d"><a href="#求解-d" class="headerlink" title="求解$d$"></a>求解$d$</h3><p>M.Wiener提出过一种攻击方式，在满足前提如下前提的时候，可以计算出$d$，称为低解密指数攻击</p>
+<h3 id="求解d"><a href="#求解d" class="headerlink" title="求解d"></a>求解d</h3><p>M.Wiener提出过一种攻击方式，在满足前提如下前提的时候，可以计算出$d$，称为低解密指数攻击</p>
 <script type="math/tex; mode=display">
 3\cdot d<N^{1/4} \ and \ q<p<2\cdot q</script><p>如果$N$的二进制表示有$l$比特位，那么当$d$的二进制表示位数小于$l/4-1$，$p$和$q$相距不太远的时候攻击有效</p>
 <p>由于解密过程是要对密文进行$d$次幂，所以选择较小的$d$可以加快解密过程，这也就是不安全性所在</p>
@@ -588,21 +588,21 @@ y^d\equiv(c\cdot x^e)^d\equiv c^d\cdot x\equiv m\cdot x(\mathrm{mod}N)</script><
         <span class="has-mr-6">2.1.4</span>
         <span>共模攻击</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#计算-phi-N">
+        <a class="is-flex" href="#计算N">
         <span class="has-mr-6">2.2</span>
-        <span>计算$\phi(N)$</span>
+        <span>计算N</span>
         </a></li><li>
         <a class="is-flex" href="#解密指数">
         <span class="has-mr-6">2.3</span>
         <span>解密指数</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#已知-d">
+        <a class="is-flex" href="#已知d">
         <span class="has-mr-6">2.3.1</span>
-        <span>已知$d$</span>
+        <span>已知d</span>
         </a></li><li>
-        <a class="is-flex" href="#求解-d">
+        <a class="is-flex" href="#求解d">
         <span class="has-mr-6">2.3.2</span>
-        <span>求解$d$</span>
+        <span>求解d</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#加密指数">
         <span class="has-mr-6">2.4</span>
