@@ -63,121 +63,11 @@
     <link href="Mask6asok.github.io/2020/02/06/kernel_challenge.html"/>
     <id>Mask6asok.github.io/2020/02/06/kernel_challenge.html</id>
     <published>2020-02-06T15:10:19.658Z</published>
-    <updated>2020-02-09T15:10:09.671Z</updated>
+    <updated>2020-02-16T07:32:20.523Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;以往比赛的Kernel Pwn题目分析（持续更新）&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
-    
-    
-      <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
-    
-      <category term="kernel" scheme="Mask6asok.github.io/tags/kernel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux Kernel Pwn Ⅴ：Brief Heap Exploit</title>
-    <link href="Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_5.html"/>
-    <id>Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_5.html</id>
-    <published>2020-02-06T14:57:46.517Z</published>
-    <updated>2020-02-06T14:57:46.518Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;简单介绍内核中堆管理的利用（待更新）&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
-    
-    
-      <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
-    
-      <category term="kernel" scheme="Mask6asok.github.io/tags/kernel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux Kernel Pwn Ⅳ：Double Fetch</title>
-    <link href="Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_4.html"/>
-    <id>Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_4.html</id>
-    <published>2020-02-06T14:50:43.350Z</published>
-    <updated>2020-02-06T14:35:41.124Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;简单介绍内核中条件竞争引起的Double Fetch漏洞&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
-    
-    
-      <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
-    
-      <category term="kernel" scheme="Mask6asok.github.io/tags/kernel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux Kernel Pwn Ⅲ：Stack Overflow</title>
-    <link href="Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_3.html"/>
-    <id>Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_3.html</id>
-    <published>2020-02-06T14:50:43.349Z</published>
-    <updated>2020-02-06T14:35:27.400Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;简单介绍内核中栈溢出的利用&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
-    
-    
-      <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
-    
-      <category term="kernel" scheme="Mask6asok.github.io/tags/kernel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux Kernel Pwn Ⅱ：Null Pointer Dereference</title>
-    <link href="Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_2.html"/>
-    <id>Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_2.html</id>
-    <published>2020-02-06T14:50:43.348Z</published>
-    <updated>2020-02-06T14:39:02.386Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;简单介绍Null Pointer Dereference这个古老的漏洞&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
-    
-    
-      <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
-    
-      <category term="kernel" scheme="Mask6asok.github.io/tags/kernel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux Kernel Pwn Ⅰ：Basic Knowledge</title>
-    <link href="Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_1.html"/>
-    <id>Mask6asok.github.io/2020/02/06/Linux_Kernel_Pwn_1.html</id>
-    <published>2020-02-06T14:50:43.347Z</published>
-    <updated>2020-02-06T14:46:17.757Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;简单介绍一下Linux kernel pwn的预备知识，以及如何编译一个kernel。如何编写一个kernel模块以及如何运行&lt;/p&gt;
     
     </summary>
     
@@ -248,9 +138,9 @@
     
       <category term="heap" scheme="Mask6asok.github.io/tags/heap/"/>
     
-      <category term="kernel" scheme="Mask6asok.github.io/tags/kernel/"/>
-    
       <category term="arm" scheme="Mask6asok.github.io/tags/arm/"/>
+    
+      <category term="kernel" scheme="Mask6asok.github.io/tags/kernel/"/>
     
       <category term="shellcode" scheme="Mask6asok.github.io/tags/shellcode/"/>
     
@@ -439,6 +329,58 @@
     
     </summary>
     
+    
+  </entry>
+  
+  <entry>
+    <title>2019 SUSCTF PWN</title>
+    <link href="Mask6asok.github.io/2019/07/20/2019%20SUSCTF%20PWN.html"/>
+    <id>Mask6asok.github.io/2019/07/20/2019 SUSCTF PWN.html</id>
+    <published>2019-07-20T04:45:25.000Z</published>
+    <updated>2020-01-20T06:45:55.273Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有幸去到东南大学参加这个比赛，这算是我参加的第一个比较正式的比赛，这是四月份的比赛了，当时实力不够，pwn只做出了两道题，还是比较简单的，另外两道有关堆的题目不会做，后来学习了一下堆的管理机制，现在终于这两道题做完了&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
+    
+    
+      <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
+    
+      <category term="stack" scheme="Mask6asok.github.io/tags/stack/"/>
+    
+      <category term="libc" scheme="Mask6asok.github.io/tags/libc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2019 NUSTCTF fmt</title>
+    <link href="Mask6asok.github.io/2019/04/27/2019NUSTCTF-fmt.html"/>
+    <id>Mask6asok.github.io/2019/04/27/2019NUSTCTF-fmt.html</id>
+    <published>2019-04-26T16:05:38.000Z</published>
+    <updated>2020-01-20T06:49:18.016Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本次校赛的题目，作为一个PWN手居然没有做出来&lt;/p&gt;
+&lt;p&gt;而且一直纠结于这个题目，导致错过了求解其他题目的机会，有点小后悔&lt;/p&gt;
+&lt;p&gt;关键还是在于对这个漏洞利用的不熟练，导致很多时间用来学习和踩坑了，事实证明，&lt;strong&gt;我还是太菜啦&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
+    
+    
+      <category term="pwn" scheme="Mask6asok.github.io/tags/pwn/"/>
+    
+      <category term="stack" scheme="Mask6asok.github.io/tags/stack/"/>
+    
+      <category term="libc" scheme="Mask6asok.github.io/tags/libc/"/>
+    
+      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
     
   </entry>
   
