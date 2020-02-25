@@ -19,7 +19,7 @@
 <meta property="og:description" content="简单学习RSA加密算法以及攻击方法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2020-02-16T02:19:02.722Z">
+<meta property="og:updated_time" content="2020-02-23T06:42:15.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RSA简单学习">
 <meta name="twitter:description" content="简单学习RSA加密算法以及攻击方法">
@@ -143,7 +143,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    24 分钟 读完 (大约 3533 个字)
+                    24 分钟 读完 (大约 3572 个字)
                 </span>
                 
                 
@@ -423,6 +423,7 @@ c_1=m^{e_1}(\mathrm{mod}N)，c_2=m^{e_2}(\mathrm{mod}N)</script><p>由于$e_1，
 s\cdot e_1+t\cdot e_2=1</script><p>得到$s，t$，由此可得</p>
 <script type="math/tex; mode=display">
 c_1^s\cdot c_2^t\equiv m^{s\cdot e_1}\cdot m^{t\cdot e_2}(\mathrm{mod}N)=m(\mathrm{mod}N)</script><p>解出明文m</p>
+<p>如果s或t为负数的时候，转换为正数，再把对应的$c_1$或$c_2$求自己的模逆，才能继续计算</p>
 <h2 id="计算N"><a href="#计算N" class="headerlink" title="计算N"></a>计算N</h2><p>在已知$N$和$\phi(N)$的情况下，是可以求解出$p，q$的，因为</p>
 <script type="math/tex; mode=display">
 N=p\cdot q</script><script type="math/tex; mode=display">
@@ -517,6 +518,13 @@ y^d\equiv(c\cdot x^e)^d\equiv c^d\cdot x\equiv m\cdot x(\mathrm{mod}N)</script><
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/25/ichunqiu_xczy_pwn.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">新春战役部分Pwn题解</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -665,7 +673,7 @@ y^d\equiv(c\cdot x^e)^d\equiv c^d\cdot x\equiv m\cdot x(\mathrm{mod}N)</script><
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            17
+                            18
                         </p>
                     </a>
                 </div>
@@ -912,20 +920,5 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
