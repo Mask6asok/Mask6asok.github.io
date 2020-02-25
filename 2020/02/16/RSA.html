@@ -520,7 +520,7 @@ y^d\equiv(c\cdot x^e)^d\equiv c^d\cdot x\equiv m\cdot x(\mathrm{mod}N)</script><
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/25/ichunqiu_xczy_pwn.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/25/gyctf_pwn.html">
                 <i class="level-item fas fa-chevron-left"></i>
                 <span class="level-item">新春战役部分Pwn题解</span>
             </a>
@@ -920,5 +920,20 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
