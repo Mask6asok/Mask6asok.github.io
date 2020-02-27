@@ -10,19 +10,19 @@
 <title>新春战役部分Crypto题解 - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="尝试做一下简单的Crypto题 easyRSA题目给出了$n,e_1,e_2,c_1,c_2$，猜测是相同密文相同模数用不同加密指数加密的RSA，使用共模攻击 求解$s$和$t$，使得$se_1+te_2=\mathrm{gcd}(e_1,e_2)$成立，接着可以直接解密  m\equiv c_1^s\cdot c_2^t(\mathrm{mod} \ n)12345678910111213141">
+    <meta name="description" content="尝试做一下简单的Crypto题">
 <meta name="keywords" content="rsa,crypto">
 <meta property="og:type" content="article">
 <meta property="og:title" content="新春战役部分Crypto题解">
 <meta property="og:url" content="http://mask6asok.top/2020/02/27/gyctf_crypto.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="尝试做一下简单的Crypto题 easyRSA题目给出了$n,e_1,e_2,c_1,c_2$，猜测是相同密文相同模数用不同加密指数加密的RSA，使用共模攻击 求解$s$和$t$，使得$se_1+te_2=\mathrm{gcd}(e_1,e_2)$成立，接着可以直接解密  m\equiv c_1^s\cdot c_2^t(\mathrm{mod} \ n)12345678910111213141">
+<meta property="og:description" content="尝试做一下简单的Crypto题">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://mask6asok.top/images/og_image.png">
-<meta property="og:updated_time" content="2020-02-27T03:50:08.120Z">
+<meta property="og:updated_time" content="2020-02-27T03:54:08.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="新春战役部分Crypto题解">
-<meta name="twitter:description" content="尝试做一下简单的Crypto题 easyRSA题目给出了$n,e_1,e_2,c_1,c_2$，猜测是相同密文相同模数用不同加密指数加密的RSA，使用共模攻击 求解$s$和$t$，使得$se_1+te_2=\mathrm{gcd}(e_1,e_2)$成立，接着可以直接解密  m\equiv c_1^s\cdot c_2^t(\mathrm{mod} \ n)12345678910111213141">
+<meta name="twitter:description" content="尝试做一下简单的Crypto题">
 <meta name="twitter:image" content="http://mask6asok.top/images/og_image.png">
 
 
@@ -141,7 +141,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-02-27T03:43:10.653Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-02-27</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-27T03:50:08.120Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-27</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-27T03:54:08.134Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-27</time>
                 
                 
                 <div class="level-item">
@@ -154,7 +154,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    11 分钟 读完 (大约 1713 个字)
+                    11 分钟 读完 (大约 1714 个字)
                 </span>
                 
                 
@@ -163,6 +163,7 @@
         
         <div class="content">
             <p>尝试做一下简单的Crypto题</p>
+<a id="more"></a>
 <h1 id="easyRSA"><a href="#easyRSA" class="headerlink" title="easyRSA"></a>easyRSA</h1><p>题目给出了$n,e_1,e_2,c_1,c_2$，猜测是相同密文相同模数用不同加密指数加密的RSA，使用共模攻击</p>
 <p>求解$s$和$t$，使得$se_1+te_2=\mathrm{gcd}(e_1,e_2)$成立，接着可以直接解密</p>
 <script type="math/tex; mode=display">
