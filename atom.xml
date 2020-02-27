@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="Mask6asok.github.io/"/>
-  <updated>2020-02-27T03:43:10.826Z</updated>
+  <updated>2020-02-27T03:46:20.207Z</updated>
   <id>Mask6asok.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="Mask6asok.github.io/2020/02/27/gyctf_crypto.html"/>
     <id>Mask6asok.github.io/2020/02/27/gyctf_crypto.html</id>
     <published>2020-02-27T03:43:10.653Z</published>
-    <updated>2020-02-27T03:43:10.826Z</updated>
+    <updated>2020-02-27T03:46:20.207Z</updated>
     
     <summary type="html">
     
@@ -40,6 +40,8 @@
     
       <category term="rsa" scheme="Mask6asok.github.io/tags/rsa/"/>
     
+      <category term="crypto" scheme="Mask6asok.github.io/tags/crypto/"/>
+    
   </entry>
   
   <entry>
@@ -47,7 +49,7 @@
     <link href="Mask6asok.github.io/2020/02/25/gyctf_pwn.html"/>
     <id>Mask6asok.github.io/2020/02/25/gyctf_pwn.html</id>
     <published>2020-02-25T02:24:02.967Z</published>
-    <updated>2020-02-25T02:24:03.087Z</updated>
+    <updated>2020-02-27T03:45:32.948Z</updated>
     
     <summary type="html">
     
