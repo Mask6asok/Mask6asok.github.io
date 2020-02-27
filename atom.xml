@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="Mask6asok.github.io/"/>
-  <updated>2020-02-25T02:24:03.087Z</updated>
+  <updated>2020-02-27T03:43:10.826Z</updated>
   <id>Mask6asok.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>新春战役部分Crypto题解</title>
+    <link href="Mask6asok.github.io/2020/02/27/gyctf_crypto.html"/>
+    <id>Mask6asok.github.io/2020/02/27/gyctf_crypto.html</id>
+    <published>2020-02-27T03:43:10.653Z</published>
+    <updated>2020-02-27T03:43:10.826Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Crypto" scheme="Mask6asok.github.io/categories/Crypto/"/>
+    
+    
+      <category term="rsa" scheme="Mask6asok.github.io/tags/rsa/"/>
+    
+  </entry>
   
   <entry>
     <title>新春战役部分Pwn题解</title>
@@ -50,9 +76,9 @@
       <category term="Crypto" scheme="Mask6asok.github.io/categories/Crypto/"/>
     
     
-      <category term="crypto" scheme="Mask6asok.github.io/tags/crypto/"/>
-    
       <category term="rsa" scheme="Mask6asok.github.io/tags/rsa/"/>
+    
+      <category term="crypto" scheme="Mask6asok.github.io/tags/crypto/"/>
     
   </entry>
   
@@ -419,28 +445,6 @@
       <category term="tcache" scheme="Mask6asok.github.io/tags/tcache/"/>
     
       <category term="IOFILE" scheme="Mask6asok.github.io/tags/IOFILE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>360 3CTF 初赛 Pwn</title>
-    <link href="Mask6asok.github.io/2019/12/15/360-3CTF.html"/>
-    <id>Mask6asok.github.io/2019/12/15/360-3CTF.html</id>
-    <published>2019-12-15T13:55:22.061Z</published>
-    <updated>2020-01-20T06:55:00.336Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;360 3CTF 初赛 Pwn wp&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Pwn" scheme="Mask6asok.github.io/categories/Pwn/"/>
-    
-    
-      <category term="integer overflow" scheme="Mask6asok.github.io/tags/integer-overflow/"/>
-    
-      <category term="fmt" scheme="Mask6asok.github.io/tags/fmt/"/>
     
   </entry>
   

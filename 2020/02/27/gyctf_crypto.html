@@ -7,20 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>分类: Crypto - Mask&#39;s blogs</title>
+<title>新春战役部分Crypto题解 - Mask&#39;s blogs</title>
 
 
-    <meta name="description" content="a newbie in CTF">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mask&#39;s blogs">
-<meta property="og:url" content="Mask6asok.github.io/categories/Crypto/index.html">
+    <meta name="description" content="尝试做一下简单的Crypto题 easyRSA题目给出了$n,e_1,e_2,c_1,c_2$，猜测是相同密文相同模数用不同加密指数加密的RSA，使用共模攻击 求解$s$和$t$，使得$se_1+te_2=\mathrm{gcd}(e_1,e_2)$成立，接着可以直接解密  m\equiv c_1^s\cdot c_2^t(\mathrm{mod} \ n)12345678910111213141">
+<meta name="keywords" content="rsa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新春战役部分Crypto题解">
+<meta property="og:url" content="Mask6asok.github.io/2020/02/27/gyctf_crypto.html">
 <meta property="og:site_name" content="Mask&#39;s blogs">
-<meta property="og:description" content="a newbie in CTF">
+<meta property="og:description" content="尝试做一下简单的Crypto题 easyRSA题目给出了$n,e_1,e_2,c_1,c_2$，猜测是相同密文相同模数用不同加密指数加密的RSA，使用共模攻击 求解$s$和$t$，使得$se_1+te_2=\mathrm{gcd}(e_1,e_2)$成立，接着可以直接解密  m\equiv c_1^s\cdot c_2^t(\mathrm{mod} \ n)12345678910111213141">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
+<meta property="og:updated_time" content="2020-02-27T03:43:10.826Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mask&#39;s blogs">
-<meta name="twitter:description" content="a newbie in CTF">
+<meta name="twitter:title" content="新春战役部分Crypto题解">
+<meta name="twitter:description" content="尝试做一下简单的Crypto题 easyRSA题目给出了$n,e_1,e_2,c_1,c_2$，猜测是相同密文相同模数用不同加密指数加密的RSA，使用共模攻击 求解$s$和$t$，使得$se_1+te_2=\mathrm{gcd}(e_1,e_2)$成立，接着可以直接解密  m\equiv c_1^s\cdot c_2^t(\mathrm{mod} \ n)12345678910111213141">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -79,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.ico" alt="Mask&#39;s blogs" height="28">
+                <img src="/images/logo.ico" alt="新春战役部分Crypto题解" height="28">
             
             </a>
         </div>
@@ -107,6 +109,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -120,26 +126,14 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
-            
-            <li class="is-active"><a href="#" aria-current="page">Crypto</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-      
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">  
 
 <div class="card">
     
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/02/27/gyctf_crypto.html"><i class="fas fa-angle-double-right"></i>新春战役部分Crypto题解</a>
+                <i class="fas fa-angle-double-right"></i>新春战役部分Crypto题解
             
         </h1>
         
@@ -247,76 +241,26 @@ $$ {aligned}
 <h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1>
         </div>
         
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-      
-
-<div class="card">
-    
-    <div class="card-content article ">
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/02/16/RSA.html"><i class="fas fa-angle-double-right"></i>RSA简单学习</a>
-            
-        </h1>
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-16T02:01:39.668Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-02-16</time>
-                
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-23T06:42:15.424Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-23</time>
-                
-                
-                <div class="level-item">
-                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/categories/Crypto/">Crypto</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    <i class="far fa-clock"></i>&nbsp;
-                    
-                    
-                    24 分钟 读完 (大约 3572 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <div class="content">
-            <p>简单学习RSA加密算法以及攻击方法</p>
-        </div>
-        
+            <ul class="post-copyright">
+            <li><strong>本文标题：</strong><a href="Mask6asok.github.io/2020/02/27/gyctf_crypto.html">新春战役部分Crypto题解</a></li>
+            <li><strong>本文作者：</strong><a href="Mask6asok.github.io">Mask</a></li>
+            <li><strong>本文链接：</strong><a href="Mask6asok.github.io/2020/02/27/gyctf_crypto.html">Mask6asok.github.io/2020/02/27/gyctf_crypto.html</a></li>
+            <li><strong>发布时间：</strong>2020-02-27</li>
+            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+            </li>
+            </ul>
         
         
         <hr style="height:1px;margin:1rem 0"/>
-        <div class="level is-mobile is-flex">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
-                
-                <div class="level-item is-size-7 is-uppercase">
+                <div class="level-item">
                     <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                    <a class="has-link-grey -link" href="/tags/crypto/">crypto</a>,&nbsp;<a class="has-link-grey -link" href="/tags/rsa/">rsa</a>
-                </div>
-                
-            </div>
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/02/16/RSA.html#more"><i class="fas fa-book-reader has-text-grey"></i>&nbsp;&nbsp;阅读更多</a>
+                    <a class="has-link-grey -link" href="/tags/rsa/">rsa</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -326,71 +270,19 @@ $$ {aligned}
 
 
 
-
-
-
-      
-
-<div class="card">
-    
-    <div class="card-content article ">
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/12/15/Classical_Crypto.html"><i class="fas fa-angle-double-right"></i>古典密码学</a>
-            
-        </h1>
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-15T15:15:13.219Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-12-15</time>
-                
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-20T06:46:50.615Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-20</time>
-                
-                
-                <div class="level-item">
-                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/categories/Crypto/">Crypto</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    <i class="far fa-clock"></i>&nbsp;
-                    
-                    
-                    33 分钟 读完 (大约 4964 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/25/gyctf_pwn.html">
+                <span class="level-item">新春战役部分Pwn题解</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <div class="content">
-            <p>简单学习一下古典密码体制与对应的密码分析方法</p>
-        </div>
-        
-        
-        
-        <hr style="height:1px;margin:1rem 0"/>
-        <div class="level is-mobile is-flex">
-            <div class="level-start">
-                
-            </div>
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/12/15/Classical_Crypto.html#more"><i class="fas fa-book-reader has-text-grey"></i>&nbsp;&nbsp;阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
 
 
 </div>
@@ -402,6 +294,39 @@ $$ {aligned}
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
+
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#easyRSA">
+        <span class="has-mr-6">1</span>
+        <span>easyRSA</span>
+        </a></li><li>
+        <a class="is-flex" href="#easy-RSA">
+        <span class="has-mr-6">2</span>
+        <span>easy_RSA</span>
+        </a></li><li>
+        <a class="is-flex" href="#warm-up">
+        <span class="has-mr-6">3</span>
+        <span>warm_up</span>
+        </a></li><li>
+        <a class="is-flex" href="#simple-math">
+        <span class="has-mr-6">4</span>
+        <span>simple_math</span>
+        </a></li><li>
+        <a class="is-flex" href="#TODO">
+        <span class="has-mr-6">5</span>
+        <span>TODO</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         
 <div class="card widget">
@@ -524,348 +449,11 @@ $$ {aligned}
     
         <div class="column-right-shadow is-hidden-widescreen is-sticky">
         
-            
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Crypto/">
-            <span class="level-start">
-                <span class="level-item">Crypto</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/DBMS/">
-            <span class="level-start">
-                <span class="level-item">DBMS</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Others/">
-            <span class="level-start">
-                <span class="level-item">Others</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Pwn/">
-            <span class="level-start">
-                <span class="level-item">Pwn</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">18</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Conditional-competition/">
-                        <span class="tag">Conditional competition</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/IOFILE/">
-                        <span class="tag">IOFILE</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/arm/">
-                        <span class="tag">arm</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/crypto/">
-                        <span class="tag">crypto</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/fmt/">
-                        <span class="tag">fmt</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/format/">
-                        <span class="tag">format</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/heap/">
-                        <span class="tag">heap</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/integer-overflow/">
-                        <span class="tag">integer overflow</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/kernel/">
-                        <span class="tag">kernel</span>
-                        <span class="tag is-grey">7</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/libc/">
-                        <span class="tag">libc</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/pwn/">
-                        <span class="tag">pwn</span>
-                        <span class="tag is-grey">13</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/rsa/">
-                        <span class="tag">rsa</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/shellcode/">
-                        <span class="tag">shellcode</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/stack/">
-                        <span class="tag">stack</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tcache/">
-                        <span class="tag">tcache</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-        
         </div>
     
 </div>
 
                 
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Crypto/">
-            <span class="level-start">
-                <span class="level-item">Crypto</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/DBMS/">
-            <span class="level-start">
-                <span class="level-item">DBMS</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Others/">
-            <span class="level-start">
-                <span class="level-item">Others</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Pwn/">
-            <span class="level-start">
-                <span class="level-item">Pwn</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">18</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Conditional-competition/">
-                        <span class="tag">Conditional competition</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/IOFILE/">
-                        <span class="tag">IOFILE</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/arm/">
-                        <span class="tag">arm</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/crypto/">
-                        <span class="tag">crypto</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/fmt/">
-                        <span class="tag">fmt</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/format/">
-                        <span class="tag">format</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/heap/">
-                        <span class="tag">heap</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/integer-overflow/">
-                        <span class="tag">integer overflow</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/kernel/">
-                        <span class="tag">kernel</span>
-                        <span class="tag is-grey">7</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/libc/">
-                        <span class="tag">libc</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/pwn/">
-                        <span class="tag">pwn</span>
-                        <span class="tag is-grey">13</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/rsa/">
-                        <span class="tag">rsa</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/shellcode/">
-                        <span class="tag">shellcode</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/stack/">
-                        <span class="tag">stack</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tcache/">
-                        <span class="tag">tcache</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-    
-    
-</div>
-
             </div>
         </div>
     </section>
@@ -875,7 +463,7 @@ $$ {aligned}
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.ico" alt="Mask&#39;s blogs" height="28">
+                    <img src="/images/logo.ico" alt="新春战役部分Crypto题解" height="28">
                 
                 </a>
                 <p class="is-size-7">
