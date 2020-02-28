@@ -8,8 +8,8 @@
         <category>Crypto</category>
       </categories>
       <tags>
-        <tag>rsa</tag>
         <tag>crypto</tag>
+        <tag>rsa</tag>
       </tags>
   </entry>
   <entry>
@@ -28,8 +28,8 @@
         <category>Crypto</category>
       </categories>
       <tags>
-        <tag>rsa</tag>
         <tag>crypto</tag>
+        <tag>rsa</tag>
       </tags>
   </entry>
   <entry>
@@ -230,8 +230,8 @@
         <category>Pwn</category>
       </categories>
       <tags>
-        <tag>fmt</tag>
         <tag>integer overflow</tag>
+        <tag>fmt</tag>
       </tags>
   </entry>
   <entry>
@@ -261,9 +261,9 @@
       </categories>
       <tags>
         <tag>pwn</tag>
+        <tag>fmt</tag>
         <tag>stack</tag>
         <tag>libc</tag>
-        <tag>fmt</tag>
       </tags>
   </entry>
 </search>
