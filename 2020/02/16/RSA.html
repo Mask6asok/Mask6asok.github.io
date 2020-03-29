@@ -19,7 +19,7 @@
 <meta property="og:description" content="简单学习RSA加密算法以及攻击方法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://mask6asok.top/images/og_image.png">
-<meta property="og:updated_time" content="2020-02-23T06:42:15.424Z">
+<meta property="og:updated_time" content="2020-03-23T16:14:04.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RSA简单学习">
 <meta name="twitter:description" content="简单学习RSA加密算法以及攻击方法">
@@ -141,7 +141,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-02-16T02:01:39.668Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-02-16</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-23T06:42:15.424Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-23</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-23T16:14:04.625Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-24</time>
                 
                 
                 <div class="level-item">
@@ -154,7 +154,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    24 分钟 读完 (大约 3572 个字)
+                    13 分钟 读完 (大约 1905 个字)
                 </span>
                 
                 
@@ -494,7 +494,9 @@ y^d\equiv(c\cdot x^e)^d\equiv c^d\cdot x\equiv m\cdot x(\mathrm{mod}N)</script><
 <p><a href="https://github.com/Ganapati/RsaCtfTool">https://github.com/Ganapati/RsaCtfTool</a></p>
 <p><a href="https://github.com/ius/rsatool">https://github.com/ius/rsatool</a></p>
 <p>RSA python脚本</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>RSA就是基于数论的一种加密算法，这几天看下来，觉得自己的数学基础还是太薄弱了，很多都是一知半解的</p>
+<h1 id="常见式子"><a href="#常见式子" class="headerlink" title="常见式子"></a>常见式子</h1><script type="math/tex; mode=display">
+dp\equiv d \mathrm{mod}\phi(p)\equiv d\mathrm{mod}(p-1)</script><script type="math/tex; mode=display">
+e*dp\equiv1\mathrm{mod}(p-1)\ ->e\equiv dp^{-1}\mathrm{mod}(p-1)</script><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>RSA就是基于数论的一种加密算法，这几天看下来，觉得自己的数学基础还是太薄弱了，很多都是一知半解的</p>
 <p>还有很多种分析方式因为数学底子不好，根本无法理解下去，先占坑，等以后学好了信安数基再来写一写</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li><a href="https://ctf-wiki.github.io/ctf-wiki/crypto/asymmetric/rsa/rsa_theory-zh/">CTF Wiki</a></li>
@@ -666,12 +668,16 @@ y^d\equiv(c\cdot x^e)^d\equiv c^d\cdot x\equiv m\cdot x(\mathrm{mod}N)</script><
         <span class="has-mr-6">3</span>
         <span>现成工具</span>
         </a></li><li>
-        <a class="is-flex" href="#总结">
+        <a class="is-flex" href="#常见式子">
         <span class="has-mr-6">4</span>
+        <span>常见式子</span>
+        </a></li><li>
+        <a class="is-flex" href="#总结">
+        <span class="has-mr-6">5</span>
         <span>总结</span>
         </a></li><li>
         <a class="is-flex" href="#参考">
-        <span class="has-mr-6">5</span>
+        <span class="has-mr-6">6</span>
         <span>参考</span>
         </a></li></ul>
             </div>
@@ -711,7 +717,7 @@ y^d\equiv(c\cdot x^e)^d\equiv c^d\cdot x\equiv m\cdot x(\mathrm{mod}N)</script><
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            24
+                            25
                         </p>
                     </a>
                 </div>
@@ -723,7 +729,7 @@ y^d\equiv(c\cdot x^e)^d\equiv c^d\cdot x\equiv m\cdot x(\mathrm{mod}N)</script><
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            4
+                            5
                         </p>
                     </a>
                 </div>
@@ -969,5 +975,20 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

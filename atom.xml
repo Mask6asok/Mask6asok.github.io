@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://mask6asok.top/"/>
-  <updated>2020-02-28T06:35:22.831Z</updated>
+  <updated>2020-03-29T07:07:27.338Z</updated>
   <id>http://mask6asok.top/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>中国剩余定理简析</title>
+    <link href="http://mask6asok.top/2020/03/29/CRT.html"/>
+    <id>http://mask6asok.top/2020/03/29/CRT.html</id>
+    <published>2020-03-29T07:07:27.231Z</published>
+    <updated>2020-03-29T07:07:27.338Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Chinese Remainder Theorem&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="CRYPTO" scheme="http://mask6asok.top/categories/CRYPTO/"/>
+    
+    
+      <category term="crypto" scheme="http://mask6asok.top/tags/crypto/"/>
+    
+      <category term="rsa" scheme="http://mask6asok.top/tags/rsa/"/>
+    
+  </entry>
   
   <entry>
     <title>新春战役部分Crypto题解</title>
@@ -61,7 +83,7 @@
     <link href="http://mask6asok.top/2020/02/16/RSA.html"/>
     <id>http://mask6asok.top/2020/02/16/RSA.html</id>
     <published>2020-02-16T02:01:39.668Z</published>
-    <updated>2020-02-23T06:42:15.424Z</updated>
+    <updated>2020-03-23T16:14:04.625Z</updated>
     
     <summary type="html">
     
@@ -415,32 +437,6 @@
       <category term="heap" scheme="http://mask6asok.top/tags/heap/"/>
     
       <category term="Conditional competition" scheme="http://mask6asok.top/tags/Conditional-competition/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2019 Nu1lCTF warmup + babypwn</title>
-    <link href="http://mask6asok.top/2019/12/15/2019%20Nu1LCTF%20warmup%20+%20babypwn.html"/>
-    <id>http://mask6asok.top/2019/12/15/2019 Nu1LCTF warmup + babypwn.html</id>
-    <published>2019-12-15T13:55:22.154Z</published>
-    <updated>2020-01-20T06:55:41.133Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;2019 Nu1lCTF warmup , babypwn wp&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
-    
-    
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
-    
-      <category term="heap" scheme="http://mask6asok.top/tags/heap/"/>
-    
-      <category term="tcache" scheme="http://mask6asok.top/tags/tcache/"/>
-    
-      <category term="IOFILE" scheme="http://mask6asok.top/tags/IOFILE/"/>
     
   </entry>
   
