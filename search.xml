@@ -230,8 +230,8 @@
       <tags>
         <tag>pwn</tag>
         <tag>heap</tag>
-        <tag>tcache</tag>
         <tag>IOFILE</tag>
+        <tag>tcache</tag>
       </tags>
   </entry>
   <entry>
@@ -273,9 +273,9 @@
       </categories>
       <tags>
         <tag>pwn</tag>
-        <tag>fmt</tag>
         <tag>stack</tag>
         <tag>libc</tag>
+        <tag>fmt</tag>
       </tags>
   </entry>
 </search>
