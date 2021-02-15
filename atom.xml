@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://mask6asok.top/"/>
+  <link href="http://yoursite.com/"/>
   <updated>2020-03-29T07:13:05.082Z</updated>
-  <id>http://mask6asok.top/</id>
+  <id>http://yoursite.com/</id>
   
   <author>
     <name>Mask</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>中国剩余定理简析</title>
-    <link href="http://mask6asok.top/2020/03/29/CRT.html"/>
-    <id>http://mask6asok.top/2020/03/29/CRT.html</id>
+    <link href="http://yoursite.com/2020/03/29/CRT.html"/>
+    <id>http://yoursite.com/2020/03/29/CRT.html</id>
     <published>2020-03-29T07:07:27.231Z</published>
     <updated>2020-03-29T07:13:05.082Z</updated>
     
@@ -29,19 +29,19 @@
     
     </summary>
     
-      <category term="CRYPTO" scheme="http://mask6asok.top/categories/CRYPTO/"/>
+      <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="crypto" scheme="http://mask6asok.top/tags/crypto/"/>
+      <category term="crypto" scheme="http://yoursite.com/tags/crypto/"/>
     
-      <category term="rsa" scheme="http://mask6asok.top/tags/rsa/"/>
+      <category term="rsa" scheme="http://yoursite.com/tags/rsa/"/>
     
   </entry>
   
   <entry>
     <title>新春战役部分Crypto题解</title>
-    <link href="http://mask6asok.top/2020/02/27/gyctf_crypto.html"/>
-    <id>http://mask6asok.top/2020/02/27/gyctf_crypto.html</id>
+    <link href="http://yoursite.com/2020/02/27/gyctf_crypto.html"/>
+    <id>http://yoursite.com/2020/02/27/gyctf_crypto.html</id>
     <published>2020-02-27T03:43:10.653Z</published>
     <updated>2020-02-28T06:35:22.831Z</updated>
     
@@ -51,19 +51,19 @@
     
     </summary>
     
-      <category term="Crypto" scheme="http://mask6asok.top/categories/Crypto/"/>
+      <category term="Crypto" scheme="http://yoursite.com/categories/Crypto/"/>
     
     
-      <category term="crypto" scheme="http://mask6asok.top/tags/crypto/"/>
+      <category term="crypto" scheme="http://yoursite.com/tags/crypto/"/>
     
-      <category term="rsa" scheme="http://mask6asok.top/tags/rsa/"/>
+      <category term="rsa" scheme="http://yoursite.com/tags/rsa/"/>
     
   </entry>
   
   <entry>
     <title>新春战役部分Pwn题解</title>
-    <link href="http://mask6asok.top/2020/02/25/gyctf_pwn.html"/>
-    <id>http://mask6asok.top/2020/02/25/gyctf_pwn.html</id>
+    <link href="http://yoursite.com/2020/02/25/gyctf_pwn.html"/>
+    <id>http://yoursite.com/2020/02/25/gyctf_pwn.html</id>
     <published>2020-02-25T02:24:02.967Z</published>
     <updated>2020-02-27T03:45:32.948Z</updated>
     
@@ -73,17 +73,17 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
   </entry>
   
   <entry>
     <title>RSA简单学习</title>
-    <link href="http://mask6asok.top/2020/02/16/RSA.html"/>
-    <id>http://mask6asok.top/2020/02/16/RSA.html</id>
+    <link href="http://yoursite.com/2020/02/16/RSA.html"/>
+    <id>http://yoursite.com/2020/02/16/RSA.html</id>
     <published>2020-02-16T02:01:39.668Z</published>
-    <updated>2020-03-23T16:14:04.625Z</updated>
+    <updated>2020-10-19T11:31:11.083Z</updated>
     
     <summary type="html">
     
@@ -91,19 +91,19 @@
     
     </summary>
     
-      <category term="Crypto" scheme="http://mask6asok.top/categories/Crypto/"/>
+      <category term="Crypto" scheme="http://yoursite.com/categories/Crypto/"/>
     
     
-      <category term="crypto" scheme="http://mask6asok.top/tags/crypto/"/>
+      <category term="crypto" scheme="http://yoursite.com/tags/crypto/"/>
     
-      <category term="rsa" scheme="http://mask6asok.top/tags/rsa/"/>
+      <category term="rsa" scheme="http://yoursite.com/tags/rsa/"/>
     
   </entry>
   
   <entry>
     <title>HGAME 2020 Pwn WriteUp</title>
-    <link href="http://mask6asok.top/2020/02/08/hgame_pwn.html"/>
-    <id>http://mask6asok.top/2020/02/08/hgame_pwn.html</id>
+    <link href="http://yoursite.com/2020/02/08/hgame_pwn.html"/>
+    <id>http://yoursite.com/2020/02/08/hgame_pwn.html</id>
     <published>2020-02-08T01:31:34.220Z</published>
     <updated>2020-02-15T03:07:28.257Z</updated>
     
@@ -113,17 +113,17 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
+      <category term="pwn" scheme="http://yoursite.com/tags/pwn/"/>
     
   </entry>
   
   <entry>
     <title>Kernel Pwn题目的实战</title>
-    <link href="http://mask6asok.top/2020/02/06/kernel_challenge.html"/>
-    <id>http://mask6asok.top/2020/02/06/kernel_challenge.html</id>
+    <link href="http://yoursite.com/2020/02/06/kernel_challenge.html"/>
+    <id>http://yoursite.com/2020/02/06/kernel_challenge.html</id>
     <published>2020-02-06T15:10:19.658Z</published>
     <updated>2020-02-18T09:30:26.765Z</updated>
     
@@ -133,19 +133,19 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
+      <category term="pwn" scheme="http://yoursite.com/tags/pwn/"/>
     
-      <category term="kernel" scheme="http://mask6asok.top/tags/kernel/"/>
+      <category term="kernel" scheme="http://yoursite.com/tags/kernel/"/>
     
   </entry>
   
   <entry>
     <title>Linux Kernel Pwn Ⅳ：Double Fetch</title>
-    <link href="http://mask6asok.top/2020/02/06/Linux_Kernel_Pwn_4.html"/>
-    <id>http://mask6asok.top/2020/02/06/Linux_Kernel_Pwn_4.html</id>
+    <link href="http://yoursite.com/2020/02/06/Linux_Kernel_Pwn_4.html"/>
+    <id>http://yoursite.com/2020/02/06/Linux_Kernel_Pwn_4.html</id>
     <published>2020-02-06T14:50:43.350Z</published>
     <updated>2020-02-06T14:35:41.124Z</updated>
     
@@ -155,21 +155,21 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
+      <category term="pwn" scheme="http://yoursite.com/tags/pwn/"/>
     
-      <category term="kernel" scheme="http://mask6asok.top/tags/kernel/"/>
+      <category term="kernel" scheme="http://yoursite.com/tags/kernel/"/>
     
   </entry>
   
   <entry>
     <title>Linux Kernel Pwn Ⅲ：Stack Overflow</title>
-    <link href="http://mask6asok.top/2020/02/06/Linux_Kernel_Pwn_3.html"/>
-    <id>http://mask6asok.top/2020/02/06/Linux_Kernel_Pwn_3.html</id>
+    <link href="http://yoursite.com/2020/02/06/Linux_Kernel_Pwn_3.html"/>
+    <id>http://yoursite.com/2020/02/06/Linux_Kernel_Pwn_3.html</id>
     <published>2020-02-06T14:50:43.349Z</published>
-    <updated>2020-02-06T14:35:27.400Z</updated>
+    <updated>2020-11-05T06:15:50.256Z</updated>
     
     <summary type="html">
     
@@ -177,19 +177,19 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
+      <category term="pwn" scheme="http://yoursite.com/tags/pwn/"/>
     
-      <category term="kernel" scheme="http://mask6asok.top/tags/kernel/"/>
+      <category term="kernel" scheme="http://yoursite.com/tags/kernel/"/>
     
   </entry>
   
   <entry>
     <title>Linux Kernel Pwn Ⅱ：Null Pointer Dereference</title>
-    <link href="http://mask6asok.top/2020/02/06/Linux_Kernel_Pwn_2.html"/>
-    <id>http://mask6asok.top/2020/02/06/Linux_Kernel_Pwn_2.html</id>
+    <link href="http://yoursite.com/2020/02/06/Linux_Kernel_Pwn_2.html"/>
+    <id>http://yoursite.com/2020/02/06/Linux_Kernel_Pwn_2.html</id>
     <published>2020-02-06T14:50:43.348Z</published>
     <updated>2020-02-06T14:39:02.386Z</updated>
     
@@ -199,21 +199,21 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
+      <category term="pwn" scheme="http://yoursite.com/tags/pwn/"/>
     
-      <category term="kernel" scheme="http://mask6asok.top/tags/kernel/"/>
+      <category term="kernel" scheme="http://yoursite.com/tags/kernel/"/>
     
   </entry>
   
   <entry>
     <title>Linux Kernel Pwn Ⅰ：Basic Knowledge</title>
-    <link href="http://mask6asok.top/2020/02/06/Linux_Kernel_Pwn_1.html"/>
-    <id>http://mask6asok.top/2020/02/06/Linux_Kernel_Pwn_1.html</id>
+    <link href="http://yoursite.com/2020/02/06/Linux_Kernel_Pwn_1.html"/>
+    <id>http://yoursite.com/2020/02/06/Linux_Kernel_Pwn_1.html</id>
     <published>2020-02-06T14:50:43.347Z</published>
-    <updated>2020-02-06T14:46:17.757Z</updated>
+    <updated>2020-11-05T06:00:51.820Z</updated>
     
     <summary type="html">
     
@@ -221,19 +221,19 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
+      <category term="pwn" scheme="http://yoursite.com/tags/pwn/"/>
     
-      <category term="kernel" scheme="http://mask6asok.top/tags/kernel/"/>
+      <category term="kernel" scheme="http://yoursite.com/tags/kernel/"/>
     
   </entry>
   
   <entry>
     <title>Linux Kernel Pwn Ⅴ：Brief Heap Exploit</title>
-    <link href="http://mask6asok.top/2020/02/06/Linux_Kernel_Pwn_5.html"/>
-    <id>http://mask6asok.top/2020/02/06/Linux_Kernel_Pwn_5.html</id>
+    <link href="http://yoursite.com/2020/02/06/Linux_Kernel_Pwn_5.html"/>
+    <id>http://yoursite.com/2020/02/06/Linux_Kernel_Pwn_5.html</id>
     <published>2020-02-06T14:50:43.346Z</published>
     <updated>2020-02-06T14:57:46.518Z</updated>
     
@@ -243,19 +243,19 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
+      <category term="pwn" scheme="http://yoursite.com/tags/pwn/"/>
     
-      <category term="kernel" scheme="http://mask6asok.top/tags/kernel/"/>
+      <category term="kernel" scheme="http://yoursite.com/tags/kernel/"/>
     
   </entry>
   
   <entry>
     <title>记一次arm架构的ret to dl_resolve</title>
-    <link href="http://mask6asok.top/2020/01/10/arm_ret2dlresolve.html"/>
-    <id>http://mask6asok.top/2020/01/10/arm_ret2dlresolve.html</id>
+    <link href="http://yoursite.com/2020/01/10/arm_ret2dlresolve.html"/>
+    <id>http://yoursite.com/2020/01/10/arm_ret2dlresolve.html</id>
     <published>2020-01-10T15:27:35.600Z</published>
     <updated>2020-01-20T06:49:38.768Z</updated>
     
@@ -265,19 +265,19 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
+      <category term="pwn" scheme="http://yoursite.com/tags/pwn/"/>
     
-      <category term="arm" scheme="http://mask6asok.top/tags/arm/"/>
+      <category term="arm" scheme="http://yoursite.com/tags/arm/"/>
     
   </entry>
   
   <entry>
     <title>SQL初步学习</title>
-    <link href="http://mask6asok.top/2019/12/28/brief_sql.html"/>
-    <id>http://mask6asok.top/2019/12/28/brief_sql.html</id>
+    <link href="http://yoursite.com/2019/12/28/brief_sql.html"/>
+    <id>http://yoursite.com/2019/12/28/brief_sql.html</id>
     <published>2019-12-28T04:01:31.292Z</published>
     <updated>2020-01-20T06:46:44.520Z</updated>
     
@@ -287,15 +287,15 @@
     
     </summary>
     
-      <category term="DBMS" scheme="http://mask6asok.top/categories/DBMS/"/>
+      <category term="DBMS" scheme="http://yoursite.com/categories/DBMS/"/>
     
     
   </entry>
   
   <entry>
     <title>Xman2020冬令营选拔赛Pwn题解</title>
-    <link href="http://mask6asok.top/2019/12/22/XMan2019_WinterCamp_Qualify_Pwn.html"/>
-    <id>http://mask6asok.top/2019/12/22/XMan2019_WinterCamp_Qualify_Pwn.html</id>
+    <link href="http://yoursite.com/2019/12/22/XMan2019_WinterCamp_Qualify_Pwn.html"/>
+    <id>http://yoursite.com/2019/12/22/XMan2019_WinterCamp_Qualify_Pwn.html</id>
     <published>2019-12-22T11:57:22.029Z</published>
     <updated>2020-01-20T06:56:47.155Z</updated>
     
@@ -305,25 +305,25 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="heap" scheme="http://mask6asok.top/tags/heap/"/>
+      <category term="heap" scheme="http://yoursite.com/tags/heap/"/>
     
-      <category term="kernel" scheme="http://mask6asok.top/tags/kernel/"/>
+      <category term="kernel" scheme="http://yoursite.com/tags/kernel/"/>
     
-      <category term="arm" scheme="http://mask6asok.top/tags/arm/"/>
+      <category term="arm" scheme="http://yoursite.com/tags/arm/"/>
     
-      <category term="shellcode" scheme="http://mask6asok.top/tags/shellcode/"/>
+      <category term="shellcode" scheme="http://yoursite.com/tags/shellcode/"/>
     
-      <category term="format" scheme="http://mask6asok.top/tags/format/"/>
+      <category term="format" scheme="http://yoursite.com/tags/format/"/>
     
   </entry>
   
   <entry>
     <title>古典密码学</title>
-    <link href="http://mask6asok.top/2019/12/15/Classical_Crypto.html"/>
-    <id>http://mask6asok.top/2019/12/15/Classical_Crypto.html</id>
+    <link href="http://yoursite.com/2019/12/15/Classical_Crypto.html"/>
+    <id>http://yoursite.com/2019/12/15/Classical_Crypto.html</id>
     <published>2019-12-15T15:15:13.219Z</published>
     <updated>2020-01-20T06:46:50.615Z</updated>
     
@@ -333,15 +333,15 @@
     
     </summary>
     
-      <category term="Crypto" scheme="http://mask6asok.top/categories/Crypto/"/>
+      <category term="Crypto" scheme="http://yoursite.com/categories/Crypto/"/>
     
     
   </entry>
   
   <entry>
     <title>永恒之蓝测试</title>
-    <link href="http://mask6asok.top/2019/12/15/Eternal_Blue.html"/>
-    <id>http://mask6asok.top/2019/12/15/Eternal_Blue.html</id>
+    <link href="http://yoursite.com/2019/12/15/Eternal_Blue.html"/>
+    <id>http://yoursite.com/2019/12/15/Eternal_Blue.html</id>
     <published>2019-12-15T13:55:22.254Z</published>
     <updated>2020-01-20T06:52:54.680Z</updated>
     
@@ -351,15 +351,15 @@
     
     </summary>
     
-      <category term="Others" scheme="http://mask6asok.top/categories/Others/"/>
+      <category term="Others" scheme="http://yoursite.com/categories/Others/"/>
     
     
   </entry>
   
   <entry>
     <title>Pwn-Ubuntu配置</title>
-    <link href="http://mask6asok.top/2019/12/15/ubuntun16_for_pwn.html"/>
-    <id>http://mask6asok.top/2019/12/15/ubuntun16_for_pwn.html</id>
+    <link href="http://yoursite.com/2019/12/15/ubuntun16_for_pwn.html"/>
+    <id>http://yoursite.com/2019/12/15/ubuntun16_for_pwn.html</id>
     <published>2019-12-15T13:55:22.229Z</published>
     <updated>2020-01-20T06:50:03.944Z</updated>
     
@@ -369,15 +369,15 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
   </entry>
   
   <entry>
     <title>2019 护网杯 mergeheap</title>
-    <link href="http://mask6asok.top/2019/12/15/2019HuWangCup-mergeheap.html"/>
-    <id>http://mask6asok.top/2019/12/15/2019HuWangCup-mergeheap.html</id>
+    <link href="http://yoursite.com/2019/12/15/2019HuWangCup-mergeheap.html"/>
+    <id>http://yoursite.com/2019/12/15/2019HuWangCup-mergeheap.html</id>
     <published>2019-12-15T13:55:22.218Z</published>
     <updated>2020-01-20T06:54:42.534Z</updated>
     
@@ -387,21 +387,21 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
+      <category term="pwn" scheme="http://yoursite.com/tags/pwn/"/>
     
-      <category term="heap" scheme="http://mask6asok.top/tags/heap/"/>
+      <category term="heap" scheme="http://yoursite.com/tags/heap/"/>
     
-      <category term="tcache" scheme="http://mask6asok.top/tags/tcache/"/>
+      <category term="tcache" scheme="http://yoursite.com/tags/tcache/"/>
     
   </entry>
   
   <entry>
     <title>2019 SUCTF PWN WP</title>
-    <link href="http://mask6asok.top/2019/12/15/2019SUCTF.html"/>
-    <id>http://mask6asok.top/2019/12/15/2019SUCTF.html</id>
+    <link href="http://yoursite.com/2019/12/15/2019SUCTF.html"/>
+    <id>http://yoursite.com/2019/12/15/2019SUCTF.html</id>
     <published>2019-12-15T13:55:22.204Z</published>
     <updated>2020-01-20T06:46:33.954Z</updated>
     
@@ -411,15 +411,15 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
   </entry>
   
   <entry>
     <title>2019 ByteCTF Pwn</title>
-    <link href="http://mask6asok.top/2019/12/15/2019ByteCTF-mulnote.html"/>
-    <id>http://mask6asok.top/2019/12/15/2019ByteCTF-mulnote.html</id>
+    <link href="http://yoursite.com/2019/12/15/2019ByteCTF-mulnote.html"/>
+    <id>http://yoursite.com/2019/12/15/2019ByteCTF-mulnote.html</id>
     <published>2019-12-15T13:55:22.172Z</published>
     <updated>2020-01-20T06:55:55.304Z</updated>
     
@@ -429,14 +429,14 @@
     
     </summary>
     
-      <category term="Pwn" scheme="http://mask6asok.top/categories/Pwn/"/>
+      <category term="Pwn" scheme="http://yoursite.com/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="http://mask6asok.top/tags/pwn/"/>
+      <category term="pwn" scheme="http://yoursite.com/tags/pwn/"/>
     
-      <category term="heap" scheme="http://mask6asok.top/tags/heap/"/>
+      <category term="heap" scheme="http://yoursite.com/tags/heap/"/>
     
-      <category term="Conditional competition" scheme="http://mask6asok.top/tags/Conditional-competition/"/>
+      <category term="Conditional competition" scheme="http://yoursite.com/tags/Conditional-competition/"/>
     
   </entry>
   
