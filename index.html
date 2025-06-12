@@ -31,7 +31,7 @@
                         'type': 'getUserInfo',
                         'msgId': 10086
                     }
-                    let ret1 = await window.HmsMapsJsBridge.postMessage(JSON.stringify(arg1));
+                    let ret1 = window.HmsMapsJsBridge.postMessage(JSON.stringify(arg1));
                     document.getElementById("text4").innerText = 'function result:' + ret1;
                     // document.getElementById("text4").innerText = ret1;
                     // console.log(ret1);
@@ -57,7 +57,7 @@
     </script>
 </head>
 <body>
-    <h1 id="text1">恶意页面 10</h1>
+    <h1 id="text1">恶意页面 11</h1>
     <h2 id="text2">bridge is exist:</h1>
     <h3 id="text3">function is exist:</h1>
     <h4 id="text4">function result:</h1>
