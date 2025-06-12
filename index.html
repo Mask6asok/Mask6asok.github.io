@@ -32,7 +32,7 @@
                         'msgId': 10086
                     }
                     let ret1 = window.HmsMapsJsBridge.postMessage(JSON.stringify(arg1));
-                    document.getElementById("text4").innerText = 'function result:' + ret1['resultCode'];
+                    document.getElementById("text4").innerText = 'function getAppData result:' + JSON.stringify(ret1);
                     // document.getElementById("text4").innerText = ret1;
                     // console.log(ret1);
                     let arg2 = {
@@ -43,6 +43,7 @@
                         }
                     };
                     let ret2 = window.HmsMapsJsBridge.postMessage(JSON.stringify(arg2));
+                    document.getElementById("text5").innerText = 'function toast result:' + JSON.stringify(ret2);
                     console.log(ret2);
                 } catch (error) {
                     console.error('执行出错', error);
@@ -57,9 +58,10 @@
     </script>
 </head>
 <body>
-    <h1 id="text1">恶意页面 12</h1>
+    <h1 id="text1">恶意页面 13</h1>
     <h2 id="text2">bridge is exist:</h1>
     <h3 id="text3">function is exist:</h1>
-    <h4 id="text4">function result:</h1>
+    <h4 id="text4">function1 result:</h1>
+    <h4 id="text5">function2 result:</h1>
 </body>
 </html>
