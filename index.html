@@ -26,7 +26,7 @@
             var hack = function() {
                 try {
                     document.getElementById("text2").innerText = 'bridge is exist:' + window.HmsMapsJsBridge;
-                    document.getElementById("text3").innerText = 'function is exist:' + window.HmsMapsJsBridge.postMessage is;
+                    document.getElementById("text3").innerText = 'function is exist:' + window.HmsMapsJsBridge.postMessage;
                     let str1 = "{'type':'deadfunction', 'msgId':10086}";
                     let ret1 = window.HmsMapsJsBridge.postMessage(str1);
                     // document.getElementById("text4").innerText = ret1;
@@ -48,7 +48,7 @@
     </script>
 </head>
 <body>
-    <h1 id="text1">恶意页面 7</h1>
+    <h1 id="text1">恶意页面 8</h1>
     <h2 id="text2">bridge is exist:</h1>
     <h3 id="text3">function is exist:</h1>
     <h4 id="text4">function result:</h1>
