@@ -32,8 +32,10 @@
                         'msgId': 10086
                     }
                     let ret1 = window.HmsMapsJsBridge.postMessage(JSON.stringify(arg1));
-                    const keys = Object.keys(ret1);
                     let output = 'begin ';
+                    let safeObj = ret1 || {};
+                    const keys = Object.keys(ret1);
+                    
                     keys.forEach(key => {
                         output = output + key + ','
                     });
@@ -62,7 +64,7 @@
     </script>
 </head>
 <body>
-    <h1 id="text1">恶意页面 3</h1>
+    <h1 id="text1">恶意页面 4</h1>
     <h2 id="text2">bridge is exist:</h1>
     <h3 id="text3">function is exist:</h1>
     <h4 id="text4">function1 result:</h1>
