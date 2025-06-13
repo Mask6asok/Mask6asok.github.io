@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遍历函数示例</title>
+    <script>
+        window.onload = function() {
+            var hack = function() {
+                const bridge = window.HmsMapsJsBridge;
+                const functions = [];
+
+                for (const key in bridge) {
+                    if (typeof bridge[key] === 'function') {
+                        functions.push(key);
+                    }
+                }
+
+                document.getElementById("output").textContent = functions.length > 0 
+                    ? `找到的函数：\n${functions.join('\n')}` 
+                    : '没有找到函数。';
+            }
+            hack();
+        }
+    </script>
+</head>
+<body>
+    <h1 id="text1">列出函数</h1>
+    <pre id="output"></pre>
+
+    
+</body>
+</html>
