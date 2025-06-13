@@ -32,9 +32,12 @@
                         'msgId': 10086
                     }
                     let ret1 = window.HmsMapsJsBridge.postMessage(JSON.stringify(arg1));
-                    document.getElementById("text4").innerText = 'function getLoginStatus result: ' + ' is null: ' + ret1 == null;
-                    // document.getElementById("text4").innerText = ret1;
-                    // console.log(ret1);
+                    const keys = Object.keys(ret1);
+                    let output = 'begin ';
+                    keys.forEach(key => {
+                        output = output + key + ','
+                    });
+                    document.getElementById("text4").innerText = 'function getLoginStatus result: ' + output;
                     let arg2 = {
                         'type': 'toast', 
                         'masgId': 10087, 
