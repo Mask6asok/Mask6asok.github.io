@@ -32,7 +32,7 @@
                         'msgId': 10086
                     }
                     let ret1 = window.HmsMapsJsBridge.postMessage(JSON.stringify(arg1));
-                    document.getElementById("text4").innerText = 'function getLoginStatus result: ' + JSON.stringify(ret1) + ' type: ' + typeof ret1;
+                    document.getElementById("text4").innerText = 'function getLoginStatus result: ' + JSON.stringify(ret1) + ' type: ' + typeof ret1 + ' is null: ' + ret1 == null;
                     // document.getElementById("text4").innerText = ret1;
                     // console.log(ret1);
                     let arg2 = {
