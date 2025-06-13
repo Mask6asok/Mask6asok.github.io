@@ -7,6 +7,11 @@
     <script>
         window.onload = function() {
             var hack = function() {
+                if (typeof window.opeeventaction !== 'undefined') {
+                    document.getElementById("output2").textContent = '存在opeeventaction';
+                } else {
+                    document.getElementById("output2").textContent = '不存在opeeventaction';
+                }
                 const bridge = window.HmsMapsJsBridge;
                 const functions = [];
 
@@ -27,6 +32,7 @@
 <body>
     <h1 id="text1">列出函数</h1>
     <pre id="output"></pre>
+    <pre id="output2"></pre>
 
     
 </body>
