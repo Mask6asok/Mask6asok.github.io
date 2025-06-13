@@ -51,6 +51,7 @@
                 } catch (error) {
                     console.error('执行出错', error);
                     alert('执行出错' + error.message);
+                    document.getElementById("text6").innerText = 'error: ' + error.message;
                 }
             }
             hack();
@@ -61,10 +62,11 @@
     </script>
 </head>
 <body>
-    <h1 id="text1">恶意页面 2</h1>
+    <h1 id="text1">恶意页面 3</h1>
     <h2 id="text2">bridge is exist:</h1>
     <h3 id="text3">function is exist:</h1>
     <h4 id="text4">function1 result:</h1>
     <h4 id="text5">function2 result:</h1>
+    <h4 id="text6">error:</h1>
 </body>
 </html>
